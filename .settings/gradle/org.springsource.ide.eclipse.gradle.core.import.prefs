@@ -1,5 +1,9 @@
 #org.springsource.ide.eclipse.gradle.core.preferences.GradleImportPreferences
+<<<<<<< HEAD
 #Tue Jan 27 19:52:33 GMT 2015
+=======
+#Wed Jan 28 18:09:36 GMT 2015
+>>>>>>> Sample java docs in Player class
 addResourceFilters=true
 afterTasks=afterEclipseImport;
 beforeTasks=cleanEclipse;eclipse;

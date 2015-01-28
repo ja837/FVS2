@@ -19,6 +19,13 @@ public class Player {
     private int score;
 
     
+
+/**
+ * New instance of a player's inventory
+ * @param pm The player manager
+ * @param playerNumber An integer number
+ */
+
     public Player(PlayerManager pm, int playerNumber) {
         goals = new ArrayList<Goal>();
         resources = new ArrayList<Resource>();
@@ -26,7 +33,11 @@ public class Player {
         number = playerNumber;
         score = 0;
     }
-    
+
+/**
+ * Returns the players resources
+ * @return resources
+ */
     public List<Resource> getResources() {
         return resources;
     }
