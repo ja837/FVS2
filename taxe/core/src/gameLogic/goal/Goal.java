@@ -9,6 +9,7 @@ public class Goal {
 	private Station destination;
 	private int turnIssued;
 	private boolean complete = false;
+	private int value;
 	//constraints
 	private String trainName = null;
 	
@@ -16,6 +17,7 @@ public class Goal {
 		this.origin = origin;
 		this.destination = destination;
 		this.turnIssued = turn;
+		this.value = 5;
 	}
 	
 	public void addConstraint(String name, String value) {
@@ -58,5 +60,9 @@ public class Goal {
 
 	public boolean getComplete() {
 		return complete;
+	}
+	
+	public int getValue() {
+		return value;
 	}
 }

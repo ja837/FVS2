@@ -123,6 +123,7 @@ public class GameScreen extends ScreenAdapter {
     public void show() {
         stationController.renderStations();
         topBarController.addEndTurnButton();
+        topBarController.displayScores(gameLogic.getPlayerManager().getAllPlayers());
         resourceController.drawPlayerResources(gameLogic.getPlayerManager().getCurrentPlayer());
     }
 

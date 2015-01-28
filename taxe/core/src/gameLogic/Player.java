@@ -6,20 +6,27 @@ import gameLogic.resource.Resource;
 
 import java.util.ArrayList;
 import java.util.List;
-
+/**
+ * class to store player info
+ * @author FVS, Lisa
+ *
+ */
 public class Player {
     private PlayerManager pm;
     private List<Resource> resources;
     private List<Goal> goals;
     private int number;
+    private int score;
 
+    
     public Player(PlayerManager pm, int playerNumber) {
         goals = new ArrayList<Goal>();
         resources = new ArrayList<Resource>();
         this.pm = pm;
         number = playerNumber;
+        score = 0;
     }
-
+    
     public List<Resource> getResources() {
         return resources;
     }
@@ -35,6 +42,7 @@ public class Player {
         changed();
     }
 
+    
     public void addGoal(Goal goal) {
     	int uncompleteGoals = 0;
     	for(Goal existingGoal : goals) {
@@ -51,11 +59,17 @@ public class Player {
         changed();
     }
     
+    /**
+     * sets goal to complete and updates player score
+     * @param goal
+     */
     public void completeGoal(Goal goal) {
     	goal.setComplete();
+    	score += goal.getValue();
         changed();
     }
 
+    
     /**
      * Method is called whenever a property of this player changes, or one of the player's resources changes
      */
@@ -73,5 +87,9 @@ public class Player {
     
     public int getPlayerNumber() {
     	return number;
+    }
+    
+    public int getPlayerScore() {
+    	return score;
     }
 }
