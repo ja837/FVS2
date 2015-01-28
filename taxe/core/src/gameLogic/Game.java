@@ -34,9 +34,9 @@ public class Game {
 			@Override
 			public void changed() {
 				Player currentPlayer = playerManager.getCurrentPlayer();
+				resourceManager.addRandomResourceToPlayer(currentPlayer);
+				resourceManager.addRandomResourceToPlayer(currentPlayer);
 				goalManager.addRandomGoalToPlayer(currentPlayer);
-				resourceManager.addRandomResourceToPlayer(currentPlayer);
-				resourceManager.addRandomResourceToPlayer(currentPlayer);
 			}
 		});
 	}
@@ -56,9 +56,9 @@ public class Game {
 	// The second player gets them when turn changes!
 	private void initialisePlayers() {
 		Player player = playerManager.getAllPlayers().get(0);
+		resourceManager.addRandomResourceToPlayer(player);
+		resourceManager.addRandomResourceToPlayer(player);
 		goalManager.addRandomGoalToPlayer(player);
-		resourceManager.addRandomResourceToPlayer(player);
-		resourceManager.addRandomResourceToPlayer(player);
 	}
 
 	public PlayerManager getPlayerManager() {

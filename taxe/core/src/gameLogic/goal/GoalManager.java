@@ -19,7 +19,7 @@ public class GoalManager {
 		this.resourceManager = resourceManager;
 	}
 
-	private Goal generateRandom(int turn) {
+	private Goal generateRandom(int turn, Player player) {
 		Map map = Game.getInstance().getMap();
 		Station origin;
 		do {
@@ -36,14 +36,15 @@ public class GoalManager {
 		// Goal with a specific train
 		Random random = new Random();
 		if(random.nextInt(2) == 1) {
-			goal.addConstraint("train", resourceManager.getTrainNames().get(random.nextInt(resourceManager.getTrainNames().size())));
+			System.out.println(player.getResources().size());
+			goal.addConstraint("train", player.getResources().get(random.nextInt(player.getResources().size())).toString());
 		}
 
 		return goal;
 	}
 	
 	public void addRandomGoalToPlayer(Player player) {
-		player.addGoal(generateRandom(player.getPlayerManager().getTurnNumber()));
+		player.addGoal(generateRandom(player.getPlayerManager().getTurnNumber(), player));
 	}
 
 	public ArrayList<String> trainArrived(Train train, Player player) {
