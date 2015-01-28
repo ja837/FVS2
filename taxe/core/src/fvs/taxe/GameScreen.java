@@ -87,8 +87,9 @@ public class GameScreen extends ScreenAdapter {
         game.batch.draw(mapTexture, 0, 0);
         game.batch.end();
 
-        topBarController.drawBackground();
-
+        goalController.drawBackground();
+        //topBarController.drawBackground();
+        
         stationController.renderConnections(map.getConnections(), Color.GRAY);
 
         if(gameLogic.getState() == GameState.ROUTING) {
@@ -116,14 +117,14 @@ public class GameScreen extends ScreenAdapter {
 
         resourceController.drawHeaderText();
         goalController.showCurrentPlayerGoals();
+        topBarController.updateScores(gameLogic.getPlayerManager().getAllPlayers());
     }
 
     @Override
     // Called when GameScreen becomes current screen of the game
     public void show() {
         stationController.renderStations();
-        topBarController.addEndTurnButton();
-        topBarController.displayScores(gameLogic.getPlayerManager().getAllPlayers());
+        goalController.addEndTurnButton();
         resourceController.drawPlayerResources(gameLogic.getPlayerManager().getCurrentPlayer());
     }
 

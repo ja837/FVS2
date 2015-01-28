@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+import com.badlogic.gdx.scenes.scene2d.Group;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
@@ -13,7 +14,6 @@ import fvs.taxe.TaxeGame;
 import gameLogic.GameState;
 import gameLogic.GameStateListener;
 import gameLogic.Player;
-import gameLogic.TurnListener;
 import static com.badlogic.gdx.scenes.scene2d.actions.Actions.*;
 
 public class TopBarController {
@@ -22,6 +22,7 @@ public class TopBarController {
     private Context context;
     private Color controlsColor = Color.LIGHT_GRAY;
     private TextButton endTurnButton;
+    private Group playerScores = new Group();
     private Label LblP1Score;
     private Label LblP2Score;
     private Label flashMessage;
@@ -37,7 +38,7 @@ public class TopBarController {
                         controlsColor = Color.GREEN;
                         break;
                     default:
-                        controlsColor = Color.LIGHT_GRAY;
+                        controlsColor = Color.CLEAR;
                         break;
                 }
             }
@@ -73,54 +74,16 @@ public class TopBarController {
         game.shapeRenderer.rect(0, TaxeGame.HEIGHT - CONTROLS_HEIGHT, TaxeGame.WIDTH, 1);
         game.shapeRenderer.end();
     }
-
-    public void addEndTurnButton() {
-        endTurnButton = new TextButton("End Turn", context.getSkin());
-        endTurnButton.setPosition(TaxeGame.WIDTH - 100.0f, TaxeGame.HEIGHT - 33.0f);
-        endTurnButton.addListener(new ClickListener() {
-            @Override
-            public void clicked(InputEvent event, float x, float y) {
-                context.getGameLogic().getPlayerManager().turnOver();
-            }
-        });
-
-        context.getGameLogic().subscribeStateChanged(new GameStateListener() {
-            @Override
-            public void changed(GameState state) {
-                if(state == GameState.NORMAL) {
-                    endTurnButton.setVisible(true);
-                } else {
-                    endTurnButton.setVisible(false);
-                }
-            }
-        });
-
-        context.getStage().addActor(endTurnButton);
-    }
     
-    public void displayScores(final List<Player> playerList) {
-    	LblP1Score = new Label("Player 1:   " + playerList.get(0).getPlayerScore(), context.getSkin());
-    	LblP2Score = new Label("Player 2:   " + playerList.get(1).getPlayerScore(), context.getSkin());
-    	LblP1Score.setPosition(TaxeGame.WIDTH - 800.0f, TaxeGame.HEIGHT - 33.0f);
-    	LblP2Score.setPosition(TaxeGame.WIDTH - 600.0f, TaxeGame.HEIGHT - 33.0f);
-    	
-    	// whenever game state is changed to normal update score values
-    	context.getGameLogic().subscribeStateChanged(new GameStateListener() {
-            @Override
-            public void changed(GameState state) {
-                if(state == GameState.NORMAL) {
-                	LblP1Score.setText("Player 1:   " + playerList.get(0).getPlayerScore());
-                	LblP2Score.setText("Player 2:   " + playerList.get(1).getPlayerScore());
-                    LblP1Score.setVisible(true);
-                    LblP2Score.setVisible(true);
-                } else {
-                	LblP1Score.setVisible(false);
-                	LblP2Score.setVisible(false);
-                }
-            }
-        });
-
-    	context.getStage().addActor(LblP1Score);
-    	context.getStage().addActor(LblP2Score);
+    public void updateScores(List<Player> playerList){
+    	TaxeGame game = context.getTaxeGame();
+    	playerScores.remove();
+        playerScores.clear();
+        game.batch.begin();
+        game.fontSmall.setColor(Color.MAROON);
+        game.fontSmall.draw(game.batch, "Player 1:   " + playerList.get(0).getPlayerScore(), 40.0f, TaxeGame.HEIGHT - 25.0f);
+        game.fontSmall.draw(game.batch, "Player 2:   " + playerList.get(1).getPlayerScore(), 40.0f, TaxeGame.HEIGHT - 50.0f);
+        game.batch.end();
+        context.getStage().addActor(playerScores);
     }
 }
