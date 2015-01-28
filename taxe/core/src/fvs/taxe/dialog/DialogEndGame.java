@@ -1,9 +1,12 @@
 package fvs.taxe.dialog;
 
+import java.util.ArrayList;
+
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Dialog;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
+
 import fvs.taxe.MainMenuScreen;
 import fvs.taxe.TaxeGame;
 import gameLogic.Player;
@@ -18,7 +21,7 @@ public class DialogEndGame extends Dialog{
 		this.game = game;
 		
 		int highscore = 0;
-		int playernum = 0;
+		ArrayList<Integer> winners = new ArrayList<Integer>();
 		for(Player player : pm.getAllPlayers()) {
 			int goalsComplete = 0;
 			for(Goal goal : player.getGoals()) {
@@ -27,18 +30,29 @@ public class DialogEndGame extends Dialog{
 				}
 			}
 			
-			text("Player " + player.getPlayerNumber() + " completed " + goalsComplete + " goals");
+			text("Player " + player.getPlayerNumber() + " completed " + goalsComplete + " goals, worth " + player.getPlayerScore() + " points");
 			getContentTable().row();
 			
-			if(goalsComplete > highscore) {
-				highscore = goalsComplete;
-				playernum = player.getPlayerNumber();
+			if(player.getPlayerScore() > highscore) {
+				highscore = player.getPlayerScore();
+				winners = new ArrayList<Integer>();
+				winners.add(player.getPlayerNumber());
+			} else if(player.getPlayerScore() == highscore) {
+				winners.add(player.getPlayerNumber());
 			}
 		}
-		if(playernum != 0) {
-			text("PLAYER " + playernum + " WINS!");
-		} else {
+		
+		if(winners.isEmpty()) {
 			text("NO WINNER");
+		} else if (winners.size() == 1){
+			text("PLAYER " + winners.get(0) + " WINS!");
+		} else {
+			String draw;
+			draw = "DRAW BETWEEN";
+			for(int winner: winners){
+				draw += " PLAYER " + winner;
+			}
+			text(draw);
 		}
 		
 		//button("Main Menu","MENU");

@@ -98,11 +98,6 @@ public class TopBarController {
         context.getStage().addActor(endTurnButton);
     }
     
-    public void refreshScores(List<Player> playerList) {
-    	LblP1Score.setText("Player 1:   " + playerList.get(0).getPlayerScore());
-    	LblP2Score.setText("Player 2:   " + playerList.get(1).getPlayerScore());
-    }
-    
     public void displayScores(final List<Player> playerList) {
     	LblP1Score = new Label("Player 1:   " + playerList.get(0).getPlayerScore(), context.getSkin());
     	LblP2Score = new Label("Player 2:   " + playerList.get(1).getPlayerScore(), context.getSkin());
@@ -127,8 +122,5 @@ public class TopBarController {
 
     	context.getStage().addActor(LblP1Score);
     	context.getStage().addActor(LblP2Score);
-    	
-    	System.out.println(LblP1Score.getText());
-    	System.out.println(LblP2Score.getText());
     }
 }
