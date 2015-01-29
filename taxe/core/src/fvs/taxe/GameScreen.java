@@ -69,6 +69,7 @@ public class GameScreen extends ScreenAdapter {
         	@Override
         	public void changed(GameState state){
         		if(gameLogic.getPlayerManager().getTurnNumber() == gameLogic.TOTAL_TURNS && state == GameState.NORMAL) {
+        			//
         			DialogEndGame dia = new DialogEndGame(GameScreen.this.game, gameLogic.getPlayerManager(), skin);
         			dia.show(stage);
         		}
@@ -111,9 +112,11 @@ public class GameScreen extends ScreenAdapter {
         stage.act(Gdx.graphics.getDeltaTime());
         stage.draw();
         
-        game.batch.begin();
-        game.fontSmall.draw(game.batch, "Turn " + (gameLogic.getPlayerManager().getTurnNumber() + 1) + "/" + gameLogic.TOTAL_TURNS, (float) TaxeGame.WIDTH - 90.0f, 20.0f);
-        game.batch.end();
+        if (gameLogic.getPlayerManager().getTurnNumber() < gameLogic.TOTAL_TURNS) {
+        	game.batch.begin();
+        	game.fontSmall.draw(game.batch, "Turn " + (gameLogic.getPlayerManager().getTurnNumber()+1) + "/" + gameLogic.TOTAL_TURNS, (float) TaxeGame.WIDTH - 90.0f, 20.0f);
+        	game.batch.end();
+        }
 
         resourceController.drawHeaderText();
         goalController.showCurrentPlayerGoals();

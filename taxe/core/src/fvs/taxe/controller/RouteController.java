@@ -70,9 +70,10 @@ public class RouteController {
         TextButton doneRouting = new TextButton("Route Complete", context.getSkin());
         TextButton cancel = new TextButton("Cancel", context.getSkin());
 
+
         doneRouting.setPosition(TaxeGame.WIDTH - 240, TaxeGame.HEIGHT - 600);
         cancel.setPosition(TaxeGame.WIDTH - 100, TaxeGame.HEIGHT - 600);
-        // bug fix moved buttons
+       
         cancel.addListener(new ClickListener() {
             @Override
             public void clicked (InputEvent event, float x, float y) {
