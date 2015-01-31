@@ -41,13 +41,22 @@ public class TrainMoveController {
     }
 
     // this action will run every time the train reaches a station within a route
-    private RunnableAction perStationAction(final Station station) {
+    private RunnableAction perStationAction(final Station station) {   	
+    	
         return new RunnableAction() {
             public void run() {
                 train.addHistory(station.getName(), context.getGameLogic().getPlayerManager().getTurnNumber());
                 System.out.println("Added to history: passed " + station.getName() + " on turn "
                         + context.getGameLogic().getPlayerManager().getTurnNumber());
-                // train.setPosition(station.getLocation());
+                if (station.isPassable() != true){
+            		System.out.println("Train was destroyed passing through here");
+            		train.getActor().remove();
+                    train.getPlayer().removeResource(train);
+            	}
+                if (station.isControlled() != false){
+            		System.out.println("Passing through a border control zone");
+            		//give penalty
+            	}          
 
                 collisions(station);
             }
@@ -99,7 +108,8 @@ public class TrainMoveController {
         if(!(station instanceof CollisionStation)) {
             return;
         }
-
+        
+        
         List<Train> trainsToDestroy = trainsToDestroy();
 
         if(trainsToDestroy.size() > 0) {
@@ -109,6 +119,7 @@ public class TrainMoveController {
             }
 
             context.getTopBarController().displayFlashMessage("Two trains collided at a Junction.  They were both destroyed.", Color.RED, 2);
+            station.setPassable(false);
         }
     }
 

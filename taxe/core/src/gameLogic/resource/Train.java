@@ -1,18 +1,13 @@
 package gameLogic.resource;
 
 import Util.Tuple;
-import fvs.taxe.TaxeGame;
 import fvs.taxe.actor.TrainActor;
-import fvs.taxe.controller.StationController;
 import gameLogic.map.Connection;
 import gameLogic.map.IPositionable;
 import gameLogic.map.Station;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 
 public class Train extends Resource {
     private String leftImage;

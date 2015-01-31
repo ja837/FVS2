@@ -4,6 +4,8 @@ import fvs.taxe.actor.StationActor;
 
 public class Station{
 	private String name;
+	private boolean isPassable;
+	private boolean isControlled;
 	private IPositionable location;
 	private StationActor actor;
 	private String acronym;
@@ -17,6 +19,7 @@ public class Station{
 	public String getName() {
 		return name;
 	}
+	
 
 	public void setName(String name) {
 		this.name = name;
@@ -44,5 +47,22 @@ public class Station{
 	public StationActor getActor(){
 		return actor;
 	}
-	
+
+	public boolean isPassable() {
+		return isPassable;
+	}
+
+	public void setPassable(boolean isPassable) {
+		this.isPassable = isPassable;
+	}
+
+	public boolean isControlled() {
+		return isControlled;
+	}
+
+	public void setControlled(boolean isControlled) {
+		this.isControlled = isControlled;
+	}
+
+
 }

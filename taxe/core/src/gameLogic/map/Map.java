@@ -95,13 +95,22 @@ public class Map {
 
     public Station addStation(String name, String acronym, Position location) {
         Station newStation = new Station(name, acronym, location);
+        newStation.setPassable(true);
+        newStation.setControlled(true);
         stations.add(newStation);
         return newStation;
+    }
+    
+    public Station deleteStation(Station station){
+    	stations.remove(station);
+		return station;    	
     }
     
     public CollisionStation addJunction(String name, String acronym, Position location) {
     	CollisionStation newJunction = new CollisionStation(name, acronym, location);
     	stations.add(newJunction);
+    	newJunction.setPassable(true);
+        newJunction.setControlled(true);
     	return newJunction;
     }
 

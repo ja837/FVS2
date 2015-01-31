@@ -5,11 +5,7 @@ import java.util.List;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.scenes.scene2d.Group;
-import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
-import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
-import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
-
 import fvs.taxe.TaxeGame;
 import gameLogic.GameState;
 import gameLogic.GameStateListener;
@@ -21,10 +17,7 @@ public class TopBarController {
 
     private Context context;
     private Color controlsColor = Color.LIGHT_GRAY;
-    private TextButton endTurnButton;
     private Group playerScores = new Group();
-    private Label LblP1Score;
-    private Label LblP2Score;
     private Label flashMessage;
 
     public TopBarController(Context context) {
