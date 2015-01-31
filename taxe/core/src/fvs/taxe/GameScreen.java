@@ -61,6 +61,7 @@ public class GameScreen extends ScreenAdapter {
         gameLogic.getPlayerManager().subscribeTurnChanged(new TurnListener() {
             @Override
             public void changed() {
+            	
                 gameLogic.setState(GameState.ANIMATING);
                 topBarController.displayFlashMessage("Time is passing...", Color.BLACK);
             }
@@ -99,8 +100,15 @@ public class GameScreen extends ScreenAdapter {
         }
 
         if(gameLogic.getState() == GameState.ANIMATING) {
+        	
+        	//Fix for player 1 getting an extra go at the start of the game
+        	int adjustedAnimationTime = ANIMATION_TIME;
+        	if (gameLogic.getPlayerManager().getTurnNumber() == 1){
+        		adjustedAnimationTime = 0;
+        	}
+        	
             timeAnimated += delta;
-            if (timeAnimated >= ANIMATION_TIME) {
+            if (timeAnimated >= adjustedAnimationTime) {
                 gameLogic.setState(GameState.NORMAL);
                 timeAnimated = 0;
             }
