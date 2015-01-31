@@ -2,240 +2,280 @@
   "stations": [
     {
       "name": "Madrid",
+      "acronym": "MAD",
       "junction": false,
       "x": "159",
       "y": 19
     },
     {
       "name": "Paris",
+      "acronym": "PRS",
       "junction": false,
       "x": "330",
       "y": 280
     },
     {
       "name": "London",
+      "acronym": "LDN",
       "junction": false,
       "x": "300",
       "y": 373
     },
     {
       "name": "Lille",
+      "acronym": "LIL",
       "junction": true,
       "x": "352",
       "y": 334
     },
     {
       "name": "Brussels",
+      "acronym": "BRS",
       "junction": false,
       "x": "389",
       "y": 336
     },
     {
       "name": "Amsterdam",
+      "acronym": "AMS",
       "junction": false,
       "x": "411",
       "y": 384
     },
     {
       "name": "Berlin",
+      "acronym": "BER",
       "junction": false,
       "x": "545",
       "y": 385
     },
     {
       "name": "Rome",
+      "acronym": "ROM",
       "junction": false,
       "x": "548",
       "y": 65
     },
     {
       "name": "Geneva",
+      "acronym": "GNV",
       "junction": false,
       "x": "413",
       "y": 190
     },
     {
       "name": "Lisbon",
+      "acronym": "LIS",
       "junction": false,
       "x": "38",
       "y": 22
     },
     {
       "name": "Barcelona",
+      "acronym": "BRC",
       "junction": false,
       "x": "260",
       "y": 36
     },
     {
       "name": "Andorra",
+      "acronym": "AND",
       "junction": true,
       "x": "296",
       "y": 82
     },
     {
       "name": "Monaco",
+      "acronym": "MNC",
       "junction": false,
       "x": "417",
       "y": 105
     },
     {
       "name": "Milan",
+      "acronym": "MLN",
       "junction": false,
       "x": "485",
       "y": 161
     },
     {
       "name": "Vaduz",
+      "acronym": "VDZ",
       "junction": true,
       "x": "480",
       "y": 216
     },
     {
       "name": "Frankfurt",
+      "acronym": "FRN",
       "junction": false,
       "x": "461",
       "y": 313
     },
     {
       "name": "Copenhagen",
+      "acronym": "CPN",
       "junction": false,
       "x": "508",
       "y": 473
     },
     {
       "name": "Warsaw",
+      "acronym": "WRS",
       "junction": false,
       "x": "700",
       "y": 399
     },
     {
       "name": "Krakow",
+      "acronym": "KRK",
       "junction": false,
       "x": "702",
       "y": 323
     },
     {
       "name": "Prague",
+      "acronym": "PRG",
       "junction": false,
       "x": "592",
       "y": 306
     },
     {
       "name": "Budapest",
+      "acronym": "BUD",
       "junction": false,
       "x": "693",
       "y": 234
     },
     {
       "name": "Poznan",
+      "acronym": "POZ",
       "junction": true,
       "x": "639",
       "y": 379
     },
     {
       "name": "Tirana",
+      "acronym": "TRN",
       "junction": false,
       "x": "735",
       "y": 40
     },
     {
       "name": "Sarajevo",
+      "acronym": "SRJ",
       "junction": false,
       "x": "685",
       "y": 128
     },
     {
       "name": "Zagreb",
+      "acronym": "ZGB",
       "junction": false,
       "x": "640",
       "y": 179
     },
     {
       "name": "Vienna",
+      "acronym": "VIN",
       "junction": false,
       "x": "621",
       "y": 259
     },
     {
       "name": "Graz",
+      "acronym": "GRZ",
       "junction": true,
       "x": "592",
       "y": 220
     },
     {
       "name": "Belgrade",
+      "acronym": "BLG",
       "junction": false,
       "x": "738",
       "y": 148
     },
     {
       "name": "Sofia",
+      "acronym": "SOF",
       "junction": false,
       "x": "816",
       "y": 97
     },
     {
       "name": "Thessaloniki",
+      "acronym": "THS",
       "junction": false,
       "x": "814",
       "y": 38
     },
     {
       "name": "Istanbul",
+      "acronym": "IST",
       "junction": false,
       "x": "951",
       "y": 79
     },
     {
       "name": "Bucharest",
+      "acronym": "BUC",
       "junction": false,
       "x": "860",
       "y": 185
     },
     {
       "name": "Kiev",
+      "acronym": "KIV",
       "junction": false,
       "x": "912",
       "y": 376
     },
     {
       "name": "Lviv",
+      "acronym": "LIV",
       "junction": false,
       "x": "801",
       "y": 324
     },
     {
       "name": "Minsk",
+      "acronym": "MSK",
       "junction": false,
       "x": "831",
       "y": 474
     },
     {
       "name": "Riga",
+      "acronym": "RGA",
       "junction": false,
       "x": "742",
       "y": 555
     },
     {
       "name": "Cluj",
+      "acronym": "CLJ",
       "junction": true,
       "x": "784",
       "y": 231
     },
     {
       "name": "Kaunas",
+      "acronym": "KNS",
       "junction": false,
       "x": "747",
       "y": 500
     },
     {
       "name": "Stockholm",
+      "acronym": "STK",
       "junction": false,
       "x": "614",
       "y": 610
     },
     {
       "name": "York",
+      "acronym": "YRK",
       "junction": false,
       "x": "290",
       "y": 452

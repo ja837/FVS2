@@ -54,10 +54,25 @@ public class StationController {
             listener.clicked(station);
         }
     }
+    
+    /**
+     * renders the station acronym labels
+     */
+    public void renderStationLbls() {
+        TaxeGame game = context.getTaxeGame();
+        List<Station> stations = context.getGameLogic().getMap().getStations();
 
+        for (Station s : stations) {
+        	// display station acronym
+            game.batch.begin();
+            game.fontTiny.setColor(Color.BLACK);
+            game.fontTiny.draw(game.batch, s.getAcronym(), s.getLocation().getX() + 5, s.getLocation().getY() + 20);
+            game.batch.end();
+        }
+    }
+    
     private void renderStation(final Station station) {
         final StationActor stationActor = new StationActor(station.getLocation());
-
         stationActor.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {

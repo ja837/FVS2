@@ -92,7 +92,8 @@ public class GameScreen extends ScreenAdapter {
         //topBarController.drawBackground();
         
         stationController.renderConnections(map.getConnections(), Color.GRAY);
-
+        stationController.renderStationLbls();
+        
         if(gameLogic.getState() == GameState.ROUTING) {
             routeController.drawRoute(Color.BLACK);
         }
@@ -103,6 +104,7 @@ public class GameScreen extends ScreenAdapter {
                 gameLogic.setState(GameState.NORMAL);
                 timeAnimated = 0;
             }
+
         }
         
         if(gameLogic.getState() == GameState.NORMAL || gameLogic.getState() == GameState.PLACING){

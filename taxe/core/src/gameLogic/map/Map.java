@@ -48,6 +48,7 @@ public class Map {
     private void parseStations(JsonValue jsonVal) {
         for(JsonValue station = jsonVal.getChild("stations"); station != null; station = station.next) {
             String name = "";
+            String acronym = "";
             int x = 0;
             int y = 0;
             boolean isJunction = false;
@@ -55,6 +56,8 @@ public class Map {
             for(JsonValue val = station.child; val != null; val = val.next) {
                 if(val.name.equalsIgnoreCase("name")) {
                     name = val.asString();
+                } else if(val.name.equalsIgnoreCase("acronym")) {
+                    acronym = val.asString();
                 } else if(val.name.equalsIgnoreCase("x")) {
                     x = val.asInt();
                 } else if(val.name.equalsIgnoreCase("y")) {
@@ -65,9 +68,9 @@ public class Map {
             }
 
             if (isJunction) {
-                addJunction(name, new Position(x,y));
+                addJunction(name, "", new Position(x,y));
             } else {
-                addStation(name, new Position(x, y));
+                addStation(name, acronym, new Position(x, y));
             }
         }
     }
@@ -90,14 +93,14 @@ public class Map {
         return stations.get(random.nextInt(stations.size()));
     }
 
-    public Station addStation(String name, Position location) {
-        Station newStation = new Station(name, location);
+    public Station addStation(String name, String acronym, Position location) {
+        Station newStation = new Station(name, acronym, location);
         stations.add(newStation);
         return newStation;
     }
     
-    public CollisionStation addJunction(String name, Position location) {
-    	CollisionStation newJunction = new CollisionStation(name, location);
+    public CollisionStation addJunction(String name, String acronym, Position location) {
+    	CollisionStation newJunction = new CollisionStation(name, acronym, location);
     	stations.add(newJunction);
     	return newJunction;
     }
