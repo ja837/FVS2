@@ -73,9 +73,12 @@ public class TopBarController {
     	playerScores.remove();
         playerScores.clear();
         game.batch.begin();
-        game.fontSmall.setColor(Color.MAROON);
-        game.fontSmall.draw(game.batch, "Player 1:   " + playerList.get(0).getPlayerScore(), 40.0f, TaxeGame.HEIGHT - 25.0f);
-        game.fontSmall.draw(game.batch, "Player 2:   " + playerList.get(1).getPlayerScore(), 40.0f, TaxeGame.HEIGHT - 50.0f);
+        game.fontSmall.setColor(Color.NAVY);
+        game.font.setColor(Color.NAVY);
+        game.fontSmall.draw(game.batch, "Player 1", 20.0f, TaxeGame.HEIGHT - 25.0f);
+        game.font.draw(game.batch, "" + playerList.get(0).getPlayerScore(), 20.0f, TaxeGame.HEIGHT - 50.0f);
+        game.fontSmall.draw(game.batch, "Player 2", 120.0f, TaxeGame.HEIGHT - 25.0f);
+        game.font.draw(game.batch, "" + playerList.get(1).getPlayerScore(), 120.0f, TaxeGame.HEIGHT - 50.0f);
         game.batch.end();
         context.getStage().addActor(playerScores);
     }

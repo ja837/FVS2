@@ -29,21 +29,21 @@ public class ResourceController {
         TaxeGame game = context.getTaxeGame();
 
         game.batch.begin();
-        game.fontSmall.setColor(Color.BLACK);
-        game.fontSmall.draw(game.batch, "Unplaced Resources:", 10.0f, (float) TaxeGame.HEIGHT - 250.0f);
+        game.fontSmall.setColor(Color.NAVY);
+        game.fontSmall.draw(game.batch, "Unplaced Resources:", TaxeGame.WIDTH - 225.0f, (float) TaxeGame.HEIGHT - 250.0f);
         game.batch.end();
     }
 
     public void drawPlayerResources(Player player) {
 
         float top = (float) TaxeGame.HEIGHT;
-        float x = 10.0f;
+        float x = TaxeGame.WIDTH - 225.0f;
         float y = top - 250.0f;
         y -= 50;
 
         resourceButtons.remove();
         resourceButtons.clear();
-
+        
         for (final Resource resource : player.getResources()) {
             if (resource instanceof Train) {
                 Train train = (Train) resource;
@@ -57,7 +57,43 @@ public class ResourceController {
 
                 TextButton button = new TextButton(resource.toString(), context.getSkin());
                 button.setPosition(x, y);
+                button.setWidth(125);
                 button.addListener(listener);
+                
+                //set button colour depending on train speed
+                //red = fast, green = slow
+                switch (((Train) resource).getSpeed()){
+                	case 10: //steam
+                		button.setColor(Color.valueOf("0DD131"));;
+                		break;
+                	case 20: //Green
+                		button.setColor(Color.valueOf("39FF03"));;
+                		break;
+                	case 30: //Diesel
+                		button.setColor(Color.valueOf("C8FF03"));;
+                		break;
+                	case 40: //Electric
+                		button.setColor(Color.valueOf("FFFF03"));;
+                		break;
+                	case 50: //Bullet
+                		button.setColor(Color.valueOf("FFEE03"));;
+                		break;
+                	case 60: //Petrol
+                		button.setColor(Color.valueOf("FFBB00"));;
+                		break;
+                	case 70: //Solar
+                		button.setColor(Color.valueOf("FF9100"));;
+                		break;
+                	case 80: //MagLev
+                		button.setColor(Color.valueOf("F26907"));;
+                		break;
+                	case 90: //Hydrogen
+                		button.setColor(Color.valueOf("F23A07"));;
+                		break;
+                	case 100: //Nuclear
+                		button.setColor(Color.valueOf("B31807"));;
+                		break;
+                }
 
                 resourceButtons.addActor(button);
 
