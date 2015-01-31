@@ -93,7 +93,7 @@ public class GoalController {
         float y = top - 10.0f;
 
         game.batch.begin();
-        game.fontSmall.setColor(Color.MAROON);
+        game.fontSmall.setColor(Color.NAVY);
         game.fontSmall.draw(game.batch, playerGoalHeader(), x, y);
         game.batch.end();
         
