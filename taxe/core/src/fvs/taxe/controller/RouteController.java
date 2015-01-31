@@ -37,7 +37,10 @@ public class RouteController {
             }
         });
     }
-
+    /**
+     * initialise routing: add initial train position to pos list, change game state, display routing controls
+     * @param train
+     */
     public void begin(Train train) {
         this.train = train;
         isRouting = true;
@@ -50,7 +53,10 @@ public class RouteController {
         trainController.setTrainsVisible(train, false);
         train.getActor().setVisible(true);
     }
-
+    /** 
+     * gets the most recently selected station, checks it's connected to the last station clicked & adds to pos list if so
+     * @param station
+     */
     private void addStationToRoute(Station station) {
         // the latest position chosen in the positions so far
         IPositionable lastPosition =  positions.get(positions.size() - 1);
@@ -65,7 +71,9 @@ public class RouteController {
             canEndRouting = !(station instanceof CollisionStation);
         }
     }
-
+    /** 
+     * sets GUI's routing buttons
+     */
     private void addRoutingButtons() {
         TextButton doneRouting = new TextButton("Route Complete", context.getSkin());
         TextButton cancel = new TextButton("Cancel", context.getSkin());
@@ -100,12 +108,17 @@ public class RouteController {
         context.getStage().addActor(routingButtons);
     }
 
+    /** 
+     * confirms the route selected by the user and creates it
+     */
     private void confirmed() {
         train.setRoute(context.getGameLogic().getMap().createRoute(positions));
 
         TrainMoveController move = new TrainMoveController(context, train);
     }
-
+    /** 
+     * returns game to NORMAL state, removes routing buttons from GUI
+     */
     private void endRouting() {
         context.getGameLogic().setState(GameState.NORMAL);
         routingButtons.remove();
@@ -115,7 +128,10 @@ public class RouteController {
         trainController.setTrainsVisible(train, true);
         train.getActor().setVisible(false);
     }
-
+    /**
+     * colours the selected parts of the route clicked by the user
+     * @param color
+     */
     public void drawRoute(Color color) {
         TaxeGame game = context.getTaxeGame();
 
@@ -134,4 +150,5 @@ public class RouteController {
 
         game.shapeRenderer.end();
     }
+
 }

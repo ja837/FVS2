@@ -3,6 +3,7 @@ package fvs.taxe.dialog;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
+
 import fvs.taxe.controller.Context;
 import gameLogic.Game;
 import gameLogic.GameState;
@@ -17,7 +18,7 @@ public class TrainClicked extends ClickListener {
         this.train = train;
         this.context = context;
     }
-
+    
     @Override
     public void clicked(InputEvent event, float x, float y) {
         if (Game.getInstance().getState() != GameState.NORMAL) return;
@@ -29,7 +30,6 @@ public class TrainClicked extends ClickListener {
             context.getTopBarController().displayFlashMessage("Opponent's " + train.getName() + ". Speed: " + train.getSpeed(), Color.RED, 2);
             return;
         }
-
         if (train.getFinalDestination() == null) {
             context.getTopBarController().displayFlashMessage("Your " + train.getName() + ". Speed: " + train.getSpeed(), Color.BLACK, 2);
         } else {
@@ -40,5 +40,4 @@ public class TrainClicked extends ClickListener {
         dia.show(context.getStage());
         dia.subscribeClick(listener);
     }
-
 }

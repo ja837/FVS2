@@ -1,12 +1,18 @@
 package gameLogic.resource;
 
 import Util.Tuple;
+import fvs.taxe.TaxeGame;
 import fvs.taxe.actor.TrainActor;
+import fvs.taxe.controller.StationController;
+import gameLogic.map.Connection;
 import gameLogic.map.IPositionable;
 import gameLogic.map.Station;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 
 public class Train extends Resource {
     private String leftImage;
@@ -79,6 +85,21 @@ public class Train extends Resource {
 
     public List<Station> getRoute() {
         return route;
+    }
+    
+    /**
+     * gives the list of individual connections which make up the train's route
+     * @return
+     */
+    public List<Connection> getRouteConnections() {
+    	ArrayList<Connection> lstConns = new ArrayList<Connection>();
+    	for (int i = 1; i < route.size(); i++) {
+        	Station station1 = route.get(i-1);
+        	Station station2 = route.get(i);
+        	Connection conn = new Connection(station1, station2);
+	        lstConns.add(conn);
+        }
+    	return lstConns;
     }
 
     public Station getFinalDestination() {

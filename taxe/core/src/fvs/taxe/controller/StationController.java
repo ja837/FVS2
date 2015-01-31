@@ -122,10 +122,15 @@ public class StationController {
         	}
         }
     }
-
+    
+    /** 
+     * renders the connections on the map to be displayed
+     * @param connections
+     * @param color
+     */
     public void renderConnections(List<Connection> connections, Color color) {
         TaxeGame game = context.getTaxeGame();
-
+        // draw all connections on map
         game.shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
         game.shapeRenderer.setColor(color);
 
@@ -133,6 +138,30 @@ public class StationController {
             IPositionable start = connection.getStation1().getLocation();
             IPositionable end = connection.getStation2().getLocation();
             game.shapeRenderer.rectLine(start.getX(), start.getY(), end.getX(), end.getY(), CONNECTION_LINE_WIDTH);
+        }
+        game.shapeRenderer.end();
+    }
+    
+    /**
+     * highlight connections which a user's current trains have travelled / will travel along
+     * @param connections
+     * @param color
+     */
+    public void renderRoutedConnections(List<Connection> connections, Color color) {
+    	TaxeGame game = context.getTaxeGame();
+        game.shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
+        game.shapeRenderer.setColor(color);
+        Player player = context.getGameLogic().getPlayerManager().getCurrentPlayer();
+        for(Resource resource : player.getResources()) {
+        	if(resource instanceof Train) {
+        		if(((Train) resource).getActor() != null) {
+        			for (Connection connection : ((Train) resource).getRouteConnections()){
+        				IPositionable start = connection.getStation1().getLocation();
+        				IPositionable end = connection.getStation2().getLocation();
+        				game.shapeRenderer.rectLine(start.getX(), start.getY(), end.getX(), end.getY(), CONNECTION_LINE_WIDTH);
+        			}
+        		}
+        	}
         }
         game.shapeRenderer.end();
     }

@@ -106,6 +106,7 @@ public class GameScreen extends ScreenAdapter {
         }
         
         if(gameLogic.getState() == GameState.NORMAL || gameLogic.getState() == GameState.PLACING){
+        	stationController.renderRoutedConnections(map.getConnections(), Color.RED);
         	stationController.displayNumberOfTrainsAtStations();
         }
 
