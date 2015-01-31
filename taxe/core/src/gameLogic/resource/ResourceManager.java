@@ -51,9 +51,38 @@ public class ResourceManager {
 
     private Resource getRandomResource() {
             	
-    	int index = random.nextInt(trains.size());
-    	Tuple<String, Integer> train = trains.get(index);
-    	return new Train(train.getFirst(), train.getFirst().replaceAll(" ", "") + ".png", train.getFirst().replaceAll(" ", "") + "Right.png",train.getSecond());
+    	int index = random.nextInt(100);
+    	if (index == 98 || index == 99) {
+    		Tuple<String, Integer> train = trains.get(4);
+        	return new Train(train.getFirst(), train.getFirst().replaceAll(" ", "") + ".png", train.getFirst().replaceAll(" ", "") + "Right.png",train.getSecond());
+    	} else if (94<=index && index<98) {
+    		Tuple<String, Integer> train = trains.get(9);
+        	return new Train(train.getFirst(), train.getFirst().replaceAll(" ", "") + ".png", train.getFirst().replaceAll(" ", "") + "Right.png",train.getSecond());
+    	} else if (88<=index && index<94) {
+    		Tuple<String, Integer> train = trains.get(3);
+        	return new Train(train.getFirst(), train.getFirst().replaceAll(" ", "") + ".png", train.getFirst().replaceAll(" ", "") + "Right.png",train.getSecond());
+    	} else if (80<=index && index<88) {
+    		Tuple<String, Integer> train = trains.get(6);
+        	return new Train(train.getFirst(), train.getFirst().replaceAll(" ", "") + ".png", train.getFirst().replaceAll(" ", "") + "Right.png",train.getSecond());
+    	} else if (70<=index && index<80) {
+    		Tuple<String, Integer> train = trains.get(5);
+        	return new Train(train.getFirst(), train.getFirst().replaceAll(" ", "") + ".png", train.getFirst().replaceAll(" ", "") + "Right.png",train.getSecond());
+    	} else if (60<=index && index<70) {
+    		Tuple<String, Integer> train = trains.get(0);
+        	return new Train(train.getFirst(), train.getFirst().replaceAll(" ", "") + ".png", train.getFirst().replaceAll(" ", "") + "Right.png",train.getSecond());
+    	} else if (48<=index && index<60) {
+    		Tuple<String, Integer> train = trains.get(2);
+        	return new Train(train.getFirst(), train.getFirst().replaceAll(" ", "") + ".png", train.getFirst().replaceAll(" ", "") + "Right.png",train.getSecond());
+    	} else if (34<=index && index<48) {
+    		Tuple<String, Integer> train = trains.get(1);
+        	return new Train(train.getFirst(), train.getFirst().replaceAll(" ", "") + ".png", train.getFirst().replaceAll(" ", "") + "Right.png",train.getSecond());
+    	} else if (18<=index && index<34) {
+    		Tuple<String, Integer> train = trains.get(8);
+        	return new Train(train.getFirst(), train.getFirst().replaceAll(" ", "") + ".png", train.getFirst().replaceAll(" ", "") + "Right.png",train.getSecond());
+    	} else {
+    		Tuple<String, Integer> train = trains.get(7);
+        	return new Train(train.getFirst(), train.getFirst().replaceAll(" ", "") + ".png", train.getFirst().replaceAll(" ", "") + "Right.png",train.getSecond());
+    	}
     	
     }
 
