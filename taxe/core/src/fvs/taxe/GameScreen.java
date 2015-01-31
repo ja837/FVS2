@@ -7,6 +7,7 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
+
 import fvs.taxe.controller.*;
 import fvs.taxe.dialog.DialogEndGame;
 import gameLogic.Game;
@@ -125,7 +126,8 @@ public class GameScreen extends ScreenAdapter {
         
         if (gameLogic.getPlayerManager().getTurnNumber() < gameLogic.TOTAL_TURNS) {
         	game.batch.begin();
-        	game.fontSmall.draw(game.batch, "Turn " + (gameLogic.getPlayerManager().getTurnNumber()+1) + "/" + gameLogic.TOTAL_TURNS, (float) TaxeGame.WIDTH - 90.0f, 20.0f);
+        	game.fontSmall.setColor(Color.NAVY);
+        	game.fontSmall.draw(game.batch, "Turn " + (gameLogic.getPlayerManager().getTurnNumber()+1) + "/" + gameLogic.TOTAL_TURNS, 20, TaxeGame.HEIGHT - 100.0f);
         	game.batch.end();
         }
 
