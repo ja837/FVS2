@@ -64,5 +64,11 @@ public class Station{
 		this.isControlled = isControlled;
 	}
 
+	
+	
+	public String toString(){
+		return getName();
+	}
+	
 
 }

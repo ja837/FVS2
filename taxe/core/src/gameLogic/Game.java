@@ -47,6 +47,7 @@ public class Game {
 			// initialisePlayers gives them a goal, and the GoalManager requires an instance of game to exist so this
 			// method can't be called in the constructor
 			instance.initialisePlayers();
+			
 		}
 
 		return instance;
@@ -60,6 +61,9 @@ public class Game {
 		resourceManager.addRandomResourceToPlayer(player);
 		goalManager.addRandomGoalToPlayer(player);
 	}
+	
+	
+	
 
 	public PlayerManager getPlayerManager() {
 		return playerManager;

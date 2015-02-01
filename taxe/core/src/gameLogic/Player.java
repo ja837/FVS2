@@ -76,7 +76,7 @@ public class Player {
      */
     public void completeGoal(Goal goal) {
     	goal.setComplete();
-    	score += goal.getValue();
+    	score += goal.getReward();
         changed();
     }
 

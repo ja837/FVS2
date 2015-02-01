@@ -16,4 +16,10 @@ public class Connection {
 	public Station getStation2() {
 		return this.station2;
 	}
+	
+	
+	@Override
+	public String toString(){
+		return (station1.getName() + " - " + station2.getName());
+	}
 }

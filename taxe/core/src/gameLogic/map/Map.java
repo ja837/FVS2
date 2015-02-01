@@ -1,8 +1,13 @@
 package gameLogic.map;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.JsonReader;
 import com.badlogic.gdx.utils.JsonValue;
+
+import gameLogic.goal.dijkstra.Dijkstra;
+import gameLogic.goal.dijkstra.Edge;
+import gameLogic.goal.dijkstra.Node;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -12,6 +17,7 @@ public class Map {
     private List<Station> stations;
     private List<Connection> connections;
     private Random random = new Random();
+    //public Dijkstra d;
 
     public Map() {
         stations = new ArrayList<Station>();
@@ -26,6 +32,9 @@ public class Map {
 
         parseStations(jsonVal);
         parseConnections(jsonVal);
+        
+        initialiseNodeList();
+    
     }
 
     private void parseConnections(JsonValue jsonVal) {
@@ -73,6 +82,7 @@ public class Map {
                 addStation(name, acronym, new Position(x, y));
             }
         }
+        
     }
 
     public boolean doesConnectionExist(String stationName, String anotherStationName) {
@@ -88,8 +98,53 @@ public class Map {
 
         return false;
     }
+    
 
-    public Station getRandomStation() {
+    public void initialiseNodeList(){
+    	
+    	//Node node1, node2; //testing node
+    	
+    	
+    	//making nodes
+    	int i =0;
+    	Dijkstra.nodeList = new ArrayList<Node>(); 
+    	for (Station stn : stations){
+			Node n = new Node(stn); 
+			Dijkstra.nodeList.add(n);
+			n.setCount(i);
+			i += 1;
+    	}
+    	
+    	//making connections
+    	for (Node n : Dijkstra.nodeList){
+    		n.addConnectionsAsEdges(this);	
+    		}
+    	
+    	//random node for testing
+    	//node1 = Dijkstra.nodeList.get(random.nextInt(Dijkstra.nodeList.size()));
+
+    	Dijkstra.allDistances = new int[Dijkstra.nodeList.size()][Dijkstra.nodeList.size()];
+    	
+    	//adding to array table for lookup
+    	for (Node n1 : Dijkstra.nodeList){
+    		if (n1.getStation() instanceof CollisionStation){
+    			continue; //skip if a junction
+    		}
+    		Dijkstra.computePath(n1); //compute paths to all nodes
+
+    		
+    		for (Node n2 : Dijkstra.nodeList){
+    			Dijkstra.allDistances[n1.getCount()][n2.getCount()] = (int) n2.minDistance;
+    		}
+    	}
+    	
+    	
+    }
+ 
+    
+		
+
+	public Station getRandomStation() {
         return stations.get(random.nextInt(stations.size()));
     }
 
@@ -177,4 +232,8 @@ public class Map {
 
         return route;
     }
+    
+    private float getDistance(Station a, Station b){
+		return Vector2.dst(a.getLocation().getX(), a.getLocation().getY(), b.getLocation().getX(), b.getLocation().getY());
+	}
 }
