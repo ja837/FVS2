@@ -19,11 +19,13 @@ public class MapTest extends LibGdxTest{
     public void addStationAndConnectionTest() throws Exception {
         String name1 = "station1";
         String name2 = "station2";
+        String acro1 = "st1";
+        String acro2 = "st2";
 
         int previousSize = map.getStations().size();
 
-        map.addStation(name1, new Position(9999, 9999));
-        map.addStation(name2, new Position(200,200));
+        map.addStation(name1,acro1, new Position(9999, 9999));
+        map.addStation(name2,acro2, new Position(200,200));
 
         assertTrue("Failed to add stations", map.getStations().size() - previousSize == 2);
 
