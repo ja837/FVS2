@@ -16,6 +16,7 @@ import gameLogic.resource.Train;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 import static com.badlogic.gdx.scenes.scene2d.actions.Actions.moveTo;
 
@@ -41,10 +42,9 @@ public class TrainMoveController {
     }
 
     // this action will run every time the train reaches a station within a route
-    private RunnableAction perStationAction(final Station station) {   	
+    private RunnableAction perStationAction(final Station station) {
     	
-    	
-    	
+    	//contains the methods for border control and junction failure
         return new RunnableAction() {
             public void run() {
                 train.addHistory(station.getName(), context.getGameLogic().getPlayerManager().getTurnNumber());
@@ -55,14 +55,18 @@ public class TrainMoveController {
             		train.getActor().remove();
                     train.getPlayer().removeResource(train);
             	}
-                if (station.isControlled() != false){
+                if (station.isControlled() != true){
             		System.out.println("Passing through a border control zone");
-            		//give penalty
-            	}
-                
-              
-                
-
+            		Random rn = new Random();
+            		if(rn.nextInt(10) < 3){
+            			System.out.println("Illegal animal found on train!");
+            			train.getActor().remove();
+                        train.getPlayer().removeResource(train);
+            		}
+            		else{
+            			System.out.println("Got through safely");
+            		}            		
+            	}  
                 collisions(station);
             }
         };
