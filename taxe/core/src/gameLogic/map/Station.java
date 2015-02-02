@@ -10,7 +10,7 @@ public class Station{
 	private StationActor actor;
 	private String acronym;
 	
-	private int speedModifier = 1;
+	private int speedModifier = 0;
 
 	public int getSpeedModifier() {
 		return speedModifier;

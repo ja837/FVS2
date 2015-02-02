@@ -76,8 +76,8 @@ public class GameScreen extends ScreenAdapter {
 				 gameLogic.setState(GameState.ANIMATING);
 				 topBarController.displayFlashMessage("Time is passing...", Color.BLACK);
 
-				 
-				 if ((gameLogic.getPlayerManager().getTurnNumber() % 5) - 1 == 0){
+				 //Change the stations that have the speed boost every 5 turns			 
+				 if ((gameLogic.getPlayerManager().getTurnNumber() % 5) == 0){
 					 ChangeSpecialStations();
 				 }
 				 
@@ -186,22 +186,26 @@ public class GameScreen extends ScreenAdapter {
 			 station3 = r.nextInt(stations.size());
 		 }
 		 
+		 //Create a random speed modifier between -50 and 50 that only includes the 10s. i.e. -50, -40, -30 etc.
+		 int speedModifier = r.nextInt(5);
+		 speedModifier *= 10;				 
+		 if ((r.nextInt(2)) == 1){
+			 speedModifier *= -1;
+		 }
+		 		 				 
 		 
-		 
-		 
-		 
-		 //Reset Speedmodifier for every station
+		 //Reset Speed modifier for every station
 		 for (Station s : stations){
-			 s.setSpeedModifier(1);
+			 s.setSpeedModifier(0);
 		 }
 		 
 		 //Set the new speed modifiers
-		 stations.get(station1).setSpeedModifier(2);
-		 stations.get(station2).setSpeedModifier(2);
-		 stations.get(station3).setSpeedModifier(2);
+		 stations.get(station1).setSpeedModifier(speedModifier);
+		 stations.get(station2).setSpeedModifier(speedModifier);
+		 stations.get(station3).setSpeedModifier(speedModifier);
 		 
 		 System.out.println("New special stations are: " + stations.get(station1) + " " + stations.get(station2) + " " + stations.get(station3));
-			
+		 System.out.println("With a speed modifier of " + speedModifier);
 		}
 
 }
