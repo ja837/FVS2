@@ -68,6 +68,32 @@ public class StationController {
             game.fontTiny.setColor(Color.BLACK);
             game.fontTiny.draw(game.batch, s.getAcronym(), s.getLocation().getX() + 5, s.getLocation().getY() + 20);
             game.batch.end();
+            
+            
+        }
+    }
+    
+    /**
+     * renders the speed boost at the station
+     */
+    public void renderStationSpeedModifierLbls() {
+        TaxeGame game = context.getTaxeGame();
+        List<Station> stations = context.getGameLogic().getMap().getStations();
+
+        for (Station s : stations) {
+        	// display station speed modifier
+        	
+        	if (s.getSpeedModifier() != 0){
+        		game.batch.begin();
+        		if (s.getSpeedModifier() < 0){
+        			game.fontTiny.setColor(Color.RED);
+        		}
+        		else{
+        			game.fontTiny.setColor(Color.BLUE);
+        		}          
+                game.fontTiny.draw(game.batch, s.getSpeedModifier() + "", s.getLocation().getX() - 20, s.getLocation().getY() + 20);
+                game.batch.end();
+        	}
         }
     }
     
