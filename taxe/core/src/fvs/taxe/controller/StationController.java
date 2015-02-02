@@ -5,11 +5,13 @@ import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
+
 import fvs.taxe.StationClickListener;
 import fvs.taxe.TaxeGame;
 import fvs.taxe.Tooltip;
 import fvs.taxe.actor.CollisionStationActor;
 import fvs.taxe.actor.StationActor;
+import fvs.taxe.actor.StopActor;
 import fvs.taxe.dialog.DialogStationMultitrain;
 import gameLogic.Game;
 import gameLogic.GameState;
@@ -151,6 +153,11 @@ public class StationController {
 
         context.getStage().addActor(collisionStationActor);
     }
+    
+    private void renderStop (final Station station){
+    	final StopActor stopActor = new StopActor(station.getLocation());
+    	context.getStage().addActor(stopActor);
+    }
 
     public void renderStations() {
         List<Station> stations = context.getGameLogic().getMap().getStations();
@@ -160,6 +167,19 @@ public class StationController {
         		renderCollisionStation(station);
         	} else {
         		renderStation(station);
+        	}
+        }
+    }
+    
+    public void renderSigns(){
+    	
+    	List<Station> stations = context.getGameLogic().getMap().getStations();    	
+        for (Station station : stations) {
+        	if(station.isPassable() == false) {
+        		renderStop(station);
+        	}
+        	if(station.isControlled() == true){
+        		//render
         	}
         }
     }

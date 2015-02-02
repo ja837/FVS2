@@ -22,9 +22,7 @@ public class TrainController {
 
         return trainActor;
     }
-
-
-
+    
     // Sets all trains on the map visible or invisible except one that we are routing for
     public void setTrainsVisible(Train train, boolean visible) {
 

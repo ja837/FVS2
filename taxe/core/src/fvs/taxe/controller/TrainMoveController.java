@@ -5,6 +5,8 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.scenes.scene2d.actions.RunnableAction;
 import com.badlogic.gdx.scenes.scene2d.actions.SequenceAction;
+
+import fvs.taxe.GameScreen;
 import fvs.taxe.actor.TrainActor;
 import gameLogic.Player;
 import gameLogic.map.CollisionStation;
@@ -53,7 +55,8 @@ public class TrainMoveController {
                 if (station.isPassable() != true){
             		System.out.println("Train was destroyed passing through here");
             		train.getActor().remove();
-                    train.getPlayer().removeResource(train);
+                    train.getPlayer().removeResource(train);         
+
             	}
                 if (station.isControlled() != true){
             		System.out.println("Passing through a border control zone");

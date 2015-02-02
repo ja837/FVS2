@@ -1,6 +1,5 @@
 package fvs.taxe;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
@@ -114,6 +113,7 @@ public class GameScreen extends ScreenAdapter {
 		 stationController.renderConnections(map.getConnections(), Color.GRAY);
 		 stationController.renderStationLbls();
 		 stationController.renderStationSpeedModifierLbls();
+		 stationController.renderSigns();
 
 		 if(gameLogic.getState() == GameState.ROUTING) {
 			 routeController.drawRoute(Color.BLACK);

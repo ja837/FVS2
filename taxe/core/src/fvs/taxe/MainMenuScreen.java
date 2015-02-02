@@ -78,10 +78,10 @@ public class MainMenuScreen extends ScreenAdapter {
         game.batch.begin();
         String startGameString = "Start game";
         game.font.draw(game.batch, startGameString, playBounds.getX() + playBounds.getWidth()/2 - game.font.getBounds(startGameString).width/2,
-                playBounds.getY() + playBounds.getHeight()/2 + game.font.getBounds(startGameString).height/2); // center the text
+                playBounds.getY() + playBounds.getHeight()/2 + game.font.getBounds(startGameString).height/2); // centre the text
         String exitGameString = "Exit";
         game.font.draw(game.batch, exitGameString, exitBounds.getX() + exitBounds.getWidth()/2 - game.font.getBounds(exitGameString).width/2,
-                exitBounds.getY() + exitBounds.getHeight()/2 + game.font.getBounds(exitGameString).height/2); // center the text
+                exitBounds.getY() + exitBounds.getHeight()/2 + game.font.getBounds(exitGameString).height/2); // centre the text
 
         game.batch.end();
     }

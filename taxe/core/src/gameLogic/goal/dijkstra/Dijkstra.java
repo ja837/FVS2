@@ -53,9 +53,6 @@ public class Dijkstra {
 		return path;
 	}
 	
-	
-	
-	
 	//converting Stations -> nodes for dijkstra
 	public ArrayList<Node> addStationsToNodeList(Map m){
 		for (Station stn : m.getStations()){
