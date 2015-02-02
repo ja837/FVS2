@@ -42,7 +42,11 @@ public class Train extends Resource {
         return "trains/" + leftImage;
     }
 
-    public String getRightImage() {
+    public void setSpeed(int speed) {
+		this.speed = speed;
+	}
+
+	public String getRightImage() {
         return "trains/" + rightImage;
     }
 

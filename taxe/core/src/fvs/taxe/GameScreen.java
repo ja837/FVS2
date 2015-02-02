@@ -1,5 +1,9 @@
 package fvs.taxe;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
+
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.ScreenAdapter;
 import com.badlogic.gdx.graphics.Color;
@@ -15,140 +19,189 @@ import gameLogic.GameState;
 import gameLogic.GameStateListener;
 import gameLogic.TurnListener;
 import gameLogic.map.Map;
+import gameLogic.map.Station;
 
 
 public class GameScreen extends ScreenAdapter {
-    final private TaxeGame game;
-    private Stage stage;
-    private Texture mapTexture;
-    private Game gameLogic;
-    private Skin skin;
-    private Map map;
-    private float timeAnimated = 0;
-    public static final int ANIMATION_TIME = 2;
-    private Tooltip tooltip;
-    private Context context;
+	final private TaxeGame game;
+	private Stage stage;
+	private Texture mapTexture;
+	private Game gameLogic;
+	private Skin skin;
+	private Map map;
+	private float timeAnimated = 0;
+	public static final int ANIMATION_TIME = 2;
+	private Tooltip tooltip;
+	private Context context;
 
-    private StationController stationController;
-    private TopBarController topBarController;
-    private ResourceController resourceController;
-    private GoalController goalController;
-    private RouteController routeController;
-
-    public GameScreen(TaxeGame game) {
-        this.game = game;
-        stage = new Stage();
-        skin = new Skin(Gdx.files.internal("data/uiskin.json"));
-
-        gameLogic = Game.getInstance();
-        context = new Context(stage, skin, game, gameLogic);
-        Gdx.input.setInputProcessor(stage);
-
-        mapTexture = new Texture(Gdx.files.internal("gamemap.png"));
-        map = gameLogic.getMap();
-
-        tooltip = new Tooltip(skin);
-        stage.addActor(tooltip);
-
-        stationController = new StationController(context, tooltip);
-        topBarController = new TopBarController(context);
-        resourceController = new ResourceController(context);
-        goalController = new GoalController(context);
-        routeController = new RouteController(context);
-
-        context.setRouteController(routeController);
-        context.setTopBarController(topBarController);
-
-        gameLogic.getPlayerManager().subscribeTurnChanged(new TurnListener() {
-            @Override
-            public void changed() {
-            	
-                gameLogic.setState(GameState.ANIMATING);
-                topBarController.displayFlashMessage("Time is passing...", Color.BLACK);
-            }
-        });
-        gameLogic.subscribeStateChanged(new GameStateListener() {
-        	@Override
-        	public void changed(GameState state){
-        		if(gameLogic.getPlayerManager().getTurnNumber() == gameLogic.TOTAL_TURNS && state == GameState.NORMAL) {
-        			//
-        			DialogEndGame dia = new DialogEndGame(GameScreen.this.game, gameLogic.getPlayerManager(), skin);
-        			dia.show(stage);
-        		}
-        	}
-        });
-    }
+	private StationController stationController;
+	private TopBarController topBarController;
+	private ResourceController resourceController;
+	private GoalController goalController;
+	private RouteController routeController;
 
 
-    // called every frame
-    @Override
-    public void render(float delta) {
-        Gdx.gl.glClearColor(0, 0, 0, 1);
-        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+	/**
+	 * 
+	 * @param game
+	 */
+	 public GameScreen(TaxeGame game) {
+		 this.game = game;
+		 stage = new Stage();
+		 skin = new Skin(Gdx.files.internal("data/uiskin.json"));
 
-        game.batch.begin();
-        game.batch.draw(mapTexture, 0, 0);
-        game.batch.end();
+		 gameLogic = Game.getInstance();
+		 context = new Context(stage, skin, game, gameLogic);
+		 Gdx.input.setInputProcessor(stage);
 
-        goalController.drawBackground();
-        //topBarController.drawBackground();
-        
-        stationController.renderConnections(map.getConnections(), Color.GRAY);
-        stationController.renderStationLbls();
-        
-        if(gameLogic.getState() == GameState.ROUTING) {
-            routeController.drawRoute(Color.BLACK);
-        }
+		 mapTexture = new Texture(Gdx.files.internal("gamemap.png"));
+		 map = gameLogic.getMap();
 
-        if(gameLogic.getState() == GameState.ANIMATING) {
-        	
-        	//Fix for player 1 getting an extra go at the start of the game
-        	int adjustedAnimationTime = ANIMATION_TIME;
-        	if (gameLogic.getPlayerManager().getTurnNumber() == 1){
-        		adjustedAnimationTime = 0;
-        	}
-        	
-            timeAnimated += delta;
-            if (timeAnimated >= adjustedAnimationTime) {
-                gameLogic.setState(GameState.NORMAL);
-                timeAnimated = 0;
-            }
+		 tooltip = new Tooltip(skin);
+		 stage.addActor(tooltip);
 
-        }
-        
-        if(gameLogic.getState() == GameState.NORMAL || gameLogic.getState() == GameState.PLACING){
-        	stationController.renderRoutedConnections(map.getConnections(), Color.RED);
-        	stationController.displayNumberOfTrainsAtStations();
-        }
+		 stationController = new StationController(context, tooltip);
+		 topBarController = new TopBarController(context);
+		 resourceController = new ResourceController(context);
+		 goalController = new GoalController(context);
+		 routeController = new RouteController(context);
 
-        stage.act(Gdx.graphics.getDeltaTime());
-        stage.draw();
-        
-        if (gameLogic.getPlayerManager().getTurnNumber() < gameLogic.TOTAL_TURNS) {
-        	game.batch.begin();
-        	game.fontSmall.setColor(Color.NAVY);
-        	game.fontSmall.draw(game.batch, "Turn " + (gameLogic.getPlayerManager().getTurnNumber()+1) + "/" + gameLogic.TOTAL_TURNS, 20, TaxeGame.HEIGHT - 100.0f);
-        	game.batch.end();
-        }
+		 context.setRouteController(routeController);
+		 context.setTopBarController(topBarController);
 
-        resourceController.drawHeaderText();
-        goalController.showCurrentPlayerGoals();
-        topBarController.updateScores(gameLogic.getPlayerManager().getAllPlayers());
-    }
+		 gameLogic.getPlayerManager().subscribeTurnChanged(new TurnListener() {
+			 @Override
+			 public void changed() {
 
-    @Override
-    // Called when GameScreen becomes current screen of the game
-    public void show() {
-        stationController.renderStations();
-        goalController.addEndTurnButton();
-        resourceController.drawPlayerResources(gameLogic.getPlayerManager().getCurrentPlayer());
-    }
+				 gameLogic.setState(GameState.ANIMATING);
+				 topBarController.displayFlashMessage("Time is passing...", Color.BLACK);
+
+				 
+				 if ((gameLogic.getPlayerManager().getTurnNumber() % 5) - 1 == 0){
+					 ChangeSpecialStations();
+				 }
+				 
+			 }
+
+			
+		 });
+		 gameLogic.subscribeStateChanged(new GameStateListener() {
+			 @Override
+			 public void changed(GameState state){
+				 if(gameLogic.getPlayerManager().getTurnNumber() == gameLogic.TOTAL_TURNS && state == GameState.NORMAL) {
+					 //
+					 DialogEndGame dia = new DialogEndGame(GameScreen.this.game, gameLogic.getPlayerManager(), skin);
+					 dia.show(stage);
+				 }
+			 }
+		 });
+	 }
 
 
-    @Override
-    public void dispose() {
-        mapTexture.dispose();
-        stage.dispose();
-    }
+	 // called every frame
+	 @Override
+	 public void render(float delta) {
+		 Gdx.gl.glClearColor(0, 0, 0, 1);
+		 Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+
+		 game.batch.begin();
+		 game.batch.draw(mapTexture, 0, 0);
+		 game.batch.end();
+
+		 goalController.drawBackground();
+		 //topBarController.drawBackground();
+
+		 stationController.renderConnections(map.getConnections(), Color.GRAY);
+		 stationController.renderStationLbls();
+
+		 if(gameLogic.getState() == GameState.ROUTING) {
+			 routeController.drawRoute(Color.BLACK);
+		 }
+
+		 if(gameLogic.getState() == GameState.ANIMATING) {
+
+			 //Fix for player 1 getting an extra go at the start of the game
+			 int adjustedAnimationTime = ANIMATION_TIME;
+			 if (gameLogic.getPlayerManager().getTurnNumber() == 1){
+				 adjustedAnimationTime = 0;
+			 }
+
+			 timeAnimated += delta;
+			 if (timeAnimated >= adjustedAnimationTime) {
+				 gameLogic.setState(GameState.NORMAL);
+				 timeAnimated = 0;
+			 }
+
+		 }
+
+		 if(gameLogic.getState() == GameState.NORMAL || gameLogic.getState() == GameState.PLACING){
+			 stationController.renderRoutedConnections(map.getConnections(), Color.RED);
+			 stationController.displayNumberOfTrainsAtStations();
+		 }
+
+		 stage.act(Gdx.graphics.getDeltaTime());
+		 stage.draw();
+
+		 if (gameLogic.getPlayerManager().getTurnNumber() < gameLogic.TOTAL_TURNS) {
+			 game.batch.begin();
+			 game.fontSmall.setColor(Color.NAVY);
+			 game.fontSmall.draw(game.batch, "Turn " + (gameLogic.getPlayerManager().getTurnNumber()+1) + "/" + gameLogic.TOTAL_TURNS, 20, TaxeGame.HEIGHT - 100.0f);
+			 game.batch.end();
+		 }
+
+		 resourceController.drawHeaderText();
+		 goalController.showCurrentPlayerGoals();
+		 topBarController.updateScores(gameLogic.getPlayerManager().getAllPlayers());
+	 }
+
+	 @Override
+	 // Called when GameScreen becomes current screen of the game
+	 public void show() {
+		 stationController.renderStations();
+		 goalController.addEndTurnButton();
+		 resourceController.drawPlayerResources(gameLogic.getPlayerManager().getCurrentPlayer());
+	 }
+
+
+	 @Override
+	 public void dispose() {
+		 mapTexture.dispose();
+		 stage.dispose();
+	 }
+	 
+	 /**
+	  * Changes which stations have the speed alterations. Called every 5 turns and changes 3 stations.
+	  */
+	 private void ChangeSpecialStations() {
+			// TODO Auto-generated method stub
+		 List<Station> stations = gameLogic.getMap().getStations();
+		 Random r = new Random();
+		 int station1 = r.nextInt(stations.size());
+		 int station2 = r.nextInt(stations.size());;
+		 int station3 = r.nextInt(stations.size());;
+		 while (station2 == station1){
+			 station2 = r.nextInt(stations.size());
+		 }
+		 while (station3 == station1 || station3 == station2){
+			 station3 = r.nextInt(stations.size());
+		 }
+		 
+		 
+		 
+		 
+		 
+		 //Reset Speedmodifier for every station
+		 for (Station s : stations){
+			 s.setSpeedModifier(1);
+		 }
+		 
+		 //Set the new speed modifiers
+		 stations.get(station1).setSpeedModifier(2);
+		 stations.get(station2).setSpeedModifier(2);
+		 stations.get(station3).setSpeedModifier(2);
+		 
+		 System.out.println("New special stations are: " + stations.get(station1) + " " + stations.get(station2) + " " + stations.get(station3));
+			
+		}
 
 }

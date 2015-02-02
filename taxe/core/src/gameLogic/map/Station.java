@@ -9,6 +9,16 @@ public class Station{
 	private IPositionable location;
 	private StationActor actor;
 	private String acronym;
+	
+	private int speedModifier = 1;
+
+	public int getSpeedModifier() {
+		return speedModifier;
+	}
+
+	public void setSpeedModifier(int speedmodifier) {
+		this.speedModifier = speedmodifier;
+	}
 
 	public Station(String name, String acronym, IPositionable location) {
 		this.name = name;

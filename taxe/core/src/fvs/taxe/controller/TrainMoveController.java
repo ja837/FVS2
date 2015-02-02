@@ -43,6 +43,8 @@ public class TrainMoveController {
     // this action will run every time the train reaches a station within a route
     private RunnableAction perStationAction(final Station station) {   	
     	
+    	
+    	
         return new RunnableAction() {
             public void run() {
                 train.addHistory(station.getName(), context.getGameLogic().getPlayerManager().getTurnNumber());
@@ -56,7 +58,10 @@ public class TrainMoveController {
                 if (station.isControlled() != false){
             		System.out.println("Passing through a border control zone");
             		//give penalty
-            	}          
+            	}
+                
+              
+                
 
                 collisions(station);
             }
@@ -85,10 +90,24 @@ public class TrainMoveController {
         action.addAction(beforeAction());
 
         for (final Station station : train.getRoute()) {
-            IPositionable next = station.getLocation();
+        	     	           
+        	IPositionable next = station.getLocation();
+            
+            
+
+        
             float duration = getDistance(current, next) / train.getSpeed();
             action.addAction(moveTo(next.getX() - TrainActor.width / 2, next.getY() - TrainActor.height / 2, duration));
             action.addAction(perStationAction(station));
+            
+            //Adds speed modifier to train here.     
+            //System.out.println("At station " + station + " train speed = "+ train.getSpeed());		Debug info for train speeds. 
+            if(station.getSpeedModifier() != 1){
+            	int newSpeed = train.getSpeed() * station.getSpeedModifier();
+                System.out.println("Train '" + train.toString() + "' speed modified. Old speed = " + train.getSpeed() + ". New speed = " + newSpeed);
+                train.setSpeed(newSpeed);
+            }
+            
             current = next;
         }
 
