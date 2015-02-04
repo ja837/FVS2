@@ -6,7 +6,7 @@ import Util.Tuple;
 import gameLogic.map.Station;
 import gameLogic.resource.Cargo;
 import gameLogic.resource.Train;
-import gameLogic.resource.Cargo.trainCargo;
+import gameLogic.resource.Cargo.Animal;
 
 public class Goal {
 	private Station origin;
@@ -18,7 +18,9 @@ public class Goal {
 	
 	//constraints
 	private String trainName = null;
-	private String cargo;
+	private Animal cargo;
+	
+
 	private Random random  = new Random();
 	
 	public Goal(Station argOrigin, Station argDestination, Station via, int turn, int score) {
@@ -28,7 +30,7 @@ public class Goal {
 		this.turnIssued = turn;
 		this.reward = score; //current score
 		
-		int ranNum= random.nextInt(trainCargo.values().length);
+		int ranNum= random.nextInt(Animal.values().length);
 		cargo = Cargo.getCargo(ranNum);
 	}
 	
@@ -86,7 +88,7 @@ public class Goal {
 		if(trainName != null) {
 			trainString = trainName;
 		}
-		goalString = "Send a " + trainString + " carrying a " + cargo.toLowerCase() + " from " + origin.getName() + " to " + destination.getName();
+		goalString = "Send a " + trainString + " carrying a " + cargo.toString().toLowerCase() + " from " + origin.getName() + " to " + destination.getName();
 		
 		
 		if (via != null){
@@ -106,5 +108,17 @@ public class Goal {
 	
 	public int getReward() {
 		return reward;
+	}
+	
+	public Animal getCargo() {
+		return cargo;
+	}
+
+	public Station getOrigin() {
+		return origin;
+	}
+
+	public Station getDestination() {
+		return destination;
 	}
 }

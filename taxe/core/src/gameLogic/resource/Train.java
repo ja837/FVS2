@@ -5,6 +5,7 @@ import fvs.taxe.actor.TrainActor;
 import gameLogic.map.Connection;
 import gameLogic.map.IPositionable;
 import gameLogic.map.Station;
+import gameLogic.resource.Cargo.Animal;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,6 +24,8 @@ public class Train extends Resource {
 
     //Station name and turn number
     private List<Tuple<String, Integer>> history;
+    
+    private ArrayList<Animal> cargo;
 
 
     public Train(String name, String leftImage, String rightImage, int speed) {
@@ -32,6 +35,23 @@ public class Train extends Resource {
         this.speed = speed;
         history = new ArrayList<Tuple<String, Integer>>();
         route =  new ArrayList<Station>();
+        cargo = new ArrayList<Animal>();
+    }
+    
+    /**
+     * Adds cargo to the train
+     * @param a The animal to add to the train.
+     */
+    public void addCargo(Animal a){
+    	cargo.add(a);
+    }
+    
+    /**
+     * Returns a list of all of the cargo on the train.
+     * @return 
+     */
+    public ArrayList<Animal> getCargo(){
+    	return cargo;
     }
     
     public String getName() {

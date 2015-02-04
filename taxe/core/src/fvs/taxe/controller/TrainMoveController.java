@@ -6,9 +6,12 @@ import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.scenes.scene2d.actions.RunnableAction;
 import com.badlogic.gdx.scenes.scene2d.actions.SequenceAction;
 
+
 import fvs.taxe.GameScreen;
+
 import fvs.taxe.actor.TrainActor;
 import gameLogic.Player;
+import gameLogic.goal.Goal;
 import gameLogic.map.CollisionStation;
 import gameLogic.map.IPositionable;
 import gameLogic.map.Position;
@@ -33,7 +36,10 @@ public class TrainMoveController {
         addMoveActions();
     }
 
-    // an action for the train to run before it starts moving across the screen
+    /**
+     * an action for the train to run before it starts moving across the screen
+     * @return
+     */
     private RunnableAction beforeAction() {
         return new RunnableAction() {
             public void run() {
@@ -43,9 +49,13 @@ public class TrainMoveController {
         };
     }
 
-    // this action will run every time the train reaches a station within a route
-    private RunnableAction perStationAction(final Station station) {
-    	
+
+    /**
+     * this action will run every time the train reaches a station within a route
+     * @param station
+     * @return
+     */
+    private RunnableAction perStationAction(final Station station) {   	   	    	
     	//contains the methods for border control and junction failure
         return new RunnableAction() {
             public void run() {
@@ -60,6 +70,7 @@ public class TrainMoveController {
             	}
                 if (station.isControlled() != true){
             		System.out.println("Passing through a border control zone");
+
             		Random rn = new Random();
             		if(rn.nextInt(10) < 3){
             			System.out.println("Illegal animal found on train!");
@@ -70,12 +81,28 @@ public class TrainMoveController {
             			System.out.println("Got through safely");
             		}            		
             	}  
+                
+                for (Goal g : train.getPlayer().getGoals()){
+                	if (g.getOrigin().equals(station)){
+                		train.addCargo(g.getCargo());
+                    	System.out.println(g.getCargo() + " added to " + train.toString()); 
+                	}
+                	
+                }
+                
+              
+                
+
+
                 collisions(station);
             }
         };
     }
 
-    // an action for the train to run after it has moved the whole route
+    /**
+     * an action for the train to run after it has moved the whole route
+     * @return
+     */
     private RunnableAction afterAction() {
         return new RunnableAction() {
             public void run() {
