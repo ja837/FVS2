@@ -10,6 +10,7 @@ import com.badlogic.gdx.scenes.scene2d.actions.SequenceAction;
 import fvs.taxe.GameScreen;
 
 import fvs.taxe.actor.TrainActor;
+import fvs.taxe.controller.TopBarController;
 import gameLogic.Player;
 import gameLogic.goal.Goal;
 import gameLogic.map.CollisionStation;
@@ -64,21 +65,23 @@ public class TrainMoveController {
                         + context.getGameLogic().getPlayerManager().getTurnNumber());
                 if (station.isPassable() != true){
             		System.out.println("Train was destroyed passing through here");
+            		context.getTopBarController().displayFlashMessage("Train was destroyed passing through broken junction", Color.RED, 3);
             		train.getActor().remove();
                     train.getPlayer().removeResource(train);         
 
             	}
-                if (station.isControlled() != true){
-            		System.out.println("Passing through a border control zone");
-
+                if (station.isControlled() == true){
+            		System.out.println("Passing through a border control zone of" + station.getName());
             		Random rn = new Random();
-            		if(rn.nextInt(10) < 3){
+            		if(rn.nextInt(100) < 20){
             			System.out.println("Illegal animal found on train!");
+            			context.getTopBarController().displayFlashMessage("A diseased animal was found on your train. It had to be destroyed.", Color.RED, 3);
             			train.getActor().remove();
                         train.getPlayer().removeResource(train);
             		}
             		else{
             			System.out.println("Got through safely");
+            			context.getTopBarController().displayFlashMessage("Passed through border control safely.", Color.GREEN, 3);
             		}            		
             	}  
                 
@@ -88,12 +91,8 @@ public class TrainMoveController {
                     	System.out.println(g.getCargo() + " added to " + train.toString()); 
                 	}
                 	
-                }
+                } 
                 
-              
-                
-
-
                 collisions(station);
             }
         };

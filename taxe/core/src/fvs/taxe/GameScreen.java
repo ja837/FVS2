@@ -114,7 +114,7 @@ public class GameScreen extends ScreenAdapter {
 		 stationController.renderStationLbls();
 		 stationController.renderStationSpeedModifierLbls();
 		 stationController.renderSigns();
-
+		 
 		 if(gameLogic.getState() == GameState.ROUTING) {
 			 routeController.drawRoute(Color.BLACK);
 		 }

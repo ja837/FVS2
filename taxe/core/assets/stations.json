@@ -4,13 +4,14 @@
       "name": "Madrid",
       "acronym": "MAD",
       "junction": false,
+      "controlled": false,	
       "x": "159",
       "y": 19
     },
     {
       "name": "Paris",
       "acronym": "PRS",
-      "junction": false,
+      "junction": false,      
       "x": "330",
       "y": 280
     },

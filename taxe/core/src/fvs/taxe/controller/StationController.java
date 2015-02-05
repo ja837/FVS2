@@ -12,6 +12,7 @@ import fvs.taxe.Tooltip;
 import fvs.taxe.actor.CollisionStationActor;
 import fvs.taxe.actor.StationActor;
 import fvs.taxe.actor.StopActor;
+import fvs.taxe.actor.StopSignActor;
 import fvs.taxe.dialog.DialogStationMultitrain;
 import gameLogic.Game;
 import gameLogic.GameState;
@@ -158,6 +159,11 @@ public class StationController {
     	final StopActor stopActor = new StopActor(station.getLocation());
     	context.getStage().addActor(stopActor);
     }
+    
+    private void renderControlled (final Station station){
+    	final StopSignActor stopActor = new StopSignActor(station.getLocation());
+    	context.getStage().addActor(stopActor);
+    }
 
     public void renderStations() {
         List<Station> stations = context.getGameLogic().getMap().getStations();
@@ -179,7 +185,7 @@ public class StationController {
         		renderStop(station);
         	}
         	if(station.isControlled() == true){
-        		//render
+        		renderControlled(station);
         	}
         }
     }

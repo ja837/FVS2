@@ -13,16 +13,15 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-public class Map {
+public class Map {	 
     private List<Station> stations;
     private List<Connection> connections;
     private Random random = new Random();
     //public Dijkstra d;
 
-    public Map() {
+    public Map() {    	
         stations = new ArrayList<Station>();
         connections = new ArrayList<Connection>();
-
         initialise();
     }
 
@@ -61,6 +60,7 @@ public class Map {
             int x = 0;
             int y = 0;
             boolean isJunction = false;
+            boolean isControlled = false;
 
             for(JsonValue val = station.child; val != null; val = val.next) {
                 if(val.name.equalsIgnoreCase("name")) {
@@ -71,15 +71,17 @@ public class Map {
                     x = val.asInt();
                 } else if(val.name.equalsIgnoreCase("y")) {
                     y = val.asInt();
-                } else {
+                } else if(val.name.equalsIgnoreCase("junction")) {
                     isJunction = val.asBoolean();
+                } else{
+                	isControlled = val.asBoolean();
                 }
             }
 
             if (isJunction) {
-                addJunction(name, "", new Position(x,y));
+                addJunction(name, "", new Position(x,y), isControlled);
             } else {
-                addStation(name, acronym, new Position(x, y));
+                addStation(name, acronym, new Position(x, y), isControlled);
             }
         }
         
@@ -136,22 +138,17 @@ public class Map {
     		for (Node n2 : Dijkstra.nodeList){
     			Dijkstra.allDistances[n1.getCount()][n2.getCount()] = (int) n2.minDistance;
     		}
-    	}
-    	
-    	
+    	}   	
     }
  
-    
-		
-
 	public Station getRandomStation() {
         return stations.get(random.nextInt(stations.size()));
     }
 
-    public Station addStation(String name, String acronym, Position location) {
+    public Station addStation(String name, String acronym, Position location, Boolean isControlled) {
         Station newStation = new Station(name, acronym, location);
         newStation.setPassable(true);
-        newStation.setControlled(true);
+        newStation.setControlled(isControlled);
         stations.add(newStation);
         return newStation;
     }
@@ -161,11 +158,11 @@ public class Map {
 		return station;    	
     }
     
-    public CollisionStation addJunction(String name, String acronym, Position location) {
+    public CollisionStation addJunction(String name, String acronym, Position location, Boolean isControlled) {
     	CollisionStation newJunction = new CollisionStation(name, acronym, location);
     	stations.add(newJunction);
     	newJunction.setPassable(true);
-        newJunction.setControlled(true);
+        newJunction.setControlled(isControlled);
     	return newJunction;
     }
 
