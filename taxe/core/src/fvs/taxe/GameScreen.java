@@ -86,7 +86,7 @@ public class GameScreen extends ScreenAdapter {
 				 Random rand = new Random();
 				 for (Station station : map.getStations()){
 					 if (station.isPassable() == false){
-						 if(rand.nextInt(10)<100){
+						 if(rand.nextInt(10)<3){
 							 station.setPassable(true);
 							 topBarController.displayFlashMessage("The station at "+station.toString()+" was fixed!", Color.GREEN);
 							 Array<Actor> stageActors = stage.getActors();
