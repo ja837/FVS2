@@ -220,10 +220,10 @@ public class GameScreen extends ScreenAdapter {
 		}
 
 
-	private int generateRandomSpeedModifier() {
-		//Create a random speed modifier between -50 and 50 that only includes the 10s. i.e. -50, -40, -30 etc. Ensure that it is not 0. 75% chance it is positive.
+	private float generateRandomSpeedModifier() {
+		//Create a random speed modifier between -50% and 50% that only includes the 10s. i.e. -50, -40, -30 etc. Ensure that it is not 0. 75% chance it is positive.
 		 Random r2 = new Random();
-		 int speedModifier = r2.nextInt(5);
+		 float speedModifier = r2.nextInt(5);
 		 while (speedModifier == 0){
 			 speedModifier = r2.nextInt(5);
 		 }
@@ -231,6 +231,8 @@ public class GameScreen extends ScreenAdapter {
 		 if ((r2.nextInt(4)) == 0){
 			 speedModifier *= -1;
 		 }
+		 speedModifier = speedModifier / 100;
+		 speedModifier++;
 		return speedModifier;
 	}
 

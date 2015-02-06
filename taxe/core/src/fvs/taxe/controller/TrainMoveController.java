@@ -134,9 +134,9 @@ public class TrainMoveController {
             action.addAction(perStationAction(station));
             
             //Adds speed modifier to train here.     
-            //System.out.println("At station " + station + " train speed = "+ train.getSpeed());		Debug info for train speeds. 
-            if(station.getSpeedModifier() != 1){
-            	int newSpeed = train.getSpeed() + station.getSpeedModifier();
+            System.out.println("At station " + station + " train speed = "+ train.getSpeed());		//Debug info for train speeds. 
+            if(station.getSpeedModifier() != 0){
+            	int newSpeed = (int) (train.getSpeed() * station.getSpeedModifier());
                 System.out.println("Train '" + train.toString() + "' speed modified. Old speed = " + train.getSpeed() + ". New speed = " + newSpeed);
                 train.setSpeed(newSpeed);
             }
