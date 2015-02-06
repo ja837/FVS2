@@ -4,7 +4,7 @@
       "name": "Madrid",
       "acronym": "MAD",
       "junction": false,
-      "controlled": false,	
+      "controlled": true,	
       "x": "159",
       "y": 19
     },

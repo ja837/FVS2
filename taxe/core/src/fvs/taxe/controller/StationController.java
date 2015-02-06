@@ -24,6 +24,7 @@ import gameLogic.map.Station;
 import gameLogic.resource.Resource;
 import gameLogic.resource.Train;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 
@@ -38,6 +39,7 @@ public class StationController {
     and this list implementation supports removing elements whilst iterating through it
     */
     private static List<StationClickListener> stationClickListeners = new CopyOnWriteArrayList<StationClickListener>();
+    private List<Actor> brokenStations = new ArrayList<Actor>();		//We store broken station actors to remove them easily
 
     public StationController(Context context, Tooltip tooltip) {
         this.context = context;
@@ -70,8 +72,7 @@ public class StationController {
             game.batch.begin();
             game.fontTiny.setColor(Color.BLACK);
             game.fontTiny.draw(game.batch, s.getAcronym(), s.getLocation().getX() + 5, s.getLocation().getY() + 20);
-            game.batch.end();
-            
+            game.batch.end(); 
             
         }
     }
@@ -158,6 +159,8 @@ public class StationController {
     private void renderStop (final Station station){
     	final StopActor stopActor = new StopActor(station.getLocation());
     	context.getStage().addActor(stopActor);
+    	stopActor.setName(station.toString());
+    	brokenStations.add(stopActor);
     }
     
     private void renderControlled (final Station station){
@@ -189,6 +192,7 @@ public class StationController {
         	}
         }
     }
+    
     
     /** 
      * renders the connections on the map to be displayed

@@ -1,5 +1,6 @@
 package fvs.taxe;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
@@ -8,8 +9,10 @@ import com.badlogic.gdx.ScreenAdapter;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
+import com.badlogic.gdx.utils.Array;
 
 import fvs.taxe.controller.*;
 import fvs.taxe.dialog.DialogEndGame;
@@ -78,6 +81,22 @@ public class GameScreen extends ScreenAdapter {
 				 //Change the stations that have the speed boost every 5 turns			 
 				 if ((gameLogic.getPlayerManager().getTurnNumber() % 5) == 0){
 					 ChangeSpecialStations();
+				 }
+				 //Have a chance to fix broken stations
+				 Random rand = new Random();
+				 for (Station station : map.getStations()){
+					 if (station.isPassable() == false){
+						 if(rand.nextInt(10)<100){
+							 station.setPassable(true);
+							 topBarController.displayFlashMessage("The station at "+station.toString()+" was fixed!", Color.GREEN);
+							 Array<Actor> stageActors = stage.getActors();
+							 for (Actor a: stageActors){
+								 if (a.getName() != null){									 
+									 a.remove();									 
+								 }
+							 }							
+						 }
+					 }
 				 }
 				 
 			 }
@@ -186,10 +205,6 @@ public class GameScreen extends ScreenAdapter {
 		 while (station3 == station1 || station3 == station2){
 			 station3 = r.nextInt(stations.size());
 		 }
-		 
-		 
-		 
-		 		 				 
 		 
 		 //Reset Speed modifier for every station
 		 for (Station s : stations){

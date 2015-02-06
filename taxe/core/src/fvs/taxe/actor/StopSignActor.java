@@ -10,7 +10,7 @@ public class StopSignActor extends Image {
     private static int height = 20;
 
     public StopSignActor(IPositionable location) {
-        super(new Texture(Gdx.files.internal("stop3.png")));
+        super(new Texture(Gdx.files.internal("stop4.png")));
 
         setSize(width, height);
         setPosition(location.getX() - width / 2, location.getY() - height / 2 + 15);
