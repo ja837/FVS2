@@ -10,10 +10,11 @@ import gameLogic.goal.dijkstra.Edge;
 import gameLogic.goal.dijkstra.Node;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 
-public class Map {	 
+public class Map {
     private List<Station> stations;
     private List<Connection> connections;
     private Random random = new Random();
@@ -103,10 +104,6 @@ public class Map {
     
 
     public void initialiseNodeList(){
-    	
-    	//Node node1, node2; //testing node
-    	
-    	
     	//making nodes
     	int i =0;
     	Dijkstra.nodeList = new ArrayList<Node>(); 
@@ -116,31 +113,22 @@ public class Map {
 			n.setCount(i);
 			i += 1;
     	}
-    	
     	//making connections
     	for (Node n : Dijkstra.nodeList){
     		n.addConnectionsAsEdges(this);	
     		}
-    	
-    	//random node for testing
-    	//node1 = Dijkstra.nodeList.get(random.nextInt(Dijkstra.nodeList.size()));
-
-    	Dijkstra.allDistances = new int[Dijkstra.nodeList.size()][Dijkstra.nodeList.size()];
-    	
+    	//adding score from x to y in array
+       	Dijkstra.allDistances = new int[Dijkstra.nodeList.size()][Dijkstra.nodeList.size()];
     	//adding to array table for lookup
     	for (Node n1 : Dijkstra.nodeList){
-    		if (n1.getStation() instanceof CollisionStation){
-    			continue; //skip if a junction
-    		}
     		Dijkstra.computePath(n1); //compute paths to all nodes
-
-    		
     		for (Node n2 : Dijkstra.nodeList){
     			Dijkstra.allDistances[n1.getCount()][n2.getCount()] = (int) n2.minDistance;
     		}
     	}   	
+    	System.out.println(Arrays.deepToString(Dijkstra.allDistances));
     }
- 
+
 	public Station getRandomStation() {
         return stations.get(random.nextInt(stations.size()));
     }

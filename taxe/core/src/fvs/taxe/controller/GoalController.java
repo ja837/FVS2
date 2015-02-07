@@ -15,7 +15,7 @@ import gameLogic.GameStateListener;
 import gameLogic.Player;
 import gameLogic.PlayerManager;
 import gameLogic.goal.Goal;
-import gameLogic.resource.Cargo.Animal;
+import gameLogic.resource.Cargo;
 
 import java.util.ArrayList;
 import java.util.List;

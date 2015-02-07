@@ -6,7 +6,7 @@ import Util.Tuple;
 import gameLogic.map.Station;
 import gameLogic.resource.Cargo;
 import gameLogic.resource.Train;
-import gameLogic.resource.Cargo.Animal;
+import gameLogic.resource.Cargo.trainCargo;
 
 public class Goal {
 	private Station origin;
@@ -18,9 +18,10 @@ public class Goal {
 	
 	//constraints
 	private String trainName = null;
-	private Animal cargo;
-	
 
+	//goal cosmetic
+	private trainCargo cargo;
+	private String cargoString;
 	private Random random  = new Random();
 	
 	public Goal(Station argOrigin, Station argDestination, Station via, int turn, int score) {
@@ -30,8 +31,9 @@ public class Goal {
 		this.turnIssued = turn;
 		this.reward = score; //current score
 		
-		int ranNum= random.nextInt(Animal.values().length);
-		this.cargo = Cargo.getCargo(ranNum);
+
+		int ranNum = random.nextInt(trainCargo.values().length);
+		cargo = Cargo.getCargo(ranNum);
 	}
 	
 	public void addConstraint(String name, String value) {
@@ -42,7 +44,6 @@ public class Goal {
 		}
 	}
 	
-
 	public boolean isComplete(Train train) {
 		boolean passedOrigin = false;
 		boolean passedVia = false;
@@ -56,6 +57,7 @@ public class Goal {
 		if (via != null){
 			for (Tuple<String, Integer> history : train.getHistory()){
 				if (history.getFirst().equals(via.getName()) && history.getSecond() >= turnIssued){
+					
 					passedVia = true;
 				}
 			}
@@ -88,6 +90,9 @@ public class Goal {
 		if(trainName != null) {
 			trainString = trainName;
 		}
+
+		//goalString = "Send a " + trainString + " carrying a " + cargo.toString().toLowerCase() + " from " + origin.getName() + " to " + destination.getName();
+
 		goalString = "Send a " + trainString + " carrying a " + cargo.toString().toLowerCase() + " from " + origin.getName() + " to " + destination.getName();
 		
 		
@@ -121,7 +126,7 @@ public class Goal {
 			imgFilePath += "penguin.png";
 			break;
 		case SHEEP:
-			imgFilePath += "SHEEP.png";
+			imgFilePath += "sheep.png";
 			break;
 		case ELEPHANT:
 			imgFilePath += "elephant.png";
@@ -160,7 +165,7 @@ public class Goal {
 		return reward;
 	}
 	
-	public Animal getCargo() {
+	public trainCargo getCargo() {
 		return cargo;
 	}
 
