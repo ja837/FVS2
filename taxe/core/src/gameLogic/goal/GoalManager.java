@@ -66,10 +66,11 @@ public class GoalManager {
 				}
 			}
 		}
-				
-		System.out.println("Score for going from  " + origin.getName() + " to " + destination.getName() + " is " + score);
+		
+		System.out.println("Score for going from  " + origin.getName() + " to " + destination.getName() /*+ " via " + via.getName()*/ +" is " + score);
+		
 		Goal goal = new Goal(origin, destination, via, turn, score);
-
+ 
 		// Goal with a specific train
 		if(random.nextInt(2) == 1) {
 			//System.out.println(player.getResources().size());
