@@ -65,7 +65,7 @@ public class RouteController {
         boolean hasConnection = context.getGameLogic().getMap().doesConnectionExist(station.getName(), lastStation.getName());
 
         if(!hasConnection) {
-            context.getTopBarController().displayFlashMessage("This connection doesn't exist", Color.RED);
+            context.getInfoController().displayFlashMessage("This connection doesn't exist", Color.RED);
         } else {
             positions.add(station.getLocation());
             canEndRouting = !(station instanceof CollisionStation);
@@ -93,7 +93,7 @@ public class RouteController {
             @Override
             public void clicked (InputEvent event, float x, float y) {
                 if(!canEndRouting) {
-                    context.getTopBarController().displayFlashMessage("Your route must end at a station", Color.RED);
+                    context.getInfoController().displayFlashMessage("Your route must end at a station", Color.RED);
                     return;
                 }
 

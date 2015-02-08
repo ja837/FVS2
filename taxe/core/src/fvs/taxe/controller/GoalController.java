@@ -130,7 +130,7 @@ public class GoalController {
             game.batch.setColor(c);
             //draw goal text
             game.fontTiny.setColor(Color.BLACK);
-            game.fontTiny.drawWrapped(game.batch, goalString, x+60, y+50, CONTROLS_WIDTH - 80);
+            game.fontTiny.drawWrapped(game.batch, goalString, x+60, y+55, CONTROLS_WIDTH - 80);
             game.batch.end();
 
             y -= 70;

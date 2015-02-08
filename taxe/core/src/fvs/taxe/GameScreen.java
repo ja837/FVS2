@@ -37,7 +37,7 @@ public class GameScreen extends ScreenAdapter {
 	private Context context;
 
 	private StationController stationController;
-	private TopBarController topBarController;
+	private InfoController infoController;
 	private ResourceController resourceController;
 	private GoalController goalController;
 	private RouteController routeController;
@@ -63,20 +63,20 @@ public class GameScreen extends ScreenAdapter {
 		 stage.addActor(tooltip);
 
 		 stationController = new StationController(context, tooltip);
-		 topBarController = new TopBarController(context);
+		 infoController = new InfoController(context);
 		 resourceController = new ResourceController(context);
 		 goalController = new GoalController(context);
 		 routeController = new RouteController(context);
 
 		 context.setRouteController(routeController);
-		 context.setTopBarController(topBarController);
+		 context.setInfoController(infoController);
 
 		 gameLogic.getPlayerManager().subscribeTurnChanged(new TurnListener() {
 			 @Override
 			 public void changed() {
 
 				 gameLogic.setState(GameState.ANIMATING);
-				 topBarController.displayFlashMessage("Time is passing...", Color.BLACK);
+				 infoController.displayFlashMessage("Time is passing...", Color.BLACK);
 
 				 
 				 //Have a chance to fix broken stations
@@ -85,7 +85,7 @@ public class GameScreen extends ScreenAdapter {
 					 if (station.isPassable() == false){
 						 if(rand.nextInt(10)<3){
 							 station.setPassable(true);
-							 topBarController.displayFlashMessage("The station at "+station.toString()+" was fixed!", Color.GREEN);
+							 infoController.displayFlashMessage("The station at "+station.toString()+" was fixed!", Color.GREEN);
 							 Array<Actor> stageActors = stage.getActors();
 							 for (Actor a: stageActors){
 								 if (a.getName() != null){									 
@@ -167,8 +167,9 @@ public class GameScreen extends ScreenAdapter {
 		 }
 
 		 resourceController.drawHeaderText();
+		 resourceController.drawInfoText();
 		 goalController.showCurrentPlayerGoals();
-		 topBarController.updateScores(gameLogic.getPlayerManager().getAllPlayers());
+		 infoController.updateScores(gameLogic.getPlayerManager().getAllPlayers());
 	 }
 
 	 @Override

@@ -99,7 +99,9 @@ public class Goal {
 		if (via != null){
 			goalString += " via " + via.getName();
 		}
-			
+		
+		goalString += ". - " + reward + " points";
+		
 		return goalString;
 	}
 	

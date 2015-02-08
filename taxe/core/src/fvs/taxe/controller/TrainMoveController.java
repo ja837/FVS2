@@ -7,10 +7,13 @@ import com.badlogic.gdx.scenes.scene2d.actions.RunnableAction;
 import com.badlogic.gdx.scenes.scene2d.actions.SequenceAction;
 
 
-import fvs.taxe.GameScreen;
+import com.badlogic.gdx.scenes.scene2d.ui.Dialog;
+import com.badlogic.gdx.scenes.scene2d.ui.Skin;
+import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 
+import fvs.taxe.GameScreen;
 import fvs.taxe.actor.TrainActor;
-import fvs.taxe.controller.TopBarController;
+import fvs.taxe.controller.InfoController;
 import gameLogic.Player;
 import gameLogic.goal.Goal;
 import gameLogic.map.CollisionStation;
@@ -65,7 +68,7 @@ public class TrainMoveController {
                         + context.getGameLogic().getPlayerManager().getTurnNumber());
                 if (station.isPassable() != true){
             		System.out.println("Train was destroyed passing through here");
-            		context.getTopBarController().displayFlashMessage("Train was destroyed passing through broken junction", Color.RED, 3);
+            		//context.getTopBarController().displayFlashMessage("Train was destroyed passing through broken junction", Color.RED, 3);
             		train.getActor().remove();
                     train.getPlayer().removeResource(train);         
 
@@ -75,13 +78,13 @@ public class TrainMoveController {
             		Random rn = new Random();
             		if(rn.nextInt(100) < 20){
             			System.out.println("Illegal animal found on train!");
-            			context.getTopBarController().displayFlashMessage("A diseased animal was found on your train. It had to be destroyed.", Color.RED, 3);
+            			context.getInfoController().displayFlashMessage("A diseased animal was found on your train. It had to be destroyed.", Color.RED, 3);
             			train.getActor().remove();
                         train.getPlayer().removeResource(train);
             		}
             		else{
             			System.out.println("Got through safely");
-            			context.getTopBarController().displayFlashMessage("Passed through border control safely.", Color.GREEN, 3);
+            			context.getInfoController().displayFlashMessage("Passed through border control safely.", Color.GREEN, 3);
             		}            		
             	}  
                 
@@ -107,7 +110,7 @@ public class TrainMoveController {
             public void run() {
                 ArrayList<String> completedGoals = context.getGameLogic().getGoalManager().trainArrived(train, train.getPlayer());
                 for(String message : completedGoals) {
-                    context.getTopBarController().displayFlashMessage(message, Color.WHITE, 2);
+                    context.getInfoController().displayFlashMessage(message, Color.WHITE, 2);
                 }
                 System.out.println(train.getFinalDestination().getLocation().getX() + "," + train.getFinalDestination().getLocation().getY());
                 train.setPosition(train.getFinalDestination().getLocation());
@@ -170,7 +173,14 @@ public class TrainMoveController {
                 trainToDestroy.getPlayer().removeResource(trainToDestroy);
             }
 
-            context.getTopBarController().displayFlashMessage("Two trains collided at a Junction.  They were both destroyed.", Color.RED, 2);
+            Dialog dia = new Dialog("Junction Failure", context.getSkin());
+            dia.show(context.getStage());
+            TextButton button = new TextButton("Ok", context.getSkin());
+            dia.text("Two trains collided at a Junction\nThey were both destroyed\nThe junction failed");
+            dia.setHeight(125);
+            dia.setWidth(250);
+            dia.setPosition(400, 500);
+            dia.button(button);
             station.setPassable(false);
         }
     }
