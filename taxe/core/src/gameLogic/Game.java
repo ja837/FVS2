@@ -17,7 +17,11 @@ public class Game {
 	private List<GameStateListener> gameStateListeners = new ArrayList<GameStateListener>();
 
 	private final int CONFIG_PLAYERS = 2;
-	public final int TOTAL_TURNS = 30;
+	public static int TOTAL_TURNS;
+	
+	public static void changeTurns(int n) {
+		TOTAL_TURNS = n;
+	};
 
 	private Game() {
 		playerManager = new PlayerManager();
@@ -61,8 +65,6 @@ public class Game {
 		resourceManager.addRandomResourceToPlayer(player);
 		goalManager.addRandomGoalToPlayer(player);
 	}
-	
-	
 	
 
 	public PlayerManager getPlayerManager() {
