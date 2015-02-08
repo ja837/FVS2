@@ -2,10 +2,12 @@ package gameLogic;
 
 import gameLogic.goal.GoalManager;
 import gameLogic.map.Map;
+import gameLogic.map.Station;
 import gameLogic.resource.ResourceManager;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 public class Game {
 	private static Game instance;
@@ -41,6 +43,11 @@ public class Game {
 				resourceManager.addRandomResourceToPlayer(currentPlayer);
 				resourceManager.addRandomResourceToPlayer(currentPlayer);
 				goalManager.addRandomGoalToPlayer(currentPlayer);
+				
+				//Change the stations that have the speed boost every 5 turns			 
+				 if ((getPlayerManager().getTurnNumber() % 5) == 0){
+					 ChangeSpecialStations();
+				 }
 			}
 		});
 	}
@@ -100,5 +107,52 @@ public class Game {
 		for(GameStateListener listener : gameStateListeners) {
 			listener.changed(state);
 		}
+	}
+	
+	/**
+	  * Changes which stations have the speed alterations. Called every 5 turns and changes 3 stations.
+	  */
+	 private void ChangeSpecialStations() {
+			// TODO Auto-generated method stub
+		 List<Station> stations = getMap().getStations();
+		 Random r = new Random();
+		 int station1 = r.nextInt(stations.size());
+		 int station2 = r.nextInt(stations.size());;
+		 int station3 = r.nextInt(stations.size());;
+		 while (station2 == station1){
+			 station2 = r.nextInt(stations.size());
+		 }
+		 while (station3 == station1 || station3 == station2){
+			 station3 = r.nextInt(stations.size());
+		 }
+		 
+		 //Reset Speed modifier for every station
+		 for (Station s : stations){
+			 s.setSpeedModifier(0);
+		 }
+		 
+		 //Set the new speed modifiers
+		 stations.get(station1).setSpeedModifier(generateRandomSpeedModifier());
+		 stations.get(station2).setSpeedModifier(generateRandomSpeedModifier());
+		 stations.get(station3).setSpeedModifier(generateRandomSpeedModifier());
+		 
+		 System.out.println("New special stations are: " + stations.get(station1) + " " + stations.get(station2) + " " + stations.get(station3));
+		}
+
+
+	private float generateRandomSpeedModifier() {
+		//Create a random speed modifier between -50% and 50% that only includes the 10s. i.e. -50, -40, -30 etc. Ensure that it is not 0. 75% chance it is positive.
+		 Random r2 = new Random();
+		 float speedModifier = r2.nextInt(5);
+		 while (speedModifier == 0){
+			 speedModifier = r2.nextInt(5);
+		 }
+		 speedModifier *= 10;				 
+		 if ((r2.nextInt(4)) == 0){
+			 speedModifier *= -1;
+		 }
+		 speedModifier = speedModifier / 100;
+		 speedModifier++;
+		return speedModifier;
 	}
 }
