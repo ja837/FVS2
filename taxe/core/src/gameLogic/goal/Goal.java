@@ -31,7 +31,7 @@ public class Goal {
 		this.reward = score; //current score
 		
 		int ranNum= random.nextInt(Animal.values().length);
-		cargo = Cargo.getCargo(ranNum);
+		this.cargo = Cargo.getCargo(ranNum);
 	}
 	
 	public void addConstraint(String name, String value) {
@@ -96,6 +96,56 @@ public class Goal {
 		}
 			
 		return goalString;
+	}
+	
+	/** get the string of the filepath for the goal's cargo's image
+	 * 
+	 * @return
+	 */
+	public String getImgFile() {
+		String imgFilePath = "animal/";
+		switch (cargo) {
+		case SNAKE:
+			imgFilePath += "snake.png";
+			break;
+		case BEAR:
+			imgFilePath += "bear.png";
+			break;
+		case MONKEY:
+			imgFilePath += "monkey.png";
+			break;
+		case GIRAFFE:
+			imgFilePath += "giraffe.png";
+			break;
+		case PENGUIN:
+			imgFilePath += "penguin.png";
+			break;
+		case SHEEP:
+			imgFilePath += "SHEEP.png";
+			break;
+		case ELEPHANT:
+			imgFilePath += "elephant.png";
+			break;
+		case OCTOPUS:
+			imgFilePath += "octopus.png";
+			break;
+		case ZEBRA:
+			imgFilePath += "zebra.png";
+			break;
+		case LION:
+			imgFilePath += "lion.png";
+			break;
+		case PIG:
+			imgFilePath += "pig.png";
+			break;
+		case DRAGON:
+			imgFilePath += "dragon.png";
+			break;
+		default:
+			imgFilePath += "lion.png";
+			break;
+		}
+		return imgFilePath;
 	}
 
 	public void setComplete() {

@@ -7,7 +7,7 @@ public class Cargo {
 	 *
 	 */
 	public enum Animal{
-		PYTHON, BEAR, MONKEY, GIRAFFE, PENGUIN, HORSE, FROG, COCKROACH, ZEBRA, LION, TOUCAN, PANDA
+		SNAKE, BEAR, MONKEY, GIRAFFE, PENGUIN, SHEEP, ELEPHANT, OCTOPUS, ZEBRA, LION, PIG, DRAGON 	
 	}
 	
 	public Cargo(){	
@@ -15,7 +15,9 @@ public class Cargo {
 
 	public static Animal getCargo(int x){
 		return Animal.values()[x];
-	}	
+	}
+	
+	
 	
 	
 

@@ -105,13 +105,12 @@ public class MainMenuScreen extends ScreenAdapter {
         //Draw rectangles, did not use TextButtons because it was easier not to
         game.shapeRenderer.setProjectionMatrix(camera.combined);
         game.shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
-        game.shapeRenderer.setColor(Color.GRAY);
+        game.shapeRenderer.setColor(Color.MAROON);
         game.shapeRenderer.rect(playBounds.getX(), playBounds.getY(), playBounds.getWidth(), playBounds.getHeight());
-        game.shapeRenderer.setColor(Color.GRAY);
         game.shapeRenderer.rect(turnBounds30.getX(), turnBounds30.getY(), turnBounds30.getWidth(), turnBounds30.getHeight());
         game.shapeRenderer.rect(turnBounds40.getX(), turnBounds40.getY(), turnBounds40.getWidth(), turnBounds40.getHeight());
         game.shapeRenderer.rect(turnBounds50.getX(), turnBounds50.getY(), turnBounds50.getWidth(), turnBounds50.getHeight());
-        game.shapeRenderer.setColor(Color.GRAY);
+        game.shapeRenderer.setColor(Color.MAROON);
         game.shapeRenderer.rect(exitBounds.getX(), exitBounds.getY(), exitBounds.getWidth(), exitBounds.getHeight());
         game.shapeRenderer.end();
 
