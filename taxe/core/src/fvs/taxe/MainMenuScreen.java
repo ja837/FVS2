@@ -17,7 +17,7 @@ public class MainMenuScreen extends ScreenAdapter {
     TaxeGame game;
     OrthographicCamera camera;
     Rectangle playBounds;
-    Rectangle exitBounds;
+    Rectangle instructionsBounds;
     Rectangle turnBounds50;
     Rectangle turnBounds40;
     Rectangle turnBounds30;
@@ -32,7 +32,7 @@ public class MainMenuScreen extends ScreenAdapter {
         camera.setToOrtho(false);
 
         playBounds = new Rectangle(TaxeGame.WIDTH/2 - -20, 200, 150, 50);
-        exitBounds = new Rectangle(TaxeGame.WIDTH/2 - 180, 200, 150, 50);
+        instructionsBounds = new Rectangle(TaxeGame.WIDTH/2 - 180, 200, 150, 50);
         turnBounds30 = new Rectangle(TaxeGame.WIDTH/2 - 60, 310, 26, 25);
         turnBounds40 = new Rectangle(TaxeGame.WIDTH/2 - 20, 310, 26, 25);
         turnBounds50 = new Rectangle(TaxeGame.WIDTH/2 - -20, 310, 26, 25);
@@ -52,8 +52,8 @@ public class MainMenuScreen extends ScreenAdapter {
                 return;
             }
             //close the game
-            if (exitBounds.contains(touchPoint.x, touchPoint.y)) {
-            	Gdx.app.exit();
+            if (instructionsBounds.contains(touchPoint.x, touchPoint.y)) {
+            	game.setScreen(new InstructionsScreen(game));
             }
             //turn selection
             if (turnBounds30.contains(touchPoint.x, touchPoint.y)) {
@@ -97,17 +97,18 @@ public class MainMenuScreen extends ScreenAdapter {
         game.shapeRenderer.rect(turnBounds40.getX(), turnBounds40.getY(), turnBounds40.getWidth(), turnBounds40.getHeight());
         game.shapeRenderer.rect(turnBounds50.getX(), turnBounds50.getY(), turnBounds50.getWidth(), turnBounds50.getHeight());
         game.shapeRenderer.setColor(Color.MAROON);
-        game.shapeRenderer.rect(exitBounds.getX(), exitBounds.getY(), exitBounds.getWidth(), exitBounds.getHeight());
+        game.shapeRenderer.rect(instructionsBounds.getX(), instructionsBounds.getY(), instructionsBounds.getWidth(), instructionsBounds.getHeight());
         game.shapeRenderer.end();
 
         //Draw text into rectangles
         game.batch.begin();
+        game.fontSmall.setColor(Color.WHITE);
         String startGameString = "Start Game";
         game.fontMed.draw(game.batch, startGameString, playBounds.getX() + playBounds.getWidth()/2 - game.fontMed.getBounds(startGameString).width/2,
                 playBounds.getY() + playBounds.getHeight()/2 + game.fontMed.getBounds(startGameString).height/2); // centre the text
-        String exitGameString = "How To Play";
-        game.fontMed.draw(game.batch, exitGameString, exitBounds.getX() + exitBounds.getWidth()/2 - game.fontMed.getBounds(exitGameString).width/2,
-                exitBounds.getY() + exitBounds.getHeight()/2 + game.fontMed.getBounds(exitGameString).height/2); // centre the text
+        String instructionsString = "How To Play";
+        game.fontMed.draw(game.batch, instructionsString, instructionsBounds.getX() + instructionsBounds.getWidth()/2 - game.fontMed.getBounds(instructionsString).width/2,
+        		instructionsBounds.getY() + instructionsBounds.getHeight()/2 + game.fontMed.getBounds(instructionsString).height/2); // centre the text
         String turn30String = "30";
         game.fontSmall.draw(game.batch, turn30String, turnBounds30.getX() + turnBounds30.getWidth()/2 - game.fontSmall.getBounds(turn30String).width/2,
         		turnBounds30.getY() + turnBounds30.getHeight()/2 + game.fontSmall.getBounds(turn30String).height/2); // centre the text
@@ -119,45 +120,12 @@ public class MainMenuScreen extends ScreenAdapter {
         		turnBounds50.getY() + turnBounds50.getHeight()/2 + game.fontSmall.getBounds(turn50String).height/2); // centre the text
         game.batch.end();
         
-    }
-    
-    public void displayTurns() {
-    	if (Gdx.input.isTouched()) {
-            camera.unproject(touchPoint.set(Gdx.input.getX(), Gdx.input.getY(), 0));
-            if (turnBounds30.contains(touchPoint.x, touchPoint.y)) {
-            	game.shapeRenderer.setProjectionMatrix(camera.combined);
-                game.shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
-                game.shapeRenderer.setColor(Color.WHITE);
-                game.shapeRenderer.rect(turnBounds30.getX(), turnBounds30.getY(), turnBounds30.getWidth(), turnBounds30.getHeight());
-                game.shapeRenderer.end();
-            	game.batch.begin();
-            	String turnsString = "30 turns selected";
-            	game.fontSmall.draw(game.batch, turnsString, 520, 300);
-            	game.batch.end();
-            }
-            if (turnBounds40.contains(touchPoint.x, touchPoint.y)) {
-            	game.shapeRenderer.setProjectionMatrix(camera.combined);
-                game.shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
-                game.shapeRenderer.setColor(Color.WHITE);
-                game.shapeRenderer.rect(turnBounds40.getX(), turnBounds40.getY(), turnBounds40.getWidth(), turnBounds40.getHeight());
-                game.shapeRenderer.end();
-            	game.batch.begin();
-            	String turnsString = "40 turns selected";
-            	game.fontSmall.draw(game.batch, turnsString, 520, 300);
-            	game.batch.end();
-            }
-            if (turnBounds50.contains(touchPoint.x, touchPoint.y)) {
-            	game.shapeRenderer.setProjectionMatrix(camera.combined);
-                game.shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
-                game.shapeRenderer.setColor(Color.WHITE);
-                game.shapeRenderer.rect(turnBounds50.getX(), turnBounds50.getY(), turnBounds50.getWidth(), turnBounds50.getHeight());
-                game.shapeRenderer.end();
-            	game.batch.begin();
-            	String turnsString = "50 turns selected";
-            	game.fontSmall.draw(game.batch, turnsString, 520, 300);
-            	game.batch.end();
-            }
-    	}
+        game.batch.begin();
+    	game.fontSmall.setColor(Color.MAROON);
+    	String turnsString = gameLogic.Game.TOTAL_TURNS + " turns selected";
+    	game.fontSmall.draw(game.batch, turnsString, 520, 300);
+    	game.batch.end();
+        
     }
 
     
@@ -165,7 +133,8 @@ public class MainMenuScreen extends ScreenAdapter {
     public void render(float delta) {
     	draw();
     	update();
-    	displayTurns();
+    	
+    	
     }
     
 }
