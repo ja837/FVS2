@@ -39,9 +39,10 @@ public class MainMenuScreen extends ScreenAdapter {
         touchPoint = new Vector3();
         mapTexture = new Texture(Gdx.files.internal("splash_screen.png"));
         mapImage = new Image(mapTexture);
+        
     }
-    
-    public void update() {
+
+	public void update() {
     	
         if (Gdx.input.justTouched()) {
             camera.unproject(touchPoint.set(Gdx.input.getX(), Gdx.input.getY(), 0));
@@ -57,29 +58,14 @@ public class MainMenuScreen extends ScreenAdapter {
             //turn selection
             if (turnBounds30.contains(touchPoint.x, touchPoint.y)) {
             	gameLogic.Game.changeTurns(30);
-            	game.shapeRenderer.setProjectionMatrix(camera.combined);
-                game.shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
-                game.shapeRenderer.setColor(Color.WHITE);
-                game.shapeRenderer.rect(turnBounds30.getX(), turnBounds30.getY(), turnBounds30.getWidth(), turnBounds30.getHeight());
-                game.shapeRenderer.end();
             	System.out.println(gameLogic.Game.TOTAL_TURNS);
             }
             if (turnBounds40.contains(touchPoint.x, touchPoint.y)) {
             	gameLogic.Game.changeTurns(40);
-            	game.shapeRenderer.setProjectionMatrix(camera.combined);
-                game.shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
-                game.shapeRenderer.setColor(Color.WHITE);
-                game.shapeRenderer.rect(turnBounds40.getX(), turnBounds40.getY(), turnBounds40.getWidth(), turnBounds40.getHeight());
-                game.shapeRenderer.end();
             	System.out.println(gameLogic.Game.TOTAL_TURNS);
             }
             if (turnBounds50.contains(touchPoint.x, touchPoint.y)) {
-            	gameLogic.Game.changeTurns(50);
-            	game.shapeRenderer.setProjectionMatrix(camera.combined);
-                game.shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
-                game.shapeRenderer.setColor(Color.WHITE);
-                game.shapeRenderer.rect(turnBounds50.getX(), turnBounds50.getY(), turnBounds50.getWidth(), turnBounds50.getHeight());
-                game.shapeRenderer.end();
+            	gameLogic.Game.changeTurns(50);            	
             	System.out.println(gameLogic.Game.TOTAL_TURNS);
             }
         }
@@ -132,12 +118,54 @@ public class MainMenuScreen extends ScreenAdapter {
         game.fontSmall.draw(game.batch, turn50String, turnBounds50.getX() + turnBounds50.getWidth()/2 - game.fontSmall.getBounds(turn50String).width/2,
         		turnBounds50.getY() + turnBounds50.getHeight()/2 + game.fontSmall.getBounds(turn50String).height/2); // centre the text
         game.batch.end();
+        
+    }
+    
+    public void displayTurns() {
+    	if (Gdx.input.isTouched()) {
+            camera.unproject(touchPoint.set(Gdx.input.getX(), Gdx.input.getY(), 0));
+            if (turnBounds30.contains(touchPoint.x, touchPoint.y)) {
+            	game.shapeRenderer.setProjectionMatrix(camera.combined);
+                game.shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
+                game.shapeRenderer.setColor(Color.WHITE);
+                game.shapeRenderer.rect(turnBounds30.getX(), turnBounds30.getY(), turnBounds30.getWidth(), turnBounds30.getHeight());
+                game.shapeRenderer.end();
+            	game.batch.begin();
+            	String turnsString = "30 turns selected";
+            	game.fontSmall.draw(game.batch, turnsString, 520, 300);
+            	game.batch.end();
+            }
+            if (turnBounds40.contains(touchPoint.x, touchPoint.y)) {
+            	game.shapeRenderer.setProjectionMatrix(camera.combined);
+                game.shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
+                game.shapeRenderer.setColor(Color.WHITE);
+                game.shapeRenderer.rect(turnBounds40.getX(), turnBounds40.getY(), turnBounds40.getWidth(), turnBounds40.getHeight());
+                game.shapeRenderer.end();
+            	game.batch.begin();
+            	String turnsString = "40 turns selected";
+            	game.fontSmall.draw(game.batch, turnsString, 520, 300);
+            	game.batch.end();
+            }
+            if (turnBounds50.contains(touchPoint.x, touchPoint.y)) {
+            	game.shapeRenderer.setProjectionMatrix(camera.combined);
+                game.shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
+                game.shapeRenderer.setColor(Color.WHITE);
+                game.shapeRenderer.rect(turnBounds50.getX(), turnBounds50.getY(), turnBounds50.getWidth(), turnBounds50.getHeight());
+                game.shapeRenderer.end();
+            	game.batch.begin();
+            	String turnsString = "50 turns selected";
+            	game.fontSmall.draw(game.batch, turnsString, 520, 300);
+            	game.batch.end();
+            }
+    	}
     }
 
-    @Override
+    
+	@Override
     public void render(float delta) {
     	draw();
     	update();
+    	displayTurns();
     }
     
 }

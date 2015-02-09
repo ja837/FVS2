@@ -19,7 +19,7 @@ public class Game {
 	private List<GameStateListener> gameStateListeners = new ArrayList<GameStateListener>();
 
 	private final int CONFIG_PLAYERS = 2;
-	public static int TOTAL_TURNS;
+	public static int TOTAL_TURNS = 30;
 	
 	public static void changeTurns(int n) {
 		TOTAL_TURNS = n;
