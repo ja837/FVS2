@@ -15,6 +15,8 @@ import gameLogic.resource.Train;
 import org.junit.Before;
 import org.junit.Test;
 
+import Util.Tuple;
+
 import java.util.ArrayList;
 
 import static org.junit.Assert.*;
@@ -40,7 +42,7 @@ public class GoalManagerTest extends LibGdxTest {
 
         Station station1 = new Station("station1","s1", new Position(5, 5));
         Station station2 = new Station("station2", "s2", new Position(2, 2));
-        Station station3 = new Station("station3", "s3", new Position(2, 2));
+        Station station3 = new Station("station3", "s3", new Position(1, 4));
         
         Goal goal = new Goal(station1, station2, station3,0,0);
         player1.addGoal(goal);
@@ -60,6 +62,11 @@ public class GoalManagerTest extends LibGdxTest {
         
         train.addHistory("station3", 1);
        
+        System.out.println(goal.toString() + " ");
+        for (Tuple<String, Integer> t : train.getHistory()){
+        	System.out.println(t + " ");
+        }
+        
         assertFalse("Goal was completed in error", goal.isComplete(train));
         
         pm.turnOver();

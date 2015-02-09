@@ -10,13 +10,13 @@ public class Station{
 	private StationActor actor;
 	private String acronym;
 	
-	private int speedModifier = 0;
+	private float speedModifier = 0f;
 
-	public int getSpeedModifier() {
+	public float getSpeedModifier() {
 		return speedModifier;
 	}
 
-	public void setSpeedModifier(int speedmodifier) {
+	public void setSpeedModifier(float speedmodifier) {
 		this.speedModifier = speedmodifier;
 	}
 

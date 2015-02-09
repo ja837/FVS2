@@ -6,9 +6,16 @@ import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.scenes.scene2d.actions.RunnableAction;
 import com.badlogic.gdx.scenes.scene2d.actions.SequenceAction;
 
+
+import com.badlogic.gdx.scenes.scene2d.ui.Dialog;
+import com.badlogic.gdx.scenes.scene2d.ui.Skin;
+import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
+
 import fvs.taxe.GameScreen;
 import fvs.taxe.actor.TrainActor;
+import fvs.taxe.controller.InfoController;
 import gameLogic.Player;
+import gameLogic.goal.Goal;
 import gameLogic.map.CollisionStation;
 import gameLogic.map.IPositionable;
 import gameLogic.map.Position;
@@ -33,7 +40,10 @@ public class TrainMoveController {
         addMoveActions();
     }
 
-    // an action for the train to run before it starts moving across the screen
+    /**
+     * an action for the train to run before it starts moving across the screen
+     * @return
+     */
     private RunnableAction beforeAction() {
         return new RunnableAction() {
             public void run() {
@@ -43,9 +53,13 @@ public class TrainMoveController {
         };
     }
 
-    // this action will run every time the train reaches a station within a route
-    private RunnableAction perStationAction(final Station station) {
-    	
+
+    /**
+     * this action will run every time the train reaches a station within a route
+     * @param station
+     * @return
+     */
+    private RunnableAction perStationAction(final Station station) {   	   	    	
     	//contains the methods for border control and junction failure
         return new RunnableAction() {
             public void run() {
@@ -54,34 +68,58 @@ public class TrainMoveController {
                         + context.getGameLogic().getPlayerManager().getTurnNumber());
                 if (station.isPassable() != true){
             		System.out.println("Train was destroyed passing through here");
+            		//context.getTopBarController().displayFlashMessage("Train was destroyed passing through broken junction", Color.RED, 3);
+            		Dialog dia = new Dialog("Train Crash", context.getSkin());
+                    dia.show(context.getStage());
+                    TextButton button = new TextButton("Ok", context.getSkin());
+                    dia.text("The train was destroyed passing\nthrough the broken junction");
+                    dia.setHeight(125);
+                    dia.setWidth(250);
+                    dia.setPosition(400, 500);
+                    dia.button(button);
+                    station.setPassable(false);
             		train.getActor().remove();
                     train.getPlayer().removeResource(train);         
 
             	}
-                if (station.isControlled() != true){
-            		System.out.println("Passing through a border control zone");
+                if (station.isControlled() == true){
+            		System.out.println("Passing through a border control zone of " + station.getName());
             		Random rn = new Random();
-            		if(rn.nextInt(10) < 3){
+            		if(rn.nextInt(100) < 20){
             			System.out.println("Illegal animal found on train!");
+            			context.getInfoController().displayFlashMessage("A diseased animal was found on your train. It had to be destroyed.", Color.RED, 3);
             			train.getActor().remove();
                         train.getPlayer().removeResource(train);
             		}
             		else{
             			System.out.println("Got through safely");
+            			context.getInfoController().displayFlashMessage("Passed through \nborder control safely.", Color.GREEN, 3);
             		}            		
             	}  
+                
+                for (Goal g : train.getPlayer().getGoals()){
+                	if (g.getOrigin().equals(station)){
+                		train.addCargo(g.getCargo());
+                    	System.out.println(g.getCargo() + " added to " + train.toString()); 
+                	}
+                	
+                } 
+                
                 collisions(station);
             }
         };
     }
 
-    // an action for the train to run after it has moved the whole route
+    /**
+     * an action for the train to run after it has moved the whole route
+     * @return
+     */
     private RunnableAction afterAction() {
         return new RunnableAction() {
             public void run() {
                 ArrayList<String> completedGoals = context.getGameLogic().getGoalManager().trainArrived(train, train.getPlayer());
                 for(String message : completedGoals) {
-                    context.getTopBarController().displayFlashMessage(message, Color.WHITE, 2);
+                    context.getInfoController().displayFlashMessage(message, Color.WHITE, 2);
                 }
                 System.out.println(train.getFinalDestination().getLocation().getX() + "," + train.getFinalDestination().getLocation().getY());
                 train.setPosition(train.getFinalDestination().getLocation());
@@ -108,9 +146,9 @@ public class TrainMoveController {
             action.addAction(perStationAction(station));
             
             //Adds speed modifier to train here.     
-            //System.out.println("At station " + station + " train speed = "+ train.getSpeed());		Debug info for train speeds. 
-            if(station.getSpeedModifier() != 1){
-            	int newSpeed = train.getSpeed() + station.getSpeedModifier();
+            System.out.println("At station " + station + " train speed = "+ train.getSpeed());		//Debug info for train speeds. 
+            if(station.getSpeedModifier() != 0){
+            	int newSpeed = (int) (train.getSpeed() * station.getSpeedModifier());
                 System.out.println("Train '" + train.toString() + "' speed modified. Old speed = " + train.getSpeed() + ". New speed = " + newSpeed);
                 train.setSpeed(newSpeed);
             }
@@ -144,7 +182,14 @@ public class TrainMoveController {
                 trainToDestroy.getPlayer().removeResource(trainToDestroy);
             }
 
-            context.getTopBarController().displayFlashMessage("Two trains collided at a Junction.  They were both destroyed.", Color.RED, 2);
+            Dialog dia = new Dialog("Junction Failure", context.getSkin());
+            dia.show(context.getStage());
+            TextButton button = new TextButton("Ok", context.getSkin());
+            dia.text("Two trains collided at a Junction\nThey were both destroyed\nThe junction failed");
+            dia.setHeight(125);
+            dia.setWidth(250);
+            dia.setPosition(400, 500);
+            dia.button(button);
             station.setPassable(false);
         }
     }

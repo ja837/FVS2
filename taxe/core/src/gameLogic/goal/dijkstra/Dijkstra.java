@@ -8,7 +8,10 @@ import java.util.Collections;
 import java.util.List;
 import java.util.PriorityQueue;
 
-
+/** Class for calculating distances to every node to use as a scoring mechanism
+ * 
+ * 
+ */
 public class Dijkstra {
 	
 	public static ArrayList<Node> nodeList;
@@ -24,7 +27,6 @@ public class Dijkstra {
 			Node u = stationQueue.poll();
 
 			for (Edge e : u.getEdges()){
-				//path to Madrid it fucks up
 				Node v = e.getTarget();
 				if (v == u){
 					v = e.getCurrent();
@@ -43,7 +45,7 @@ public class Dijkstra {
 	}
 	
 	//actual path through edges
-	//uses all memory
+	//infinite loop when called
 	public static List<Node> getShortestPathTo(Node argTarget){
 		List<Node> path = new ArrayList<Node>();
 		for (Node node = argTarget; node != null; node = node.previous){
@@ -52,6 +54,7 @@ public class Dijkstra {
 		Collections.reverse(path);
 		return path;
 	}
+
 	
 	//converting Stations -> nodes for dijkstra
 	public ArrayList<Node> addStationsToNodeList(Map m){

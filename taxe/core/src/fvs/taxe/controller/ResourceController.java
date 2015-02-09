@@ -13,9 +13,11 @@ import gameLogic.resource.Train;
 public class ResourceController {
     private Context context;
     private Group resourceButtons = new Group();
+	private String infoText ;
 
     public ResourceController(final Context context) {
         this.context = context;
+        this.infoText = "";
 
         context.getGameLogic().getPlayerManager().subscribePlayerChanged(new PlayerChangedListener() {
             @Override
@@ -31,6 +33,19 @@ public class ResourceController {
         game.batch.begin();
         game.fontSmall.setColor(Color.NAVY);
         game.fontSmall.draw(game.batch, "Unplaced Resources:", TaxeGame.WIDTH - 225.0f, (float) TaxeGame.HEIGHT - 250.0f);
+        game.batch.end();
+    }
+    
+    public void setInfoText(String text) {
+        infoText = text;
+    }
+    
+    public void drawInfoText() {
+        TaxeGame game = context.getTaxeGame();
+
+        game.batch.begin();
+        game.fontTiny.setColor(Color.NAVY);
+        game.fontTiny.draw(game.batch, infoText, TaxeGame.WIDTH - 225.0f, (float) TaxeGame.HEIGHT - 550.0f);
         game.batch.end();
     }
 

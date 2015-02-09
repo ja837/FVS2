@@ -10,6 +10,7 @@ import gameLogic.goal.dijkstra.Edge;
 import gameLogic.goal.dijkstra.Node;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 
@@ -19,10 +20,9 @@ public class Map {
     private Random random = new Random();
     //public Dijkstra d;
 
-    public Map() {
+    public Map() {    	
         stations = new ArrayList<Station>();
         connections = new ArrayList<Connection>();
-
         initialise();
     }
 
@@ -61,6 +61,7 @@ public class Map {
             int x = 0;
             int y = 0;
             boolean isJunction = false;
+            boolean isControlled = false;
 
             for(JsonValue val = station.child; val != null; val = val.next) {
                 if(val.name.equalsIgnoreCase("name")) {
@@ -71,15 +72,17 @@ public class Map {
                     x = val.asInt();
                 } else if(val.name.equalsIgnoreCase("y")) {
                     y = val.asInt();
-                } else {
+                } else if(val.name.equalsIgnoreCase("junction")) {
                     isJunction = val.asBoolean();
+                } else{
+                	isControlled = val.asBoolean();
                 }
             }
 
             if (isJunction) {
-                addJunction(name, "", new Position(x,y));
+                addJunction(name, "", new Position(x,y), isControlled);
             } else {
-                addStation(name, acronym, new Position(x, y));
+                addStation(name, acronym, new Position(x, y), isControlled);
             }
         }
         
@@ -101,10 +104,6 @@ public class Map {
     
 
     public void initialiseNodeList(){
-    	
-    	//Node node1, node2; //testing node
-    	
-    	
     	//making nodes
     	int i =0;
     	Dijkstra.nodeList = new ArrayList<Node>(); 
@@ -114,44 +113,35 @@ public class Map {
 			n.setCount(i);
 			i += 1;
     	}
-    	
     	//making connections
     	for (Node n : Dijkstra.nodeList){
     		n.addConnectionsAsEdges(this);	
     		}
-    	
-    	//random node for testing
-    	//node1 = Dijkstra.nodeList.get(random.nextInt(Dijkstra.nodeList.size()));
-
-    	Dijkstra.allDistances = new int[Dijkstra.nodeList.size()][Dijkstra.nodeList.size()];
-    	
+    	//adding score from x to y in array
+       	Dijkstra.allDistances = new int[Dijkstra.nodeList.size()][Dijkstra.nodeList.size()];
     	//adding to array table for lookup
     	for (Node n1 : Dijkstra.nodeList){
-    		if (n1.getStation() instanceof CollisionStation){
-    			continue; //skip if a junction
-    		}
     		Dijkstra.computePath(n1); //compute paths to all nodes
-
-    		
     		for (Node n2 : Dijkstra.nodeList){
     			Dijkstra.allDistances[n1.getCount()][n2.getCount()] = (int) n2.minDistance;
     		}
-    	}
-    	
-    	
+    	}   	
+    	System.out.println(Arrays.deepToString(Dijkstra.allDistances));
     }
- 
-    
-		
 
 	public Station getRandomStation() {
         return stations.get(random.nextInt(stations.size()));
     }
 
-    public Station addStation(String name, String acronym, Position location) {
+    public Station addStation(String name, String acronym, Position location, Boolean isControlled) {
         Station newStation = new Station(name, acronym, location);
         newStation.setPassable(true);
-        newStation.setControlled(true);
+        if(random.nextInt(10)<2){
+        	newStation.setControlled(true);
+        }
+        else{
+        	newStation.setControlled(false);
+        }
         stations.add(newStation);
         return newStation;
     }
@@ -161,11 +151,11 @@ public class Map {
 		return station;    	
     }
     
-    public CollisionStation addJunction(String name, String acronym, Position location) {
+    public CollisionStation addJunction(String name, String acronym, Position location, Boolean isControlled) {
     	CollisionStation newJunction = new CollisionStation(name, acronym, location);
     	stations.add(newJunction);
     	newJunction.setPassable(true);
-        newJunction.setControlled(true);
+        newJunction.setControlled(isControlled);
     	return newJunction;
     }
 

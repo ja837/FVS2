@@ -12,7 +12,7 @@ import gameLogic.GameStateListener;
 import gameLogic.Player;
 import static com.badlogic.gdx.scenes.scene2d.actions.Actions.*;
 
-public class TopBarController {
+public class InfoController {
     public final static int CONTROLS_HEIGHT = 40;
 
     private Context context;
@@ -20,7 +20,7 @@ public class TopBarController {
     private Group playerScores = new Group();
     private Label flashMessage;
 
-    public TopBarController(Context context) {
+    public InfoController(Context context) {
         this.context = context;
 
         context.getGameLogic().subscribeStateChanged(new GameStateListener() {
@@ -42,7 +42,7 @@ public class TopBarController {
 
     private void createFlashActor() {
         flashMessage = new Label("", context.getSkin());
-        flashMessage.setPosition(400, TaxeGame.HEIGHT - 35);
+        flashMessage.setPosition(TaxeGame.WIDTH - 225 , TaxeGame.HEIGHT - 535);
         context.getStage().addActor(flashMessage);
     }
 
