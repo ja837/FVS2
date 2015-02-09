@@ -59,9 +59,13 @@ public class Game {
 				
 				resourceManager.addRandomResourceToPlayer(currentPlayer);
 				resourceManager.addRandomResourceToPlayer(currentPlayer);					
-				
 				goalManager.addRandomGoalToPlayer(currentPlayer);
 				
+				if (!Game.getInstance().getSoundManager().getHighSpeed().isPlaying()){
+					if (!Game.getInstance().getSoundManager().getBGMusic().isPlaying()){
+						Game.getInstance().getSoundManager().playBGMusic();
+					}
+				}
 				
 			}
 		});
@@ -75,9 +79,7 @@ public class Game {
 			// initialisePlayers gives them a goal, and the GoalManager requires an instance of game to exist so this
 			// method can't be called in the constructor
 			instance.initialisePlayers();
-			
 		}
-
 		return instance;
 	}
 
@@ -163,7 +165,6 @@ public class Game {
 		 soundManager.playSpeedBoost();
 		 
 		}
-
 
 	private float generateRandomSpeedModifier() {
 		//Create a random speed modifier between -50% and 50% that only includes the 10s. i.e. -50, -40, -30 etc. Ensure that it is not 0. 75% chance it is positive.

@@ -13,6 +13,8 @@ import gameLogic.goal.dijkstra.Dijkstra;
 import java.util.ArrayList;
 import java.util.Random;
 
+import com.badlogic.gdx.math.MathUtils;
+
 public class GoalManager {
 	public final static int CONFIG_MAX_PLAYER_GOALS = 3;
 	private ResourceManager resourceManager;
@@ -70,10 +72,11 @@ public class GoalManager {
 			}
 		}
 		
+		score = score/10;
+		score = (int) Math.round((double) score/10) * 10;
 		System.out.println("Score for going from  " + origin.getName() + " to " + destination.getName() /*+ " via " + via.getName()*/ +" is " + score);
 		
 		Goal goal = new Goal(origin, destination, via, turn, score);
-		
 		soundManager.playAnimal(goal.getCargo());
  
 		// Goal with a specific train

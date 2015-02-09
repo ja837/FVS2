@@ -14,6 +14,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import fvs.taxe.GameScreen;
 import fvs.taxe.actor.TrainActor;
 import fvs.taxe.controller.InfoController;
+import gameLogic.Game;
 import gameLogic.Player;
 import gameLogic.goal.Goal;
 import gameLogic.map.CollisionStation;
@@ -80,8 +81,8 @@ public class TrainMoveController {
                     station.setPassable(false);
             		train.getActor().remove();
                     train.getPlayer().removeResource(train);         
-
             	}
+                
                 if (station.isControlled() == true){
             		System.out.println("Passing through a border control zone of " + station.getName());
             		Random rn = new Random();
@@ -102,8 +103,12 @@ public class TrainMoveController {
                 		train.addCargo(g.getCargo());
                     	System.out.println(g.getCargo() + " added to " + train.toString()); 
                 	}
-                	
-                } 
+                }
+                
+                
+                if (station.getSpeedModifier() == 1.4f && train.getName().equals("Nuclear Train")){
+                	Game.getInstance().getSoundManager().playHighSpeed();
+                }
                 
                 collisions(station);
             }
@@ -137,10 +142,7 @@ public class TrainMoveController {
         for (final Station station : train.getRoute()) {
         	     	           
         	IPositionable next = station.getLocation();
-            
-            
-
-        
+         
             float duration = getDistance(current, next) / train.getSpeed();
             action.addAction(moveTo(next.getX() - TrainActor.width / 2, next.getY() - TrainActor.height / 2, duration));
             action.addAction(perStationAction(station));
@@ -151,6 +153,7 @@ public class TrainMoveController {
             	int newSpeed = (int) (train.getSpeed() * station.getSpeedModifier());
                 System.out.println("Train '" + train.toString() + "' speed modified. Old speed = " + train.getSpeed() + ". New speed = " + newSpeed);
                 train.setSpeed(newSpeed);
+                
             }
             
             current = next;

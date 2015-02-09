@@ -32,6 +32,7 @@ public class SoundManager {
 	Music[] speedBoost = new Music[2];
 
 	Music bGMusic;
+	Music highSpeed;
 
 	public SoundManager(){
 		this.bananaPeel = Gdx.audio.newMusic(Gdx.files.internal("wavs/wavs/bananaPeel.wav"));
@@ -54,8 +55,8 @@ public class SoundManager {
 		this.speedBoost[1] = Gdx.audio.newMusic(Gdx.files.internal("wavs/wavs/transportAnimalsFaster1.wav"));
 
 		this.bGMusic = Gdx.audio.newMusic(Gdx.files.internal("wavs/wavs/BGMusicLoop.wav"));
-
-		this.elephantBigger = Gdx.audio.newMusic(Gdx.files.internal("wavs/wavs/elephantBiggerTrain.wav"));
+		
+		this.highSpeed = Gdx.audio.newMusic(Gdx.files.internal("wavs/wavs/highSpeed.wav"));
 
 	}
 
@@ -64,6 +65,21 @@ public class SoundManager {
 		bGMusic.play();
 		bGMusic.setLooping(true);
 	}
+	public void playHighSpeed(){
+		bGMusic.pause();
+		highSpeed.setVolume(0.4f);
+		highSpeed.play();
+	}
+
+	
+	public Music getBGMusic(){
+		return bGMusic;
+	} 
+	public Music getHighSpeed(){
+		return highSpeed;
+	}
+	
+
 
 	public void playRandomNewTrain(){
 		if (random.nextInt(2) == 0){
@@ -129,6 +145,7 @@ public class SoundManager {
 			}
 		}
 	}
+	
 
 
 

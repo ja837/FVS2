@@ -102,7 +102,8 @@ public class Map {
         return false;
     }
     
-
+    /**Setting up for Dijkstras
+     */
     public void initialiseNodeList(){
     	//making nodes
     	int i =0;
