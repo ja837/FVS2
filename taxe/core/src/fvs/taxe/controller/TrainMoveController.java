@@ -69,6 +69,15 @@ public class TrainMoveController {
                 if (station.isPassable() != true){
             		System.out.println("Train was destroyed passing through here");
             		//context.getTopBarController().displayFlashMessage("Train was destroyed passing through broken junction", Color.RED, 3);
+            		Dialog dia = new Dialog("Train Crash", context.getSkin());
+                    dia.show(context.getStage());
+                    TextButton button = new TextButton("Ok", context.getSkin());
+                    dia.text("The train was destroyed passing\nthrough the broken junction");
+                    dia.setHeight(125);
+                    dia.setWidth(250);
+                    dia.setPosition(400, 500);
+                    dia.button(button);
+                    station.setPassable(false);
             		train.getActor().remove();
                     train.getPlayer().removeResource(train);         
 

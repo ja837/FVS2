@@ -11,7 +11,9 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.Dialog;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
+import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.utils.Array;
 
 import fvs.taxe.controller.*;
@@ -85,7 +87,16 @@ public class GameScreen extends ScreenAdapter {
 					 if (station.isPassable() == false){
 						 if(rand.nextInt(10)<3){
 							 station.setPassable(true);
-							 infoController.displayFlashMessage("The station at "+station.toString()+" was fixed!", Color.GREEN);
+							// infoController.displayFlashMessage("The station at "+station.toString()+" was fixed!", Color.GREEN);
+							 Dialog dia = new Dialog("Junction Failure", context.getSkin());
+				            dia.show(context.getStage());
+				            TextButton button = new TextButton("Ok", context.getSkin());
+				            dia.text("The junction at "+station.toString()+"\nwas fixed!");
+				            dia.setHeight(125);
+				            dia.setWidth(250);
+				            dia.setPosition(400, 500);
+				            dia.button(button);
+				            station.setPassable(false);
 							 Array<Actor> stageActors = stage.getActors();
 							 for (Actor a: stageActors){
 								 if (a.getName() != null){									 
@@ -129,7 +140,7 @@ public class GameScreen extends ScreenAdapter {
 		 stationController.renderConnections(map.getConnections(), Color.GRAY);
 		 stationController.renderStationLbls();
 		 stationController.renderStationSpeedModifierLbls();
-		 stationController.renderSigns();
+		 //stationController.renderSigns();
 		 
 		 if(gameLogic.getState() == GameState.ROUTING) {
 			 routeController.drawRoute(Color.BLACK);
@@ -179,7 +190,6 @@ public class GameScreen extends ScreenAdapter {
 		 goalController.addEndTurnButton();
 		 resourceController.drawPlayerResources(gameLogic.getPlayerManager().getCurrentPlayer());
 	 }
-
 
 	 @Override
 	 public void dispose() {

@@ -3,8 +3,7 @@
     {
       "name": "Madrid",
       "acronym": "MAD",
-      "junction": false,
-      "controlled": true,	
+      "junction": false,      	
       "x": "159",
       "y": 19
     },

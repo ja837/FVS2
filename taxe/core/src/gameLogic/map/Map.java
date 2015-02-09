@@ -136,7 +136,12 @@ public class Map {
     public Station addStation(String name, String acronym, Position location, Boolean isControlled) {
         Station newStation = new Station(name, acronym, location);
         newStation.setPassable(true);
-        newStation.setControlled(isControlled);
+        if(random.nextInt(10)<2){
+        	newStation.setControlled(true);
+        }
+        else{
+        	newStation.setControlled(false);
+        }
         stations.add(newStation);
         return newStation;
     }
