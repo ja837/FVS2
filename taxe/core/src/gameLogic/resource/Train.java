@@ -6,6 +6,7 @@ import gameLogic.map.Connection;
 import gameLogic.map.IPositionable;
 import gameLogic.map.Station;
 import gameLogic.resource.Cargo;
+import gameLogic.resource.Cargo.trainCargo;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,7 +26,7 @@ public class Train extends Resource {
     //Station name and turn number
     private List<Tuple<String, Integer>> history;
     
-    private ArrayList<Cargo> cargo;
+    private ArrayList<trainCargo> cargo;
 
 
     public Train(String name, String leftImage, String rightImage, int speed) {
@@ -35,14 +36,14 @@ public class Train extends Resource {
         this.speed = speed;
         history = new ArrayList<Tuple<String, Integer>>();
         route =  new ArrayList<Station>();
-        cargo = new ArrayList<Cargo>();
+        cargo = new ArrayList<trainCargo>();
     }
     
     /**
      * Adds cargo to the train
      * @param a The animal to add to the train.
      */
-    public void addCargo(Cargo c){
+    public void addCargo(trainCargo c){
     	cargo.add(c);
     }
     
@@ -50,7 +51,7 @@ public class Train extends Resource {
      * Returns a list of all of the cargo on the train.
      * @return 
      */
-    public ArrayList<Cargo> getCargo(){
+    public ArrayList<trainCargo> getCargo(){
     	return cargo;
     }
     
