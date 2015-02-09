@@ -83,7 +83,7 @@ public class TrainMoveController {
 
             	}
                 if (station.isControlled() == true){
-            		System.out.println("Passing through a border control zone of" + station.getName());
+            		System.out.println("Passing through a border control zone of " + station.getName());
             		Random rn = new Random();
             		if(rn.nextInt(100) < 20){
             			System.out.println("Illegal animal found on train!");
@@ -93,7 +93,7 @@ public class TrainMoveController {
             		}
             		else{
             			System.out.println("Got through safely");
-            			context.getInfoController().displayFlashMessage("Passed through border control safely.", Color.GREEN, 3);
+            			context.getInfoController().displayFlashMessage("Passed through \nborder control safely.", Color.GREEN, 3);
             		}            		
             	}  
                 

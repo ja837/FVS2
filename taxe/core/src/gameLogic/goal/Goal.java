@@ -31,9 +31,9 @@ public class Goal {
 		this.turnIssued = turn;
 		this.reward = score; //current score
 		
-
+		
 		int ranNum = random.nextInt(trainCargo.values().length);
-		cargo = Cargo.getCargo(ranNum);
+		this.cargo = Cargo.getCargo(ranNum);
 	}
 	
 	public void addConstraint(String name, String value) {
@@ -147,6 +147,9 @@ public class Goal {
 			break;
 		case DRAGON:
 			imgFilePath += "dragon.png";
+			break;
+		case YETI:
+			imgFilePath += "yeti.png";
 			break;
 		default:
 			imgFilePath += "lion.png";

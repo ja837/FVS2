@@ -4,16 +4,19 @@ import gameLogic.goal.GoalManager;
 import gameLogic.map.Map;
 import gameLogic.map.Station;
 import gameLogic.resource.ResourceManager;
+import gameLogic.resource.SoundManager;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+
 
 public class Game {
 	private static Game instance;
 	private PlayerManager playerManager;
 	private GoalManager goalManager;
 	private ResourceManager resourceManager;
+	private SoundManager soundManager;
 	private Map map;
 	private GameState state;
 	private List<GameStateListener> gameStateListeners = new ArrayList<GameStateListener>();
@@ -26,11 +29,16 @@ public class Game {
 	};
 
 	private Game() {
+		
+		soundManager = new SoundManager();
+		
 		playerManager = new PlayerManager();
 		playerManager.createPlayers(CONFIG_PLAYERS);
 
 		resourceManager = new ResourceManager();
-		goalManager = new GoalManager(resourceManager);
+		goalManager = new GoalManager(this);
+		
+		
 		
 		map = new Map();
 		
@@ -40,17 +48,26 @@ public class Game {
 			@Override
 			public void changed() {
 				Player currentPlayer = playerManager.getCurrentPlayer();
+
+				//Change the stations that have the speed boost every 5 turns		 
+				if ((getPlayerManager().getTurnNumber() % 5) == 0){
+					ChangeSpecialStations();
+				}
+				if (currentPlayer.getResources().size() != 7){
+					soundManager.playRandomNewTrain();
+				}
+				
 				resourceManager.addRandomResourceToPlayer(currentPlayer);
-				resourceManager.addRandomResourceToPlayer(currentPlayer);
+				resourceManager.addRandomResourceToPlayer(currentPlayer);					
+				
 				goalManager.addRandomGoalToPlayer(currentPlayer);
 				
-				//Change the stations that have the speed boost every 5 turns			 
-				 if ((getPlayerManager().getTurnNumber() % 5) == 0){
-					 ChangeSpecialStations();
-				 }
+				
 			}
 		});
 	}
+
+
 
 	public static Game getInstance() {
 		if (instance == null) {
@@ -98,6 +115,10 @@ public class Game {
 		this.state = state;
 		stateChanged();
 	}
+	
+	public SoundManager getSoundManager() {
+		return soundManager;
+	}
 
 	public void subscribeStateChanged(GameStateListener listener) {
 		gameStateListeners.add(listener);
@@ -137,6 +158,10 @@ public class Game {
 		 stations.get(station3).setSpeedModifier(generateRandomSpeedModifier());
 		 
 		 System.out.println("New special stations are: " + stations.get(station1) + " " + stations.get(station2) + " " + stations.get(station3));
+		 
+		 
+		 soundManager.playSpeedBoost();
+		 
 		}
 
 

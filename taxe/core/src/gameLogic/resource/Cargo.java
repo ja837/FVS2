@@ -7,7 +7,7 @@ public class Cargo {
 	 *
 	 */
 	public enum trainCargo{
-		SNAKE, BEAR, MONKEY, GIRAFFE, PENGUIN, ZEBRA, LION, OCTOPUS, SHEEP, DRAGON, PIG, ELEPHANT
+		SNAKE, BEAR, MONKEY, GIRAFFE, PENGUIN, ZEBRA, LION, OCTOPUS, SHEEP, DRAGON, PIG, ELEPHANT, YETI
 	}
 	
 	public Cargo(){	

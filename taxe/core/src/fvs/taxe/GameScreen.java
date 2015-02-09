@@ -189,6 +189,7 @@ public class GameScreen extends ScreenAdapter {
 		 stationController.renderStations();
 		 goalController.addEndTurnButton();
 		 resourceController.drawPlayerResources(gameLogic.getPlayerManager().getCurrentPlayer());
+		 gameLogic.getSoundManager().playBGMusic();
 	 }
 
 	 @Override

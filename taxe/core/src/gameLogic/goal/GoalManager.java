@@ -6,6 +6,7 @@ import gameLogic.map.CollisionStation;
 import gameLogic.map.Map;
 import gameLogic.map.Station;
 import gameLogic.resource.ResourceManager;
+import gameLogic.resource.SoundManager;
 import gameLogic.resource.Train;
 import gameLogic.goal.dijkstra.Dijkstra;
 
@@ -15,11 +16,13 @@ import java.util.Random;
 public class GoalManager {
 	public final static int CONFIG_MAX_PLAYER_GOALS = 3;
 	private ResourceManager resourceManager;
+	private SoundManager soundManager;
 	private Random random = new Random();
 	private final int scoreLimit = 1500;
 	
-	public GoalManager(ResourceManager resourceManager) {
-		this.resourceManager = resourceManager;
+	public GoalManager(Game game) {
+		this.resourceManager = game.getResourceManager();
+		this.soundManager = game.getSoundManager();
 	}
 
 	private Goal generateRandom(int turn, Player player, int limitt) {
@@ -70,6 +73,8 @@ public class GoalManager {
 		System.out.println("Score for going from  " + origin.getName() + " to " + destination.getName() /*+ " via " + via.getName()*/ +" is " + score);
 		
 		Goal goal = new Goal(origin, destination, via, turn, score);
+		
+		soundManager.playAnimal(goal.getCargo());
  
 		// Goal with a specific train
 		if(random.nextInt(2) == 1) {
