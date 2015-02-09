@@ -70,8 +70,8 @@ public class StationController {
         for (Station s : stations) {
         	// display station acronym
             game.batch.begin();
-            game.fontTiny.setColor(Color.BLACK);
-            game.fontTiny.draw(game.batch, s.getAcronym(), s.getLocation().getX() + 5, s.getLocation().getY() + 20);
+            game.fontTiny.setColor(Color.MAROON);
+            game.fontTiny.draw(game.batch, s.getAcronym(), s.getLocation().getX() - 5, s.getLocation().getY() - 8);
             game.batch.end(); 
             
         }

@@ -41,6 +41,7 @@ public class GameScreen extends ScreenAdapter {
 	private ResourceController resourceController;
 	private GoalController goalController;
 	private RouteController routeController;
+	private StationWorksController stationWorksController;
 
 
 	/**
@@ -67,6 +68,7 @@ public class GameScreen extends ScreenAdapter {
 		 resourceController = new ResourceController(context);
 		 goalController = new GoalController(context);
 		 routeController = new RouteController(context);
+		 stationWorksController = new StationWorksController(context);
 
 		 context.setRouteController(routeController);
 		 context.setInfoController(infoController);
@@ -76,7 +78,7 @@ public class GameScreen extends ScreenAdapter {
 			 public void changed() {
 
 				 gameLogic.setState(GameState.ANIMATING);
-				 infoController.displayFlashMessage("Time is passing...", Color.BLACK);
+				 //infoController.displayFlashMessage("Time is passing...", Color.BLACK);
 
 				 
 				 //Have a chance to fix broken stations
@@ -133,7 +135,6 @@ public class GameScreen extends ScreenAdapter {
 		 game.batch.end();
 
 		 goalController.drawBackground();
-		 //topBarController.drawBackground();
 
 		 stationController.renderConnections(map.getConnections(), Color.GRAY);
 		 stationController.renderStationLbls();
@@ -178,6 +179,7 @@ public class GameScreen extends ScreenAdapter {
 		 resourceController.drawHeaderText();
 		 resourceController.drawInfoText();
 		 goalController.showCurrentPlayerGoals();
+		 //stationWorksController.showSpeedBoostStations();
 		 infoController.updateScores(gameLogic.getPlayerManager().getAllPlayers());
 	 }
 

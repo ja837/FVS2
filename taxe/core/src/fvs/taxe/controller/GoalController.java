@@ -69,9 +69,10 @@ public class GoalController {
     
     public void addEndTurnButton() {
         endTurnButton = new TextButton("End Turn", context.getSkin());
-        endTurnButton.setPosition(TaxeGame.WIDTH - CONTROLS_WIDTH + 25, TaxeGame.HEIGHT - 623.0f);
-        endTurnButton.setHeight(50);
-        endTurnButton.setWidth(100);
+        endTurnButton.setPosition(TaxeGame.WIDTH - CONTROLS_WIDTH + 15, TaxeGame.HEIGHT - 613.0f);
+        endTurnButton.setHeight(40);
+        endTurnButton.setWidth(225);
+        endTurnButton.setColor(Color.CYAN);
         endTurnButton.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {

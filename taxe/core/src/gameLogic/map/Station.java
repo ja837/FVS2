@@ -12,13 +12,6 @@ public class Station{
 	
 	private float speedModifier = 0f;
 
-	public float getSpeedModifier() {
-		return speedModifier;
-	}
-
-	public void setSpeedModifier(float speedmodifier) {
-		this.speedModifier = speedmodifier;
-	}
 
 	public Station(String name, String acronym, IPositionable location) {
 		this.name = name;
@@ -74,7 +67,13 @@ public class Station{
 		this.isControlled = isControlled;
 	}
 
-	
+	public float getSpeedModifier() {
+		return speedModifier;
+	}
+
+	public void setSpeedModifier(float speedmodifier) {
+		this.speedModifier = speedmodifier;
+	}
 	
 	public String toString(){
 		return getName();

@@ -42,7 +42,7 @@ public class InfoController {
 
     private void createFlashActor() {
         flashMessage = new Label("", context.getSkin());
-        flashMessage.setPosition(TaxeGame.WIDTH - 225 , TaxeGame.HEIGHT - 535);
+        flashMessage.setPosition(TaxeGame.WIDTH - 225 , TaxeGame.HEIGHT - 525);
         context.getStage().addActor(flashMessage);
     }
 

@@ -65,7 +65,7 @@ public class RouteController {
         boolean hasConnection = context.getGameLogic().getMap().doesConnectionExist(station.getName(), lastStation.getName());
 
         if(!hasConnection) {
-            context.getInfoController().displayFlashMessage("This connection doesn't exist", Color.RED);
+            context.getInfoController().displayFlashMessage("Connection doesn't exist", Color.RED);
         } else {
             positions.add(station.getLocation());
             canEndRouting = !(station instanceof CollisionStation);
@@ -77,10 +77,11 @@ public class RouteController {
     private void addRoutingButtons() {
         TextButton doneRouting = new TextButton("Route Complete", context.getSkin());
         TextButton cancel = new TextButton("Cancel", context.getSkin());
+        doneRouting.setColor(Color.CYAN);
+        cancel.setColor(Color.CYAN);
 
-
-        doneRouting.setPosition(TaxeGame.WIDTH - 240, TaxeGame.HEIGHT - 600);
-        cancel.setPosition(TaxeGame.WIDTH - 100, TaxeGame.HEIGHT - 600);
+        doneRouting.setPosition(TaxeGame.WIDTH - 225, TaxeGame.HEIGHT - 610);
+        cancel.setPosition(TaxeGame.WIDTH - 75, TaxeGame.HEIGHT - 610);
        
         cancel.addListener(new ClickListener() {
             @Override
@@ -93,7 +94,7 @@ public class RouteController {
             @Override
             public void clicked (InputEvent event, float x, float y) {
                 if(!canEndRouting) {
-                    context.getInfoController().displayFlashMessage("Your route must end at a station", Color.RED);
+                    context.getInfoController().displayFlashMessage("Route must end at a station", Color.RED);
                     return;
                 }
 
