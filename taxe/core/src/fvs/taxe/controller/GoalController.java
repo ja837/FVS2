@@ -47,6 +47,10 @@ public class GoalController {
         return strings;
     }
     
+    /** for each goal get it's associated animal image and display it
+     * 
+     * @return
+     */
     private List<String> playerGoalAnimals() {
         ArrayList<String> animals = new ArrayList<String>();
         PlayerManager pm = context.getGameLogic().getPlayerManager();
