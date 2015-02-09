@@ -1,5 +1,7 @@
 package gameLogic;
 
+import fvs.taxe.GameScreen;
+import fvs.taxe.MainMenuScreen;
 import gameLogic.goal.GoalManager;
 import gameLogic.map.Map;
 import gameLogic.map.Station;
@@ -9,6 +11,9 @@ import gameLogic.resource.SoundManager;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+
+import com.badlogic.gdx.scenes.scene2d.ui.Dialog;
+import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 
 
 public class Game {
@@ -20,6 +25,9 @@ public class Game {
 	private Map map;
 	private GameState state;
 	private List<GameStateListener> gameStateListeners = new ArrayList<GameStateListener>();
+	
+
+
 
 	private final int CONFIG_PLAYERS = 2;
 	public static int TOTAL_TURNS = 30;
@@ -161,6 +169,14 @@ public class Game {
 		 
 		 System.out.println("New special stations are: " + stations.get(station1) + " " + stations.get(station2) + " " + stations.get(station3));
 		 
+		 Dialog dia = new Dialog("New special stations are: " + stations.get(station1) + " " + stations.get(station2) + " " + stations.get(station3), getSkin());
+         dia.show(getStage());
+         TextButton button = new TextButton("Ok", getSkin());
+         dia.text("The new special stations are");
+         dia.setHeight(125);
+         dia.setWidth(250);
+         dia.setPosition(400, 500);
+         dia.button(button);
 		 
 		 soundManager.playSpeedBoost();
 		 
@@ -181,4 +197,5 @@ public class Game {
 		 speedModifier++;
 		return speedModifier;
 	}
+
 }

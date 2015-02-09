@@ -182,7 +182,17 @@ public class GameScreen extends ScreenAdapter {
 		 infoController.updateScores(gameLogic.getPlayerManager().getAllPlayers());
 	 }
 
-	 @Override
+	 public Stage getStage() {
+		return stage;
+	}
+
+
+	public Skin getSkin() {
+		return skin;
+	}
+
+
+	@Override
 	 // Called when GameScreen becomes current screen of the game
 	 public void show() {
 		 stationController.renderControlled();
