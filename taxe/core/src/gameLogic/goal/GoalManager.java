@@ -13,8 +13,6 @@ import gameLogic.goal.dijkstra.Dijkstra;
 import java.util.ArrayList;
 import java.util.Random;
 
-import com.badlogic.gdx.math.MathUtils;
-
 public class GoalManager {
 	public final static int CONFIG_MAX_PLAYER_GOALS = 3;
 	private ResourceManager resourceManager;
@@ -29,46 +27,44 @@ public class GoalManager {
 
 	private Goal generateRandom(int turn, Player player, int limitt) {
 		Map map = Game.getInstance().getMap();
-		int score, score1;
+		int score = 0;
+		int score1 = 0;
 		Station origin = null;
 		Station destination = null;
 		Station via = null;
-		score = scoreLimit + 1;
-		while (score > limitt){
-			do {
-				origin = map.getRandomStation();
-			} while (origin instanceof CollisionStation);
-			do {
-				destination = map.getRandomStation();
-				// always true, really?
-			} while (destination == origin || destination instanceof CollisionStation);
+		do {
+			origin = map.getRandomStation();
+		} while (origin instanceof CollisionStation);
+		do {
+			destination = map.getRandomStation();
+			// always true, really?
+		} while (destination == origin || destination instanceof CollisionStation);
 
-			//there is a 2/5 chance of a goal having a via station
-			if (random.nextInt(5) == 0 || random.nextInt(5) == 1){
-				do {
-					via = map.getRandomStation();
-				} while (via == origin || via == destination || via instanceof CollisionStation);
+		//there is a 2/5 chance of a goal having a via station
+		if (random.nextInt(5) == 0 || random.nextInt(5) == 1){
+			do {
+				via = map.getRandomStation();
+			} while (via == origin || via == destination || via instanceof CollisionStation);
+		}
+		else {
+			via = null;
+		}
+		//score is based on the minimum path from a->b (or a->b->c)
+		if (via  != null){
+			score = genScore(origin, via);
+			if (score == 0){
+				score = genScore(via, origin);
 			}
-			else {
-				via = null;
+			score1 = genScore(via, destination);
+			if (score1 == 0){
+				score1 = genScore(destination, via);
 			}
-			//score is based on the minimum path from a->b (or a->b->c)
-			if (via  != null){
-				score = genScore(origin, via);
-				if (score == 0){
-					score = genScore(via, origin);
-				}
-				score1 = genScore(via, destination);
-				if (score1 == 0){
-					score1 = genScore(destination, via);
-				}
-				score = score + score1;
-			}
-			else {
-				score = genScore(origin, destination);
-				if (score == 0){
-					score = genScore(destination, origin);
-				}
+			score = score + score1;
+		}
+		else {
+			score = genScore(origin, destination);
+			if (score == 0){
+				score = genScore(destination, origin);
 			}
 		}
 		

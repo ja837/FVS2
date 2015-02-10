@@ -35,39 +35,40 @@ public class SoundManager {
 	Music highSpeed;
 
 	public SoundManager(){
-		this.bananaPeel = Gdx.audio.newMusic(Gdx.files.internal("wavs/wavs/bananaPeel.wav"));
-		this.animals[Cargo.trainCargo.BEAR.ordinal()] = Gdx.audio.newMusic(Gdx.files.internal("wavs/wavs/bear.wav"));
-		this.animals[Cargo.trainCargo.ELEPHANT.ordinal()]= Gdx.audio.newMusic(Gdx.files.internal("wavs/wavs/elephantBiggerTrain.wav"));
-		this.animals[Cargo.trainCargo.GIRAFFE.ordinal()]= Gdx.audio.newMusic(Gdx.files.internal("wavs/wavs/giraffe.wav"));
-		this.animals[Cargo.trainCargo.LION.ordinal()] = Gdx.audio.newMusic(Gdx.files.internal("wavs/wavs/lion.wav"));
-		this.animals[Cargo.trainCargo.MONKEY.ordinal()] = Gdx.audio.newMusic(Gdx.files.internal("wavs/wavs/monkey.wav"));
-		this.animals[Cargo.trainCargo.PENGUIN.ordinal()] = Gdx.audio.newMusic(Gdx.files.internal("wavs/wavs/penguin.wav"));
-		this.animals[Cargo.trainCargo.YETI.ordinal()] = Gdx.audio.newMusic(Gdx.files.internal("wavs/wavs/yetiGL.wav"));
-		this.animals[Cargo.trainCargo.ZEBRA.ordinal()] = Gdx.audio.newMusic(Gdx.files.internal("wavs/wavs/zebra.wav"));
-
-		this.newTrainArray[0] = Gdx.audio.newMusic(Gdx.files.internal("wavs/wavs/newTrain.wav"));
-		this.newTrainArray[1] = Gdx.audio.newMusic(Gdx.files.internal("wavs/wavs/newTrain1.wav"));
-		this.newTrainArray[2] = Gdx.audio.newMusic(Gdx.files.internal("wavs/wavs/here'sANewTrainForYou.wav"));
-		this.newTrainArray[3] = Gdx.audio.newMusic(Gdx.files.internal("wavs/wavs/here'sANewTrainForYou1.wav"));
-		this.newTrainArray[4] = Gdx.audio.newMusic(Gdx.files.internal("wavs/wavs/fundingForNewTrain.wav"));
-
-		this.speedBoost[0] = Gdx.audio.newMusic(Gdx.files.internal("wavs/wavs/transportAnimalsFaster.wav"));
-		this.speedBoost[1] = Gdx.audio.newMusic(Gdx.files.internal("wavs/wavs/transportAnimalsFaster1.wav"));
-
-		this.bGMusic = Gdx.audio.newMusic(Gdx.files.internal("wavs/wavs/BGMusicLoop.wav"));
+		//this.bananaPeel = Gdx.audio.newMusic(Gdx.files.internal("sounds/bananaPeel.ogg"));
+		this.animals[Cargo.trainCargo.BEAR.ordinal()] = Gdx.audio.newMusic(Gdx.files.internal("sounds/bear.ogg"));
+		this.animals[Cargo.trainCargo.ELEPHANT.ordinal()]= Gdx.audio.newMusic(Gdx.files.internal("sounds/elephantBiggerTrain.ogg"));
+		this.animals[Cargo.trainCargo.GIRAFFE.ordinal()]= Gdx.audio.newMusic(Gdx.files.internal("sounds/giraffe.ogg"));
+		this.animals[Cargo.trainCargo.LION.ordinal()] = Gdx.audio.newMusic(Gdx.files.internal("sounds/lion.ogg"));
+		this.animals[Cargo.trainCargo.MONKEY.ordinal()] = Gdx.audio.newMusic(Gdx.files.internal("sounds/monkey.ogg"));
+		this.animals[Cargo.trainCargo.PENGUIN.ordinal()] = Gdx.audio.newMusic(Gdx.files.internal("sounds/penguin.ogg"));
+		this.animals[Cargo.trainCargo.YETI.ordinal()] = Gdx.audio.newMusic(Gdx.files.internal("sounds/yetiGL.ogg"));
+		this.animals[Cargo.trainCargo.ZEBRA.ordinal()] = Gdx.audio.newMusic(Gdx.files.internal("sounds/zebra.ogg"));
 		
-		this.highSpeed = Gdx.audio.newMusic(Gdx.files.internal("wavs/wavs/highSpeed.wav"));
+		this.newTrainArray[0] = Gdx.audio.newMusic(Gdx.files.internal("sounds/newTrain.ogg"));
+		this.newTrainArray[1] = Gdx.audio.newMusic(Gdx.files.internal("sounds/newTrain1.ogg"));
+		this.newTrainArray[2] = Gdx.audio.newMusic(Gdx.files.internal("sounds/here'sANewTrainForYou.ogg"));
+		this.newTrainArray[3] = Gdx.audio.newMusic(Gdx.files.internal("sounds/here'sANewTrainForYou1.ogg"));
+		this.newTrainArray[4] = Gdx.audio.newMusic(Gdx.files.internal("sounds/fundingForNewTrain.ogg"));
+
+		this.speedBoost[0] = Gdx.audio.newMusic(Gdx.files.internal("sounds/transportAnimalsFaster.ogg"));
+		this.speedBoost[1] = Gdx.audio.newMusic(Gdx.files.internal("sounds/transportAnimalsFaster1.ogg"));
+
+		this.bGMusic = Gdx.audio.newMusic(Gdx.files.internal("sounds/BGMusicLoop.ogg"));
+		
+		this.highSpeed = Gdx.audio.newMusic(Gdx.files.internal("sounds/highSpeed.ogg"));
 
 	}
 
 
 	public void playBGMusic(){
+		bGMusic.setVolume(0.65f);
 		bGMusic.play();
 		bGMusic.setLooping(true);
 	}
 	public void playHighSpeed(){
 		bGMusic.pause();
-		highSpeed.setVolume(0.4f);
+		highSpeed.setVolume(0.45f);
 		highSpeed.play();
 	}
 

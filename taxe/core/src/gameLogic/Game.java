@@ -37,19 +37,14 @@ public class Game {
 	};
 
 	private Game() {
-		
 		soundManager = new SoundManager();
-		
 		playerManager = new PlayerManager();
 		playerManager.createPlayers(CONFIG_PLAYERS);
 
 		resourceManager = new ResourceManager();
 		goalManager = new GoalManager(this);
-		
-		
-		
+
 		map = new Map();
-		
 		state = GameState.NORMAL;
 
 		playerManager.subscribeTurnChanged(new TurnListener() {
@@ -66,17 +61,14 @@ public class Game {
 				resourceManager.addRandomResourceToPlayer(currentPlayer);					
 				goalManager.addRandomGoalToPlayer(currentPlayer);
 				
-				if (!Game.getInstance().getSoundManager().getHighSpeed().isPlaying()){
-					if (!Game.getInstance().getSoundManager().getBGMusic().isPlaying()){
-						Game.getInstance().getSoundManager().playBGMusic();
+				if (soundManager.getHighSpeed().isPlaying()){
+					if (soundManager.getBGMusic().isPlaying()){
+						soundManager.playBGMusic();
 					}
-				}
-				
+				}	
 			}
 		});
 	}
-
-
 
 	public static Game getInstance() {
 		if (instance == null) {
