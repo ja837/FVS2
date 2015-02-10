@@ -88,7 +88,7 @@ public class TrainMoveController {
             		Random rn = new Random();
             		if(rn.nextInt(100) < 20){
             			System.out.println("Illegal animal found on train!");
-            			context.getInfoController().displayFlashMessage("A diseased animal was found on your train. It had to be destroyed.", Color.RED, 3);
+            			context.getInfoController().displayFlashMessage("A diseased animal was found \non your train. It had to \nbe destroyed.", Color.RED, 3);
             			train.getActor().remove();
                         train.getPlayer().removeResource(train);
             		}

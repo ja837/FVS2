@@ -52,7 +52,6 @@ public class Game {
 			public void changed() {
 				Player currentPlayer = playerManager.getCurrentPlayer();
 
-				
 				if (currentPlayer.getResources().size() != 7){
 					soundManager.playRandomNewTrain();
 				}
@@ -61,8 +60,8 @@ public class Game {
 				resourceManager.addRandomResourceToPlayer(currentPlayer);					
 				goalManager.addRandomGoalToPlayer(currentPlayer);
 				
-				if (soundManager.getHighSpeed().isPlaying()){
-					if (soundManager.getBGMusic().isPlaying()){
+				if (!soundManager.getHighSpeed().isPlaying()){
+					if (!soundManager.getBGMusic().isPlaying()){
 						soundManager.playBGMusic();
 					}
 				}	
