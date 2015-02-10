@@ -1,5 +1,6 @@
 package fvs.taxe;
 
+import java.util.List;
 import java.util.Random;
 
 import com.badlogic.gdx.Gdx;
@@ -76,6 +77,11 @@ public class GameScreen extends ScreenAdapter {
 		 gameLogic.getPlayerManager().subscribeTurnChanged(new TurnListener() {
 			 @Override
 			 public void changed() {
+				 
+				//Change the stations that have the speed boost every 5 turns. It's this high so that it gets priority in the sound manager.		 
+				if ((gameLogic.getPlayerManager().getTurnNumber() % 5) == 0){
+					ChangeSpecialStations();
+				}
 
 				 gameLogic.setState(GameState.ANIMATING);
 				 //infoController.displayFlashMessage("Time is passing...", Color.BLACK);
@@ -106,6 +112,7 @@ public class GameScreen extends ScreenAdapter {
 						 }
 					 }
 				 }
+
 			 }
 
 			
@@ -139,6 +146,8 @@ public class GameScreen extends ScreenAdapter {
 		 stationController.renderStationLbls();
 		 stationController.renderStationSpeedModifierLbls();
 		 stationController.renderStop();
+		 
+		 //stationController.renderGasPumps();
 		 
 		 if(gameLogic.getState() == GameState.ROUTING) {
 			 routeController.drawRoute(Color.BLACK);
@@ -207,6 +216,64 @@ public class GameScreen extends ScreenAdapter {
 		 mapTexture.dispose();
 		 stage.dispose();
 	 }
+	 
+	 /**
+	  * Changes which stations have the speed alterations. Called every 5 turns and changes 3 stations.
+	  */
+	 private void ChangeSpecialStations() {
+			// TODO Auto-generated method stub
+		 List<Station> stations = gameLogic.getMap().getStations();
+		 Random r = new Random();
+		 int station1 = r.nextInt(stations.size());
+		 int station2 = r.nextInt(stations.size());;
+		 int station3 = r.nextInt(stations.size());;
+		 while (station2 == station1){
+			 station2 = r.nextInt(stations.size());
+		 }
+		 while (station3 == station1 || station3 == station2){
+			 station3 = r.nextInt(stations.size());
+		 }
+		 
+		 //Reset Speed modifier for every station
+		 for (Station s : stations){
+			 s.setSpeedModifier(0);
+		 }
+		 
+		 //Set the new speed modifiers
+		 stations.get(station1).setSpeedModifier(generateRandomSpeedModifier());
+		 stations.get(station2).setSpeedModifier(generateRandomSpeedModifier());
+		 stations.get(station3).setSpeedModifier(generateRandomSpeedModifier());
+		 
+		 System.out.println("The new special stations are: " + stations.get(station1) + " " + stations.get(station2) + " " + stations.get(station3));
+		 
+		 Dialog dia = new Dialog("New Special Stations!", getSkin());
+         dia.show(getStage());
+         TextButton button = new TextButton("Ok", getSkin());
+         dia.text("The new special stations are:\n" + stations.get(station1) + "\n" + stations.get(station2) + "\n" + stations.get(station3));
+         dia.setHeight(150);
+         dia.setWidth(250);
+         dia.setPosition(400, 500);
+         dia.button(button);
+		 
+		 gameLogic.getSoundManager().playSpeedBoost();
+		 
+		}
+
+	private float generateRandomSpeedModifier() {
+		//Create a random speed modifier between -50% and 50% that only includes the 10s. i.e. -50, -40, -30 etc. Ensure that it is not 0. 75% chance it is positive.
+		 Random r2 = new Random();
+		 float speedModifier = r2.nextInt(5);
+		 while (speedModifier == 0){
+			 speedModifier = r2.nextInt(5);
+		 }
+		 speedModifier *= 10;				 
+		 if ((r2.nextInt(4)) == 0){
+			 speedModifier *= -1;
+		 }
+		 speedModifier = speedModifier / 100;
+		 speedModifier++;
+		return speedModifier;
+	}
 	 
 	 
 

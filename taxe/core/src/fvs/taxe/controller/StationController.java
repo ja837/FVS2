@@ -13,6 +13,7 @@ import fvs.taxe.StationClickListener;
 import fvs.taxe.TaxeGame;
 import fvs.taxe.Tooltip;
 import fvs.taxe.actor.CollisionStationActor;
+import fvs.taxe.actor.GasPumpActor;
 import fvs.taxe.actor.StationActor;
 import fvs.taxe.actor.StopActor;
 import fvs.taxe.actor.StopSignActor;
@@ -94,13 +95,13 @@ public class StationController {
         	
         	if (s.getSpeedModifier() != 0){
         		game.batch.begin();
-        		if (s.getSpeedModifier() < 0){
-        			game.fontTiny.setColor(Color.RED);
+        		if (s.getSpeedModifier() < 1){
+        			game.fontSmall.setColor(Color.RED);
         		}
         		else{
-        			game.fontTiny.setColor(Color.BLUE);
+        			game.fontSmall.setColor(Color.BLUE);
         		}          
-                game.fontTiny.draw(game.batch, s.getSpeedModifier() + "", s.getLocation().getX() - 20, s.getLocation().getY() + 20);
+                game.fontSmall.draw(game.batch, s.getSpeedModifier() + "", s.getLocation().getX() - 30, s.getLocation().getY() + 30);
                 game.batch.end();
         	}
         }
@@ -202,6 +203,7 @@ public class StationController {
         }
     }
     
+
     
     /** 
      * renders the connections on the map to be displayed
