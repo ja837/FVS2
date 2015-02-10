@@ -80,7 +80,7 @@ public class GameScreen extends ScreenAdapter {
 				 
 				//Change the stations that have the speed boost every 5 turns. It's this high so that it gets priority in the sound manager.		 
 				if ((gameLogic.getPlayerManager().getTurnNumber() % 5) == 0){
-					ChangeSpecialStations();
+					ChangeSpecialStations();					
 				}
 
 				 gameLogic.setState(GameState.ANIMATING);

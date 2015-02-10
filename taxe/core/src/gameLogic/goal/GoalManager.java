@@ -77,7 +77,7 @@ public class GoalManager {
 		System.out.println("Score for going from  " + origin.getName() + " to " + destination.getName() /*+ " via " + via.getName()*/ +" is " + score);
 		
 		Goal goal = new Goal(origin, destination, via, turn, score);
-		soundManager.playAnimal(goal.getCargo());
+		
  
 		// Goal with a specific train
 		if(random.nextInt(2) == 1) {
@@ -95,7 +95,13 @@ public class GoalManager {
 			total += g.getReward();
 		}
 		int limit = scoreLimit - total;
-		player.addGoal(generateRandom(player.getPlayerManager().getTurnNumber(), player, limit));
+		Goal g = generateRandom(player.getPlayerManager().getTurnNumber(), player, limit);
+		player.addGoal(g);
+		System.out.println("Goals size: " + player.getGoals().size());
+		if (player.getGoals().size() < 3){
+			soundManager.playAnimal(g.getCargo());
+		}
+		
 	}
 
 	public ArrayList<String> trainArrived(Train train, Player player) {

@@ -82,7 +82,7 @@ public class SoundManager {
 
 
 	public void playRandomNewTrain(){
-		if (random.nextInt(2) == 0){
+		if (random.nextInt(4) == 0){
 			Boolean play = true;
 			for (Music m : speedBoost){
 				if (m.isPlaying()){
