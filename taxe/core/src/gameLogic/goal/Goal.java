@@ -18,7 +18,10 @@ public class Goal {
 	
 	//constraints
 	private String trainName = null;
-	private String cargo;
+
+	//goal cosmetic
+	private trainCargo cargo;
+	private String cargoString;
 	private Random random  = new Random();
 	
 	public Goal(Station argOrigin, Station argDestination, Station via, int turn, int score) {
@@ -28,8 +31,9 @@ public class Goal {
 		this.turnIssued = turn;
 		this.reward = score; //current score
 		
-		int ranNum= random.nextInt(trainCargo.values().length);
-		cargo = Cargo.getCargo(ranNum);
+		
+		int ranNum = random.nextInt(trainCargo.values().length);
+		this.cargo = Cargo.getCargo(ranNum);
 	}
 	
 	public void addConstraint(String name, String value) {
@@ -40,7 +44,6 @@ public class Goal {
 		}
 	}
 	
-
 	public boolean isComplete(Train train) {
 		boolean passedOrigin = false;
 		boolean passedVia = false;
@@ -54,6 +57,7 @@ public class Goal {
 		if (via != null){
 			for (Tuple<String, Integer> history : train.getHistory()){
 				if (history.getFirst().equals(via.getName()) && history.getSecond() >= turnIssued){
+					
 					passedVia = true;
 				}
 			}
@@ -86,14 +90,72 @@ public class Goal {
 		if(trainName != null) {
 			trainString = trainName;
 		}
-		goalString = "Send a " + trainString + " carrying a " + cargo.toLowerCase() + " from " + origin.getName() + " to " + destination.getName();
+
+		//goalString = "Send a " + trainString + " carrying a " + cargo.toString().toLowerCase() + " from " + origin.getName() + " to " + destination.getName();
+
+		goalString = "Send a " + trainString + " carrying a " + cargo.toString().toLowerCase() + " from " + origin.getName() + " to " + destination.getName();
 		
 		
 		if (via != null){
 			goalString += " via " + via.getName();
 		}
-			
+		
+		goalString += ". - " + reward + " points";
+		
 		return goalString;
+	}
+	
+	/** get the string of the filepath for the goal's cargo's image
+	 * 
+	 * @return
+	 */
+	public String getImgFile() {
+		String imgFilePath = "animal/";
+		switch (cargo) {
+		case SNAKE:
+			imgFilePath += "snake.png";
+			break;
+		case BEAR:
+			imgFilePath += "bear.png";
+			break;
+		case MONKEY:
+			imgFilePath += "monkey.png";
+			break;
+		case GIRAFFE:
+			imgFilePath += "giraffe.png";
+			break;
+		case PENGUIN:
+			imgFilePath += "penguin.png";
+			break;
+		case SHEEP:
+			imgFilePath += "sheep.png";
+			break;
+		case ELEPHANT:
+			imgFilePath += "elephant.png";
+			break;
+		case OCTOPUS:
+			imgFilePath += "octopus.png";
+			break;
+		case ZEBRA:
+			imgFilePath += "zebra.png";
+			break;
+		case LION:
+			imgFilePath += "lion.png";
+			break;
+		case PIG:
+			imgFilePath += "pig.png";
+			break;
+		case DRAGON:
+			imgFilePath += "dragon.png";
+			break;
+		case YETI:
+			imgFilePath += "yeti.png";
+			break;
+		default:
+			imgFilePath += "lion.png";
+			break;
+		}
+		return imgFilePath;
 	}
 
 	public void setComplete() {
@@ -106,5 +168,17 @@ public class Goal {
 	
 	public int getReward() {
 		return reward;
+	}
+	
+	public trainCargo getCargo() {
+		return cargo;
+	}
+
+	public Station getOrigin() {
+		return origin;
+	}
+
+	public Station getDestination() {
+		return destination;
 	}
 }

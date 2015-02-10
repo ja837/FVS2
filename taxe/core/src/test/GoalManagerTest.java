@@ -3,6 +3,7 @@ package test;
  * Tests Goal completion and also via goal logic
  */
 
+import gameLogic.Game;
 import gameLogic.Player;
 import gameLogic.PlayerManager;
 import gameLogic.goal.Goal;
@@ -15,6 +16,8 @@ import gameLogic.resource.Train;
 import org.junit.Before;
 import org.junit.Test;
 
+
+
 import java.util.ArrayList;
 
 import static org.junit.Assert.*;
@@ -25,8 +28,8 @@ public class GoalManagerTest extends LibGdxTest {
 
     @Before
     public void setup() throws Exception {
-        ResourceManager rs = new ResourceManager();
-        gm = new GoalManager(rs);
+        Game game = gameLogic.Game.getInstance();
+        gm = new GoalManager(game);
         pm = new PlayerManager();
 
     }
@@ -41,6 +44,7 @@ public class GoalManagerTest extends LibGdxTest {
         Station station1 = new Station("station1","s1", new Position(5, 5));
         Station station2 = new Station("station2", "s2", new Position(2, 2));
         Station station3 = new Station("station3", "s3", new Position(4, 3));
+
         
         Goal goal = new Goal(station1, station2, station3,0,0);
         player1.addGoal(goal);
@@ -60,7 +64,9 @@ public class GoalManagerTest extends LibGdxTest {
         
         train.addHistory("station3", 1);
        
-        //assertFalse("Goal was completed in error", goal.isComplete(train));
+
+        //assertFalse("Goal was completed in error", goal.isComplete(train)
+
         
         pm.turnOver();
         pm.turnOver();

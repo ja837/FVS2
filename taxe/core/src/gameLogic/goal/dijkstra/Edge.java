@@ -5,6 +5,10 @@ import com.badlogic.gdx.math.Vector2;
 import gameLogic.map.Connection;
 import gameLogic.map.Station;
 
+/** Class for converting connections into edges to use in dijkstra
+
+*/
+
 public class Edge {
 	
 	private final Node target;
@@ -16,7 +20,7 @@ public class Edge {
 		this.conn = argConn;
 		this.current = Dijkstra.lookupNode(conn.getStation1());
 		this.target = Dijkstra.lookupNode(conn.getStation2());
-		this.weight = getDistance(conn.getStation1(), conn.getStation2());
+		this.weight = getDistance(conn.getStation1(), conn.getStation2()); 
 	}
 	
 	

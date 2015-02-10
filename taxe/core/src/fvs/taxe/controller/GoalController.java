@@ -1,6 +1,8 @@
 package fvs.taxe.controller;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.scenes.scene2d.Group;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
@@ -13,6 +15,7 @@ import gameLogic.GameStateListener;
 import gameLogic.Player;
 import gameLogic.PlayerManager;
 import gameLogic.goal.Goal;
+import gameLogic.resource.Cargo;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -44,11 +47,32 @@ public class GoalController {
         return strings;
     }
     
+    /** for each goal get it's associated animal image and display it
+     * 
+     * @return
+     */
+    private List<String> playerGoalAnimals() {
+        ArrayList<String> animals = new ArrayList<String>();
+        PlayerManager pm = context.getGameLogic().getPlayerManager();
+        Player currentPlayer = pm.getCurrentPlayer();
+
+        for (Goal goal : currentPlayer.getGoals()) {
+            if(goal.getComplete()) {
+                continue;
+            }
+
+            animals.add(goal.getImgFile());
+        }
+
+        return animals;
+    }
+    
     public void addEndTurnButton() {
         endTurnButton = new TextButton("End Turn", context.getSkin());
-        endTurnButton.setPosition(TaxeGame.WIDTH - CONTROLS_WIDTH + 25, TaxeGame.HEIGHT - 623.0f);
-        endTurnButton.setHeight(50);
-        endTurnButton.setWidth(100);
+        endTurnButton.setPosition(TaxeGame.WIDTH - CONTROLS_WIDTH + 15, TaxeGame.HEIGHT - 613.0f);
+        endTurnButton.setHeight(40);
+        endTurnButton.setWidth(225);
+        endTurnButton.setColor(Color.CYAN);
         endTurnButton.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
@@ -88,7 +112,7 @@ public class GoalController {
         goalButtons.clear();
 
         float top = (float) TaxeGame.HEIGHT;
-        float x = TaxeGame.WIDTH - CONTROLS_WIDTH + 25;
+        float x = TaxeGame.WIDTH - CONTROLS_WIDTH + 10;
         float y = top - 10.0f;
 
         game.batch.begin();
@@ -96,17 +120,28 @@ public class GoalController {
         game.fontSmall.draw(game.batch, playerGoalHeader(), x, y);
         game.batch.end();
         
-        y -= 25;
+        y -= 90;
 
-        for (String goalString : playerGoalStrings()) {
-            
+        for (int i = 0; i < playerGoalAnimals().size(); i++) {
+        	
+        	String animal = playerGoalAnimals().get(i);
+        	String goalString = playerGoalStrings().get(i);
+        	Texture animalTexture = new Texture(Gdx.files.internal(animal));
+        	Color c = game.batch.getColor();
             game.batch.begin();
-            game.fontSmall.setColor(Color.BLACK);
-            game.fontSmall.drawWrapped(game.batch, goalString, x, y, CONTROLS_WIDTH - 50);
+            //draw goal animal
+            game.batch.setColor(c.r, c.g, c.b, (float) 1.0);
+            game.batch.draw(animalTexture, x, y);
+            game.batch.setColor(c);
+            //draw goal text
+            game.fontTiny.setColor(Color.BLACK);
+            game.fontTiny.drawWrapped(game.batch, goalString, x+60, y+55, CONTROLS_WIDTH - 80);
             game.batch.end();
 
             y -= 70;
         }
+        
+        
         
         context.getStage().addActor(goalButtons);
     }

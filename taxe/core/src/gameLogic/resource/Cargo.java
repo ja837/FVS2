@@ -2,17 +2,24 @@ package gameLogic.resource;
 
 public class Cargo {
 	
+	/**
+	 * Enum for the potential animals
+	 *
+	 */
 	public enum trainCargo{
-		PYHTON, BEAR, MONKEY, GIRAFFE, PENGUIN, HORSE, FROG, COCKROACH, ZEBRA, LION, TOUCAN, PANDA
+		SNAKE, BEAR, MONKEY, GIRAFFE, PENGUIN, ZEBRA, LION, OCTOPUS, SHEEP, DRAGON, PIG, ELEPHANT, YETI
 	}
 	
 	public Cargo(){	
 	}
 
-	public static String getCargo(int x){
-		return trainCargo.values()[x].toString();
+
+	public static trainCargo getCargo(int x){
+		return trainCargo.values()[x];
 	}	
 	
-	
+	public static String toString(int x){
+		return trainCargo.values()[x].toString();
+	}
 
 }

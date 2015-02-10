@@ -14,11 +14,11 @@ public class DesktopLauncher {
 		config.width = TaxeGame.WIDTH;
 		config.title = "TaxE";
 		config.resizable = false;
-		config.addIcon("icon/fvs256.png", FileType.Internal);
-		config.addIcon("icon/fvs128.png", FileType.Internal);
-		config.addIcon("icon/fvs64.png", FileType.Internal);
-		config.addIcon("icon/fvs32.png", FileType.Internal);
-		config.addIcon("icon/fvs16.png", FileType.Internal);
+		config.addIcon("icon/ic_launcher4.png", FileType.Internal);
+		config.addIcon("icon/ic_launcher3.png", FileType.Internal);
+		config.addIcon("icon/ic_launcher2.png", FileType.Internal);
+		config.addIcon("icon/ic_launcher1.png", FileType.Internal);
+		config.addIcon("icon/ic_launcher0.png", FileType.Internal);
 		//config.fullscreen = true;
 		new LwjglApplication(new TaxeGame(), config);
 	}

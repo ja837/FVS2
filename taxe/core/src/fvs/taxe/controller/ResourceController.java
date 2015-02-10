@@ -13,9 +13,11 @@ import gameLogic.resource.Train;
 public class ResourceController {
     private Context context;
     private Group resourceButtons = new Group();
+	private String infoText ;
 
     public ResourceController(final Context context) {
         this.context = context;
+        this.infoText = "";
 
         context.getGameLogic().getPlayerManager().subscribePlayerChanged(new PlayerChangedListener() {
             @Override
@@ -30,15 +32,28 @@ public class ResourceController {
 
         game.batch.begin();
         game.fontSmall.setColor(Color.NAVY);
-        game.fontSmall.draw(game.batch, "Unplaced Resources:", TaxeGame.WIDTH - 225.0f, (float) TaxeGame.HEIGHT - 250.0f);
+        game.fontSmall.draw(game.batch, "Unplaced Resources:", TaxeGame.WIDTH - 235.0f, (float) TaxeGame.HEIGHT - 260.0f);
+        game.batch.end();
+    }
+    
+    public void setInfoText(String text) {
+        infoText = text;
+    }
+    
+    public void drawInfoText() {
+        TaxeGame game = context.getTaxeGame();
+
+        game.batch.begin();
+        game.fontTiny.setColor(Color.NAVY);
+        game.fontTiny.draw(game.batch, infoText, TaxeGame.WIDTH - 235.0f, (float) TaxeGame.HEIGHT - 590.0f);
         game.batch.end();
     }
 
     public void drawPlayerResources(Player player) {
 
         float top = (float) TaxeGame.HEIGHT;
-        float x = TaxeGame.WIDTH - 225.0f;
-        float y = top - 250.0f;
+        float x = TaxeGame.WIDTH - 235.0f;
+        float y = top - 260.0f;
         y -= 50;
 
         resourceButtons.remove();
@@ -57,7 +72,7 @@ public class ResourceController {
 
                 TextButton button = new TextButton(resource.toString(), context.getSkin());
                 button.setPosition(x, y);
-                button.setWidth(125);
+                button.setWidth(225);
                 button.addListener(listener);
                 
                 //set button colour depending on train speed

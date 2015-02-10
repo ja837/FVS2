@@ -6,6 +6,9 @@ import gameLogic.map.Station;
 
 import java.util.ArrayList;
 
+/** Class for converting stations into nodes for dijkstra
+
+*/
 
 public class Node implements Comparable<Node>{
 	private Station station;

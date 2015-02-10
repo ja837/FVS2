@@ -16,7 +16,7 @@ public class DialogResourceTrain extends Dialog {
         super(train.toString(), skin);
 
         text("What do you want to do with this train?");
-
+        
         button("Cancel", "CLOSE");
         button("Drop", "DROP");
 

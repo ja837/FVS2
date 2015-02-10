@@ -28,6 +28,7 @@ public class PlayerManager {
 		currentTurn = currentTurn == 1 ? 0 : 1;
 		turnChanged();
 		playerChanged();
+		//fixJunctions();
 	}
 
 

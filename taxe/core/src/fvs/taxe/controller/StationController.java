@@ -12,6 +12,7 @@ import fvs.taxe.Tooltip;
 import fvs.taxe.actor.CollisionStationActor;
 import fvs.taxe.actor.StationActor;
 import fvs.taxe.actor.StopActor;
+import fvs.taxe.actor.StopSignActor;
 import fvs.taxe.dialog.DialogStationMultitrain;
 import gameLogic.Game;
 import gameLogic.GameState;
@@ -23,6 +24,7 @@ import gameLogic.map.Station;
 import gameLogic.resource.Resource;
 import gameLogic.resource.Train;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 
@@ -37,6 +39,7 @@ public class StationController {
     and this list implementation supports removing elements whilst iterating through it
     */
     private static List<StationClickListener> stationClickListeners = new CopyOnWriteArrayList<StationClickListener>();
+    private List<Actor> brokenStations = new ArrayList<Actor>();		//We store broken station actors to remove them easily
 
     public StationController(Context context, Tooltip tooltip) {
         this.context = context;
@@ -67,10 +70,9 @@ public class StationController {
         for (Station s : stations) {
         	// display station acronym
             game.batch.begin();
-            game.fontTiny.setColor(Color.BLACK);
-            game.fontTiny.draw(game.batch, s.getAcronym(), s.getLocation().getX() + 5, s.getLocation().getY() + 20);
-            game.batch.end();
-            
+            game.fontTiny.setColor(Color.MAROON);
+            game.fontTiny.draw(game.batch, s.getAcronym(), s.getLocation().getX() - 5, s.getLocation().getY() - 8);
+            game.batch.end(); 
             
         }
     }
@@ -157,6 +159,13 @@ public class StationController {
     private void renderStop (final Station station){
     	final StopActor stopActor = new StopActor(station.getLocation());
     	context.getStage().addActor(stopActor);
+    	stopActor.setName(station.toString());
+    	brokenStations.add(stopActor);
+    }
+    
+    private void renderControlled (final Station station){
+    	final StopSignActor stopActor = new StopSignActor(station.getLocation());
+    	context.getStage().addActor(stopActor);
     }
 
     public void renderStations() {
@@ -179,10 +188,11 @@ public class StationController {
         		renderStop(station);
         	}
         	if(station.isControlled() == true){
-        		//render
+        		renderControlled(station);
         	}
         }
     }
+    
     
     /** 
      * renders the connections on the map to be displayed
