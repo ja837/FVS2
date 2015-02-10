@@ -93,7 +93,6 @@ public class GoalManager {
 		int limit = scoreLimit - total;
 		Goal g = generateRandom(player.getPlayerManager().getTurnNumber(), player, limit);
 		player.addGoal(g);
-		System.out.println("Goals size: " + player.getGoals().size());
 		if (player.getGoals().size() < 3){
 			soundManager.playAnimal(g.getCargo());
 		}
