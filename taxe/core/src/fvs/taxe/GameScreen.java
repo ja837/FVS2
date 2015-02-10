@@ -94,13 +94,13 @@ public class GameScreen extends ScreenAdapter {
 						 if(rand.nextInt(10)<3){
 							station.setPassable(true);							
 							// infoController.displayFlashMessage("The station at "+station.toString()+" was fixed!", Color.GREEN);
-							 Dialog dia = new Dialog("Junction Failure", context.getSkin());
+							 Dialog dia = new Dialog("Junction Fixed", context.getSkin());
 				            dia.show(context.getStage());
 				            TextButton button = new TextButton("Ok", context.getSkin());
 				            dia.text("The junction at "+station.toString()+"\nwas fixed!");
-				            dia.setHeight(125);
-				            dia.setWidth(250);
-				            dia.setPosition(400, 500);
+				            dia.setHeight(100);
+				            dia.setWidth(200);
+				            dia.setPosition(425, 500);
 				            dia.button(button);
 				            
 							 Array<Actor> stageActors = context.getStage().getActors();							 
@@ -187,7 +187,7 @@ public class GameScreen extends ScreenAdapter {
 		 resourceController.drawHeaderText();
 		 resourceController.drawInfoText();
 		 goalController.showCurrentPlayerGoals();
-		 //stationWorksController.showSpeedBoostStations();
+		 stationWorksController.showSpeedBoostStations();
 		 infoController.updateScores(gameLogic.getPlayerManager().getAllPlayers());
 	 }
 
@@ -221,7 +221,7 @@ public class GameScreen extends ScreenAdapter {
 	  * Changes which stations have the speed alterations. Called every 5 turns and changes 3 stations.
 	  */
 	 private void ChangeSpecialStations() {
-			// TODO Auto-generated method stub
+			// TODO Auto-generated m-  ethod stub
 		 List<Station> stations = gameLogic.getMap().getStations();
 		 Random r = new Random();
 		 int station1 = r.nextInt(stations.size());
@@ -249,8 +249,8 @@ public class GameScreen extends ScreenAdapter {
 		 Dialog dia = new Dialog("New Special Stations!", getSkin());
          dia.show(getStage());
          TextButton button = new TextButton("Ok", getSkin());
-         dia.text("The new special stations are:\n" + stations.get(station1) + "\n" + stations.get(station2) + "\n" + stations.get(station3));
-         dia.setHeight(150);
+         dia.text("The new special stations are:\n\t" + stations.get(station1) + "\n\t" + stations.get(station2) + "\n\t" + stations.get(station3));
+         dia.setHeight(140);
          dia.setWidth(250);
          dia.setPosition(400, 500);
          dia.button(button);

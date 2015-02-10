@@ -6,13 +6,13 @@ import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import gameLogic.map.IPositionable;
 
 public class GasPumpActor extends Image {
-    private static int width = 30;
-    private static int height = 30;
+    private static int width = 20;
+    private static int height = 20;
 
     public GasPumpActor(IPositionable location) {
         super(new Texture(Gdx.files.internal("pump.png")));
 
         setSize(width, height);
-        setPosition((location.getX() - width / 2) - 30, (location.getY() - height / 2) - 30);
+        setPosition((location.getX() - width / 2) - 10, (location.getY() - height / 2) - 10);
     }
 }

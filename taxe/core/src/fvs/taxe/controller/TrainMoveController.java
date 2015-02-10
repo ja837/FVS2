@@ -88,15 +88,17 @@ public class TrainMoveController {
             		System.out.println("Passing through a border control zone of " + station.getName());
             		Random rn = new Random();
             		if(rn.nextInt(100) < 20){
-            			System.out.println("Illegal animal found on train!");
-            			context.getInfoController().displayFlashMessage("A diseased animal was found \non your train. It had to \nbe destroyed.", Color.RED, 3);
+        			    Dialog dia = new Dialog("Border Control", context.getSkin());
+			            dia.show(context.getStage());
+			            TextButton button = new TextButton("Ok", context.getSkin());
+			            dia.text("A diseased animal was found \non your train.\nIt had to be destroyed.");
+			            dia.setHeight(125);
+			            dia.setWidth(250);
+			            dia.setPosition(400, 500);
+			            dia.button(button);
             			train.getActor().remove();
                         train.getPlayer().removeResource(train);
-            		}
-            		else{
-            			System.out.println("Got through safely");
-            			context.getInfoController().displayFlashMessage("Passed through \nborder control safely.", Color.GREEN, 3);
-            		}            		
+            		}         		
             	}  
                 
                 for (Goal g : train.getPlayer().getGoals()){

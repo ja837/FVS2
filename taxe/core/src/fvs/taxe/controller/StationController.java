@@ -46,6 +46,7 @@ public class StationController {
     private static List<StationClickListener> stationClickListeners = new CopyOnWriteArrayList<StationClickListener>();
     private List<Actor> brokenStationActors = new ArrayList<Actor>();		//We store broken station actors to remove them easily
     private List<Station> brokenStations = new ArrayList<Station>();
+    private List<Station> gasStations = new ArrayList<Station>();
 
     public StationController(Context context, Tooltip tooltip) {
         this.context = context;
@@ -96,10 +97,10 @@ public class StationController {
         	if (s.getSpeedModifier() != 0){
         		game.batch.begin();
         		if (s.getSpeedModifier() < 1){
-        			game.fontSmall.setColor(Color.RED);
+        			game.fontSmall.setColor(Color.MAGENTA);
         		}
         		else{
-        			game.fontSmall.setColor(Color.BLUE);
+        			game.fontSmall.setColor(Color.MAGENTA);
         		}          
                 game.fontSmall.draw(game.batch, s.getSpeedModifier() + "", s.getLocation().getX() - 30, s.getLocation().getY() + 30);
                 game.batch.end();
@@ -165,6 +166,19 @@ public class StationController {
     public void tryFixing(){
     	
     }
+    /*
+    public void renderGasPumps (){
+    	List<Station> stations = context.getGameLogic().getMap().getStations();    	
+    	for (Station station : stations) {
+    		if(gasStations.contains(station) == false){
+    			if(station.getSpeedModifier() != 0f){        		
+			    	final GasPumpActor stopActor = new GasPumpActor(station.getLocation());
+			    	context.getStage().addActor(stopActor);
+			    	gasStations.add(station);
+        		}
+        	}
+        }
+    }*/
     
     public void renderStop (){
     	List<Station> stations = context.getGameLogic().getMap().getStations();    	
