@@ -85,7 +85,7 @@ public class GameScreen extends ScreenAdapter {
 				 Random rand = new Random();
 				 for (Station station : context.getGameLogic().getMap().getStations()){
 					 if (station.isPassable() == false){
-						 if(rand.nextInt(10)<30){
+						 if(rand.nextInt(10)<3){
 							station.setPassable(true);							
 							// infoController.displayFlashMessage("The station at "+station.toString()+" was fixed!", Color.GREEN);
 							 Dialog dia = new Dialog("Junction Failure", context.getSkin());
