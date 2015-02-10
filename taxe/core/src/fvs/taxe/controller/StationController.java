@@ -4,7 +4,10 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
+import com.badlogic.gdx.scenes.scene2d.ui.Dialog;
+import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
+import com.badlogic.gdx.utils.Array;
 
 import fvs.taxe.StationClickListener;
 import fvs.taxe.TaxeGame;
@@ -26,6 +29,7 @@ import gameLogic.resource.Train;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 import java.util.concurrent.CopyOnWriteArrayList;
 
 public class StationController {
@@ -39,7 +43,8 @@ public class StationController {
     and this list implementation supports removing elements whilst iterating through it
     */
     private static List<StationClickListener> stationClickListeners = new CopyOnWriteArrayList<StationClickListener>();
-    private List<Actor> brokenStations = new ArrayList<Actor>();		//We store broken station actors to remove them easily
+    private List<Actor> brokenStationActors = new ArrayList<Actor>();		//We store broken station actors to remove them easily
+    private List<Station> brokenStations = new ArrayList<Station>();
 
     public StationController(Context context, Tooltip tooltip) {
         this.context = context;
@@ -156,16 +161,33 @@ public class StationController {
         context.getStage().addActor(collisionStationActor);
     }
     
-    private void renderStop (final Station station){
-    	final StopActor stopActor = new StopActor(station.getLocation());
-    	context.getStage().addActor(stopActor);
-    	stopActor.setName(station.toString());
-    	brokenStations.add(stopActor);
+    public void tryFixing(){
+    	
     }
     
-    private void renderControlled (final Station station){
-    	final StopSignActor stopActor = new StopSignActor(station.getLocation());
-    	context.getStage().addActor(stopActor);
+    public void renderStop (){
+    	List<Station> stations = context.getGameLogic().getMap().getStations();    	
+    	for (Station station : stations) {
+        	if(station.isPassable() == false){
+        		if (brokenStations.contains(station) == false){
+			    	final StopActor stopActor = new StopActor(station.getLocation());
+			    	context.getStage().addActor(stopActor);
+			    	stopActor.setName(station.toString());
+			    	brokenStationActors.add(stopActor);
+			    	brokenStations.add(station);
+        		}
+        	}
+        }
+    }
+    
+    public void renderControlled (){    	
+    	List<Station> stations = context.getGameLogic().getMap().getStations();    	
+        for (Station station : stations) {
+        	if(station.isControlled() == true){
+	        	final StopSignActor stopActor = new StopSignActor(station.getLocation());
+	        	context.getStage().addActor(stopActor);
+        	}
+        }
     }
 
     public void renderStations() {
@@ -176,19 +198,6 @@ public class StationController {
         		renderCollisionStation(station);
         	} else {
         		renderStation(station);
-        	}
-        }
-    }
-    
-    public void renderSigns(){
-    	
-    	List<Station> stations = context.getGameLogic().getMap().getStations();    	
-        for (Station station : stations) {
-        	if(station.isPassable() == false) {
-        		renderStop(station);
-        	}
-        	if(station.isControlled() == true){
-        		renderControlled(station);
         	}
         }
     }

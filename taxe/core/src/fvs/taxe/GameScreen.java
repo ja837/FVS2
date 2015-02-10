@@ -83,10 +83,10 @@ public class GameScreen extends ScreenAdapter {
 				 
 				 //Have a chance to fix broken stations
 				 Random rand = new Random();
-				 for (Station station : map.getStations()){
+				 for (Station station : context.getGameLogic().getMap().getStations()){
 					 if (station.isPassable() == false){
-						 if(rand.nextInt(10)<3){
-							 station.setPassable(true);
+						 if(rand.nextInt(10)<30){
+							station.setPassable(true);							
 							// infoController.displayFlashMessage("The station at "+station.toString()+" was fixed!", Color.GREEN);
 							 Dialog dia = new Dialog("Junction Failure", context.getSkin());
 				            dia.show(context.getStage());
@@ -96,8 +96,8 @@ public class GameScreen extends ScreenAdapter {
 				            dia.setWidth(250);
 				            dia.setPosition(400, 500);
 				            dia.button(button);
-				            station.setPassable(false);
-							 Array<Actor> stageActors = stage.getActors();
+				            
+							 Array<Actor> stageActors = context.getStage().getActors();							 
 							 for (Actor a: stageActors){
 								 if (a.getName() != null){									 
 									 a.remove();									 
@@ -106,7 +106,6 @@ public class GameScreen extends ScreenAdapter {
 						 }
 					 }
 				 }
-				 
 			 }
 
 			
@@ -139,7 +138,7 @@ public class GameScreen extends ScreenAdapter {
 		 stationController.renderConnections(map.getConnections(), Color.GRAY);
 		 stationController.renderStationLbls();
 		 stationController.renderStationSpeedModifierLbls();
-		 //stationController.renderSigns();
+		 stationController.renderStop();
 		 
 		 if(gameLogic.getState() == GameState.ROUTING) {
 			 routeController.drawRoute(Color.BLACK);
@@ -186,7 +185,8 @@ public class GameScreen extends ScreenAdapter {
 	 @Override
 	 // Called when GameScreen becomes current screen of the game
 	 public void show() {
-		 stationController.renderStations();
+		 stationController.renderControlled();
+		 stationController.renderStations();		 
 		 goalController.addEndTurnButton();
 		 resourceController.drawPlayerResources(gameLogic.getPlayerManager().getCurrentPlayer());
 		 gameLogic.getSoundManager().playBGMusic();
