@@ -31,6 +31,8 @@ public class SoundManager {
 
 	Music[] speedBoost = new Music[2];
 
+	Music[] junctionFailure = new Music[2];
+	
 	Music bGMusic;
 	Music highSpeed;
 
@@ -53,6 +55,9 @@ public class SoundManager {
 
 		this.speedBoost[0] = Gdx.audio.newMusic(Gdx.files.internal("sounds/transportAnimalsFaster.ogg"));
 		this.speedBoost[1] = Gdx.audio.newMusic(Gdx.files.internal("sounds/transportAnimalsFaster1.ogg"));
+		
+		this.junctionFailure[0] = Gdx.audio.newMusic((Gdx.files.internal("sounds/junctionFailure.ogg")));
+		this.junctionFailure[1] = Gdx.audio.newMusic((Gdx.files.internal("sounds/junctionFailure.ogg")));
 
 		this.bGMusic = Gdx.audio.newMusic(Gdx.files.internal("sounds/BGMusicLoop.ogg"));
 		
@@ -78,6 +83,10 @@ public class SoundManager {
 	} 
 	public Music getHighSpeed(){
 		return highSpeed;
+	}
+	
+	public void playRandomJunctionFailure(){
+			junctionFailure[random.nextInt(2)].play();
 	}
 	
 

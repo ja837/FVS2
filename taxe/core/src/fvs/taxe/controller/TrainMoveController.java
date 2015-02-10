@@ -79,8 +79,9 @@ public class TrainMoveController {
                     dia.setPosition(400, 500);
                     dia.button(button);
                     station.setPassable(false);
+                    
             		train.getActor().remove();
-                    train.getPlayer().removeResource(train);         
+                    train.getPlayer().removeResource(train); 
             	}
                 
                 if (station.isControlled() == true){
@@ -194,6 +195,7 @@ public class TrainMoveController {
             dia.setPosition(400, 500);
             dia.button(button);
             station.setPassable(false);
+            Game.getInstance().getSoundManager().playRandomJunctionFailure();
         }
     }
 
