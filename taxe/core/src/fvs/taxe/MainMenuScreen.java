@@ -30,11 +30,11 @@ public class MainMenuScreen extends ScreenAdapter {
         this.game = game;
         camera = new OrthographicCamera(TaxeGame.WIDTH, TaxeGame.HEIGHT);
         camera.setToOrtho(false);
-        playBounds = new Rectangle(TaxeGame.WIDTH/2 - -20, 200, 150, 50);
-        instructionsBounds = new Rectangle(TaxeGame.WIDTH/2 - 180, 200, 150, 50);
-        turnBounds30 = new Rectangle(TaxeGame.WIDTH/2 - 60, 310, 26, 25);
-        turnBounds40 = new Rectangle(TaxeGame.WIDTH/2 - 20, 310, 26, 25);
-        turnBounds50 = new Rectangle(TaxeGame.WIDTH/2 - -20, 310, 26, 25);
+        playBounds = new Rectangle(TaxeGame.WIDTH/2 - -40, 220, 150, 50);
+        instructionsBounds = new Rectangle(TaxeGame.WIDTH/2 - 160, 220, 150, 50);
+        turnBounds30 = new Rectangle(TaxeGame.WIDTH/2 - 40, 320, 26, 25);
+        turnBounds40 = new Rectangle(TaxeGame.WIDTH/2 - 0, 320, 26, 25);
+        turnBounds50 = new Rectangle(TaxeGame.WIDTH/2 - -40, 320, 26, 25);
         touchPoint = new Vector3();
         mapTexture = new Texture(Gdx.files.internal("splash_screen.png"));
         mapImage = new Image(mapTexture);
@@ -102,7 +102,7 @@ public class MainMenuScreen extends ScreenAdapter {
         //draw "choose number of turns:" text
         game.batch.begin();
         game.fontSmall.setColor(Color.BLACK);
-        game.fontSmall.draw(game.batch, "choose number of turns:", 496, 370);
+        game.fontSmall.draw(game.batch, "choose number of turns:", 516, 380);
         
       //Draw text into rectangles
         game.fontSmall.setColor(Color.WHITE);
@@ -127,7 +127,7 @@ public class MainMenuScreen extends ScreenAdapter {
         game.batch.begin();
     	game.fontSmall.setColor(Color.BLACK);
     	String turnsString = gameLogic.Game.TOTAL_TURNS + " turns selected";
-    	game.fontSmall.draw(game.batch, turnsString, 520, 300);
+    	game.fontSmall.draw(game.batch, turnsString, 540, 310);
     	game.batch.end();
         
     }

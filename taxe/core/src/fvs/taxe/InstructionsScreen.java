@@ -28,7 +28,7 @@ public class InstructionsScreen extends ScreenAdapter {
         camera.setToOrtho(false);
         backBounds = new Rectangle(TaxeGame.WIDTH/2 - 570, 550, 150, 50);
         touchPoint = new Vector3();
-        mapTexture = new Texture(Gdx.files.internal("splash_screen.png"));
+        mapTexture = new Texture(Gdx.files.internal("instructions_screen.png"));
         mapImage = new Image(mapTexture);
         
     }
