@@ -12,7 +12,7 @@ import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 public class TaxeGame extends Game {
 	
 	public static final int WIDTH=1216,HEIGHT=628;
-	// Using native res of the map image we are using at the moment
+	//Using native res of the map image we are using at the moment
 	//public static final int WIDTH=1022,HEIGHT=678;
 
 	public SpriteBatch batch;
@@ -52,6 +52,7 @@ public class TaxeGame extends Game {
 		batch.dispose();
 		font.dispose();
 		shapeRenderer.dispose();
+		
 	}
 
 	

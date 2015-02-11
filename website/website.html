@@ -1,0 +1,671 @@
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>TaxE - Team FVS</title>
+        <link href='http://fonts.googleapis.com/css?family=Play:400,700' rel='stylesheet' type='text/css'>
+        <style type="text/css">
+            html, body{
+                margin:0;padding:0
+            }
+            
+            body{
+                font-family: Play, Arial, Helvetica, sans-serif
+            }
+            
+            nav#topnav{
+                background-color: hotpink;
+                color: white; width:100%;
+                position: fixed;
+                top:0;left:0;
+                z-index:500
+            }
+            #topnav ul{
+                padding:0;margin-top: 0;margin-bottom: 0
+            }
+            #topnav ul li{
+                list-style-type: none;
+                padding: 6px 6px 6px 6px;
+                border-right: 1px solid white;
+                font-weight: bold;
+                display: inline-block;
+                height: 32px;
+            }
+            #topnav ul li:hover{
+                background-color: white;
+                color: hotpink
+            }
+            #topnav ul li a{
+                color:inherit;text-decoration: none;display: block;height: 100%
+            }
+            #topnav ul li#fvslogo{
+                background-color: white;
+                background-image: url(res/fvs64.png);
+                background-repeat: no-repeat no-repeat;
+                background-position: center center;
+                background-size: auto 32px;
+                width:78px;
+            }
+            #fvslogo a{
+                width:100%
+            }
+            #fvslogo a span{
+                display: none
+            }
+            
+            .contain{
+                margin-left:auto;margin-right:auto;max-width:1008px;
+            }
+            
+            #bigpromo{
+                width:100%;height:450px;
+                position: relative;
+                overflow-y: hidden;
+                margin-top: 32px
+            }
+            #bigpromo video{
+                width:100%;
+                height:auto;
+                opacity: 0.3
+            }
+            #bigpromo h1{
+                font-size: 60px;
+                color: white;
+                position:absolute;
+                z-index: 10;
+                margin: auto 0px auto 0px;
+                width: 100%;
+                top: 200px;
+                text-align: center;
+                display: block
+            }
+            
+            blockquote{
+                font-size: 1.4em
+            }
+            
+            #get{
+                background-color: skyblue;color:white
+            }
+            #code{
+                background-color: maroon; color:white
+            }
+            #faq{
+                background-color: yellow; color: black;
+            }
+			#pik{
+				background-color: green; color: black;
+			}
+
+            h2{
+                margin-top:0px;padding-top:16px;
+            }
+            
+            a{
+                color: inherit
+            }
+			figure
+			{
+				width:25%;
+				float:left;
+				margin:0px;
+				text-align:center;
+				padding:0px;
+			}
+			figure1 { 
+				display: block;
+				margin-top: 1em;
+				margin-bottom: 1em;
+				margin-left: 300px;
+				margin-right: 40px;
+			}
+
+			
+			.indent {
+				text-indent:200px
+			}
+            
+            section p:last-of-type{
+                margin-bottom: 0px;padding-bottom: 16px
+            }
+            
+            footer{
+                background-color:#323232;color:white;font-size: 0.6em;padding:4px 4px 4px 4px
+            }
+            
+            footer p{
+                margin-top:0px;margin-bottom: 0px;
+            }
+            
+            #trainmenu{
+                background-image: url(res/screenshot1.png);
+                background-position: center center;
+                background-repeat: no-repeat no-repeat;
+                position: relative
+            }
+            #trainmenu ul{
+                display: inline-block;
+                margin: 0px 0px 0px 0px;
+                padding: 0px 0px 0px 0px;
+                border-right: 1px solid white;
+                width: 25%;
+                color:black;
+            }
+            #trainmenu ul li{
+                display: block;
+                border-bottom: 1px solid white;
+                text-align: center;
+                background-color: rgba(255,255,255,0.7)
+            }
+            #trainmenu ul li:last-of-type{
+                border-bottom: none;
+            }
+            #trainmenu ul li:hover{
+                cursor:pointer;
+                background-color: white;
+            }
+            #trainmenu ul li a{
+                color:inherit;
+                display: block;
+                width: 100%;
+                padding:8px 8px 8px 8px;
+            }
+            #trainmenu div{
+                display: inline-block;
+                position: absolute;
+                max-width: 74%;
+                font-size:1.2em;
+                background-color:rgba(255,255,255,0.5);
+                height: 100%;width:100%;
+                padding:0px 8px 0px 8px
+            }
+            #trainmenu div p{
+                background-size: 64px 64px;
+                background-position:right center;
+                background-repeat: no-repeat no-repeat;
+                margin: 0px 0px 0px 0px;
+                padding: 8px 64px 8px 0px
+            }
+            #trainmenu-steam{
+                background-image: url(res/SteamTrain.png)
+            }
+            #trainmenu-diesel{
+                background-image: url(res/DieselTrain.png)
+            }
+            #trainmenu-electric{
+                background-image: url(res/ElectricTrain.png)
+            }
+            #trainmenu-bullet{
+                background-image: url(res/BulletTrain.png)
+            }
+            #trainmenu-nuclear{
+                background-image: url(res/NuclearTrain.png)
+            }
+            
+            .smlshot, .midshot, .bigshot{
+                padding: 8px 8px 8px 8px
+            }
+            .midshot{
+                width: 350px;
+                height: auto
+            }
+            .left{
+                float: left
+            }
+            .right{
+                float: right
+            }
+			p1 {
+				display: block;
+				margin-top: 1em;
+				margin-bottom: 1em;
+				margin-right: 0;
+				margin-left: 40px;
+			}
+            
+            #download{
+                width:49%;
+                padding: 4px 4px 4px 4px;
+                display: inline-block;
+                text-align: center;
+                position: relative;
+                top: 0px
+            }
+            #download button, #github{
+                cursor:pointer;
+                background-color: green;
+                color:white;
+                font-size: 2em;
+                font-weight: bold;
+                border: none;
+                border-radius: 8px 8px 8px 8px;
+                display: block;
+                margin: 0px auto 0px auto;
+                outline: none;
+                padding:8px 8px 8px 8px;
+            }
+            #download button:active, #github:active{
+                outline: none;
+            }
+            #licence{
+                width:50%
+            }
+            #install{
+                border: 1px solid white;
+                display: inline-block;
+                width:49%;
+            }
+            #install div{
+                padding:4px 4px 4px 4px
+            }
+            #install ul{
+                padding:0px 0px 0px 0px;
+                margin:0px 0px 0px 0px;
+                border-bottom:1px solid white
+            }
+            #install ul li{
+                border-right:1px solid white;
+                display: inline-block;
+                width: 33%;
+                font-weight: bold;
+                text-align: center;
+                list-style-type: none;
+            }
+            #install ul li:last-of-type{
+                border-right: none
+            }
+            #install ul li:hover{
+                background-color: white;
+                color:black
+            }
+            #install ul li a{
+                display: block;
+                width: 100%;
+                height: 100%;
+                padding: 4px;
+                cursor: pointer;
+            }
+        </style>
+        <script type="application/javascript">
+            var saveTimeout = null;
+            
+            function fileDownload(url, dlname){
+                if(dlname == null){dlname = "";}
+                var downloader = window.document.createElement("a");
+                downloader.href = url;
+                downloader.title = "Download " + dlname;
+                downloader.download = dlname;
+                downloader.onclick = function(){
+                    window.clearTimeout(saveTimeout);
+                }
+                saveTimeout = window.setTimeout(function(){
+                    window.open(url, "downloader");
+                    window.focus();
+                },1000);
+                downloader.click();
+            }
+        </script>
+    </head>
+    <body>
+        <nav id="topnav"><ul class="contain">
+            <li id="fvslogo"><a href="#top" title="FVS"><span>FVS</span>&nbsp;</a></li><li>
+            <a href="#about" title="About TaxE">About</a></li><li>
+            <a href="#get" title="Get TaxE">Get TaxE</a></li><li>
+            <a href="#code" title="TaxE Code">Code</a></li><li>
+            <a href="#faq" title="FAQs">FAQs</a></li>
+			<a href="#pik" title="Team PIK">PIK</a></li>
+        </ul></nav>
+        <div id="bigpromo" style="background-color:black">
+            <video autoplay="autoplay" loop="loop" muted="muted" src="res/taxecomp.mp4"></video>
+            <h1>TaxE - A Game about Trains</h1>
+        </div>
+        <section id="about"><div class="contain">
+            <blockquote>"TaxE is the best game I've played in the past 20 minutes"<br/><cite>Developer</cite></blockquote>
+            <p>TaxE is the latest, and first, game from Team FVS.  A story of great suspense, tragedy and jubilance as you must step up and become a train company.  Your rivals will try to beat you and leave you with nowhere left to run but you must ensure your transportation empire prevails.  Using all the trains at your disposal you need to travel across Europe to get your train to the most destinations in the time you have.  Your main competitor won't stand still, so play now to make sure you're on top.</p>
+            <div id="trainmenu">
+                <ul>
+                    <li><a title="Steam" onclick="trainmenuChange('steam');">Steam</a></li>
+                    <li><a title="Diesel" onclick="trainmenuChange('diesel');">Diesel</a></li>
+                    <li><a title="Electric" onclick="trainmenuChange('electric');">Electric</a></li>
+                    <li><a title="Bullet" onclick="trainmenuChange('bullet');">Bullet</a></li>
+                    <li><a title="Nuclear" onclick="trainmenuChange('nuclear');">Nuclear</a></li>
+                </ul>
+                <div>
+                    <p id="trainmenu-steam">Go back to the roots of the rail indistry as you move steam trains around the game world in a bid to reach your destinations ahead of the competition.<br/><br/>They may be slow but the humble steam train will reliably get you there on time.</p>
+                    <p id="trainmenu-diesel">Diesel is Petrols more environmentally friendly brother and currently powers a large part of the trains in use across the world today.  Take to the rails and race to your destination.<br/><br/>Diesel keeps the world moving, so make the journey to the other side of the continent in a Diesel.</p>
+                    <p id="trainmenu-electric">If you've ever travelled across the country before, it was an electric train that got you there on time.  Powered by wires above the rails, electricity always keeps running.<br/><br/>Take your journey now, and take it in style with an electric train.</p>
+                    <p id="trainmenu-bullet">Famous for powering the railways of Japan, the Bullet train was once the fastest there was so you know you're not going to be late today.<br/><br/>The more of these you have, the greater your chances are of beating the competition and winning the race to be the best.</p>
+                    <p id="trainmenu-nuclear">Nuclear energy provides clean and efficient energy to millions everyday and is deployed on different modes of transport already.  We add trains to the atomic arsenal.<br/><br/>Nothing can stand in your way with radioactive power behind your attempts to beat the competition and win.</p>
+                </div>
+                <script type="text/javascript">
+                    function trainmenuSetup(){
+                        window.document.getElementById("trainmenu-steam").style.display = "block";
+                        window.document.getElementById("trainmenu-diesel").style.display = "none";
+                        window.document.getElementById("trainmenu-electric").style.display = "none";
+                        window.document.getElementById("trainmenu-bullet").style.display = "none";
+                        window.document.getElementById("trainmenu-nuclear").style.display = "none";
+                    }
+                    
+                    function trainmenuChange(train){
+                        window.document.getElementById("trainmenu-steam").style.display = "none";
+                        window.document.getElementById("trainmenu-diesel").style.display = "none";
+                        window.document.getElementById("trainmenu-electric").style.display = "none";
+                        window.document.getElementById("trainmenu-bullet").style.display = "none";
+                        window.document.getElementById("trainmenu-nuclear").style.display = "none";
+                        window.document.getElementById("trainmenu-" + train).style.display = "block";
+                    }
+                    
+                    trainmenuSetup();
+                </script>
+            </div>
+            <p>You can travel across Europe to get your trains to their destination as quickly as possible.  With stations in over 25 countries there are hundreds of possibilities as to what you can do.  Your main competitor operates across the same network so you'll need to make sure your trains are the fastest and taking the best route possible to ensure that they reach the destination first.  The player who completes the most goals wins, so you need to make sure that you're keeping on top.</p>
+            <img src="res/screenshot1.png" class="midshot left" alt="Train Map from TaxE" />
+            <h3>Game Map</h3>
+            <p>There are stations and junctions across over 25 european countries, giving you hundreds of possible routes you can take.  The realistic map of the continent makes it easy to find the station you need, whilst the abstraction of the train lines makes it easy to understand just how long each journey will take when paired with the abilities of each train you use.</p>
+            <p>Stations have infinite capacity so you don't need to worry about where the other player has as their final destination, unless you're on a collision course.  All trains sit at a platform so it's easy to pick your train out from the station and give the driver instructions of where his next adventure will be to.</p>
+            <p>Play the game to explore all the destinations!</p>
+            <img src="res/screenshot2.png" class="midshot right" alt="Station Options from TaxE" />
+            <h3>Trains</h3>
+            <p>There are 10 different train types in game and upto 14 trains traveling around at any one time, so strategy with your trains is key to your success.  Different trains travel at different speeds so some will reach destinations faster than others, so if it doesn't matter what train you send then choosing the right train to make it fastest is key.</p>
+            <p>Trains don't last forever though.  Once your train has made it to it's final destination it leaves you to go off on a new and exciting adventure.  You can also choose to let the trains you have go that you no longer need, so strategy is key to maintaing not only the fastest fleet around, but the fleet you need to meet the demands set by your client.</p>
+            <p>Meet all the trains in game now!</p>
+            <h3>Goals</h3>
+            <p>There are many different types of goals, and just like in the real world transprtation game, you rarely get the same task twice.  Sometimes you just need to get from one station to another, but at others you need to make sure the right type of train arrives, otherwise you'll have to do it all over again.</p>
+            <p>Your strategy is key to being prepared for these goals.  Will you keep the fastest trains ready to respond to the majority of goals, or will you keep some less good trains in reserve so you can beat your competitor when the harder goals arrive?  The choice is up to you, but you need to be ready for anything in TaxE.</p>
+            <img src="res/screenshot3.png" class="midshot left" alt="Train Map from TaxE" />
+            <h3>Routing</h3>
+            <p>Not every station is connected to every other station, there is a complex network of twists, turns, stations and junctions to negotiate.  You need to get your train there the fastest way, but which is it?  It's easy to build up a route and make it to your target destination so long as you have the right train to hand.</p>
+            <p>Be careful though!  You can never have 2 trains at a junction.  You don't want to run the risk of coming a cropper and seeing your and your competitors trains destroyed in a horrific crash, or do you?  Strategy is key to predicting your opponents moves and remembering what they're already doing.  It's down to you, though, if you use this power for good or evil.</p>
+            <p>Get TaxE now to see how your game will play out!</p>
+        </div></section>
+        <section id="get"><div class="contain">
+            <h2>Download TaxE</h2>
+            <p>TaxE runs on Windows, Mac and Linux with Java installed.  It is not currently compatible with Android or iOS (and most probably never will be).  Download below and Play Now.</p>
+            <div id="download">
+                <button type="button" id="jardownload" title="Download Now" onclick="fileDownload('https://github.com/SEPRFVS/FVS2/blob/master/taxe.jar?raw=true','taxe.jar');">Download TaxE</button>
+                <p><a href="https://github.com/SEPRFVS/FVS2/blob/master/taxe.jar?raw=true" title="Mirror">Mirror</a></p>
+                <p>TaxE needs Java to run</p>
+                <button type="button" id="javadownload" title="Get Java" onclick="window.open('http://www.java.com/');";>Get Java</button>
+                <p>TaxE is licenced under Creative Commons BY-NC-SA 4.0 International, except where otherwise required (such as for SEPR teams who may use the game in accordance with the rules of the Assessments).</p>
+                <p><a href="http://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" title="Licence"><img src="res/by-nc-sa.eu.png" alt="CC BY-NC-SA" id="licence"/></a></p>
+                <p><a href="res/Manual2.pdf" title="TaxE Manual" target="_blank"><strong>User Manual</strong></a></p>
+            </div>
+            <div id="install">
+                <ul>
+                    <li><a title="Windows" onclick="installChange('windows');">Windows</a></li><li>
+                    <a title="Mac" onclick="installChange('mac');">Mac OSX</a></li><li>
+                    <a title="Linux" onclick="installChange('linux');">Linux</a></li>
+                </ul>
+                <div id="install-windows">
+                    <h3>Microsoft Windows</h3>
+                    <h4>System Requirements</h4>
+                    <p>TaxE will run on Microsft Windows Vista/7/8/8.1, with at least 1GB of RAM and a recent Intel or AMD processor.</p>
+                    <p>Java must be installed and up-to-date.  TaxE may not run with a version of Oracle Java less than 8u25.</p>
+                    <h4>Installation Instructions</h4>
+                    <ol>
+                        <li>Install Java</li>
+                        <li>Download TaxE using the button to the left</li>
+                        <li>Run the "taxe.jar" file that downloads</li>
+                    </ol>
+                    <p>If TaxE will not run then please ensure Java has been installed correctly.  Java sometimes requires permission to run, so disabling UAC may resolve issues.</p>
+                </div>
+                <div id="install-mac">
+                    <h3>Apple Mac OSX</h3>
+                    <h4>System Requirements</h4>
+                    <p>TaxE will run on Apple Mac OSX Lion/Mountain Lion/Mavericks/Yosemite, on any Apple manufactured device with an Intel processor.  TaxE does not support PowerPC.</p>
+                    <p>Java must be installed and up-to-date.  TaxE may not run with a version of Oracle Java less than 8u25.</p>
+                    <h4>Installation Instructions</h4>
+                    <ol>
+                        <li>Install Java</li>
+                        <li>Download TaxE using the button to the left</li>
+                        <li>Run the "taxe.jaar" file that downloads</li>
+                    </ol>
+                    <p>If TaxE will not run please ensure Java has been installed correctly.  Java may need to be run as an Administrator, depending on your security settings.  TaxE will not run on PowerPC based Macs.</p>
+                </div>
+                <div id="install-linux">
+                    <h3>Linux (All Distributions)</h3>
+                    <h4>System Requirements</h4>
+                    <p>TaxE will run on all versions of Linux with at least 1GB of RAM and an Intel or AMD processor.  A GUI environment (Gnome/XWindows/etc.) must be installed and running.</p>
+                    <p>Java must be installed and up-to-date.  TaxE may not run with a version of Oracle Java less than 8u25.</p>
+                    <h4>Installation Instructions</h4>
+                    <ol>
+                        <li>Install Java</li>
+                        <li>Download TaxE</li>
+                        <li>Open a GUI environment</li>
+                        <li>Run the "taxe.jar" file that downloads</li>
+                    </ol>
+                    <p>If TaxE will not run please ensure Java has been installed correctly.  You may need to run TaxE as a SuperUser, depending on your security settings.  TaxE does not support terminal interaction.</p>
+                </div>
+                <script type="text/javascript">
+                    function installSetup(){
+                        window.document.getElementById("install-windows").style.display = "block";
+                        window.document.getElementById("install-mac").style.display = "none";
+                        window.document.getElementById("install-linux").style.display = "none";
+                        
+                        window.document.getElementById("download").style.height = window.document.getElementById("install").style.height;
+                    }
+                    
+                    function installChange(platform){
+                        window.document.getElementById("install-windows").style.display = "none";
+                        window.document.getElementById("install-mac").style.display = "none";
+                        window.document.getElementById("install-linux").style.display = "none";
+                        window.document.getElementById("install-" + platform).style.display = "block";
+                    }
+                    
+                    installSetup();
+                </script>
+            </div>
+            <p>TaxE was designed as part of the Computer Science SEPR module at the University of York.  University of York assumes no responsibility for this program, and any loss or damage that occur, directly or indirectly, through using this program.</p>
+        </div></section>
+        <section id="code"><div class="contain">
+            <h2>Explore the Code</h2>
+            <p>TaxE is open source, which means you're free to take the game resources and code and make your own version.  All of our code is available to download on GitHub so take a look.</p>
+            <button type="button" id="github" onclick="window.open('http://www.github.com/SEPRFVS/FVS2');" title="FVS on GitHub">View on GitHub</button>
+            <p>Full information for developers is available via the GitHub Wiki for the repository.  The key features for developers are:</p>
+            <ul>
+                <li>Package and Class Hierarchy make it easy to find the code you need</li>
+                <li>Game data is stored in JSON format, so you can easily modify all data using a variety of tools (Map Editor included)</li>
+                <li>Compliant with all LibGDX standards so code follows through to on-screen</li>
+                <li>Gradle configures all dependencies automatically</li>
+                <li>JUnit Tests included to allow you to test out any modifications you make</li>
+            </ul>
+            <p>TaxE was designed using both Eclipse and IntelliJ, and necesarry configuration is included for both.</p>
+            <h3>Presentation</h3>
+            <p>If you missed the developer presentation, or would like to see it again because it was just that amazing and awesome, then you can <a href="presentation/" title="View the Developer Presentation">view it online</a>.</p>
+            <h3>Developer Resources</h3>
+            <p>We have made our developer documentation available to help people extend and develop TaxE to make it even better than it already is.</p>
+            <ul>
+                <li><a href="res/DesRep.pdf" title="Architecture Report" target="_blank">Architecture Report</a></li>
+                <li><a href="res/GUIRep.pdf" title="GUI Report" target="_blank">GUI Report</a></li>
+                <li><a href="res/Test2.pdf" title="Testing Report" target="_blank">Testing Report</a></li>
+                <li><a href="http://www.github.com/SEPRFVS/FVS2/wiki" title="FVS Wiki" target="_blank">GitHub Wiki</a></li>
+            </ul>
+            <h3>Developer Offer</h3>
+            <p>We're offering all developers taking this project on for Assessment 3 of SEPR the chance to get the edge with TaxE.  If you have any questions then please get in touch with us at <a href="mailto:contact-sepr-fvs-group@york.ac.uk" title="Contact FVS">contact-sepr-fvs-group [at] york.ac.uk</a> (University of York E-mail addresses only).  If you select the group project you can also receive an introductory session to TaxE and we'll guide you through the codebase.  Just <a href="mailto:contact-sepr-fvs-group@york.ac.uk" title="Contact FVS">get in touch</a>.</p>
+        </div></section>
+        <section id="faq"><div class="contain">
+            <h2>FAQs</h2>
+            <p>Both users and developers have been asking about FVS.  We want to make it easy to get some of the most common answers.</p>
+            <ul>
+                <li>
+                    <h3>What is this?  Who are you?  What are you subjecting my eyes to?</h3>
+                    <p>FVS are a team of 6 students from the University of York in their 2nd year of studying Computer Science.  TaxE is a game set as part of the SEPR module, in which we form a software development team and show off our skills by building a game.  This website advertises that game, which we think it pretty good.  Give it a go, you might like it?</p>
+                </li>
+                <li>
+                    <h3>I tried it an feature X isn't there.</h3>
+                    <p>This game fufills the requirements for Assessment 2, which requires about half a game be implemented.  We'll probably put it in one day, and by that we mean March 2015</p>
+                </li>
+                <li>
+                    <h3>I don't mind feature X isn't there.  Your game is the best thing I've played in the past 20 minutes!!!</h3>
+                    <p>Awww, thanks.  If you're a SEPR team then why not select it?  If you're not a SEPR team then select it anyway.  We're not sure what you could select it for, though.</p>
+                </li>
+                <li>
+                    <h3>Before I select it though I'd like to read some actual instructions with words in it.</h3>
+                    <p>Check below the game download link there are some lovely instructions that you can read/save/print/eat.  These instructions will instruct you on how to play the game.  It may be worth adding that these instructions are not suitable for human consumption.</p>
+                </li>
+                <li>
+                    <h3>I still remain to be convinced.  What else have you got for me?</h3>
+                    <p>We've got lot's of information in our Code section, including the developers presentation, GUI report and Architecture report.  We also have some testing evidence so you can confirm that we have confirmed that the game works (has been confirmed).</p>
+                </li>
+            </ul>
+            <p>For our full developer offering, please see the code section above.  All consumer questions are answered in the Get TaxE section.</p>
+            <ul>
+                <li>
+                    <h3>I have one more question.  Do you wish to thank anyone?</h3>
+                    <p>Yes we do wish thank some people.  The developers at <a href="http://libgdx.badlogicgames.com/" title="BadLogic Games" target="_blank">BadLogic Games and LibGDX</a> provided the library which runs the game, and the people at the <a href="http://www.eclipse.org/" title="Eclipse" target="_blank">Eclipse Foundation</a> and <a href="https://www.jetbrains.com/" title="JetBrains" target="_blank">JetBrains</a> made the tools we developed with.  Also a guy called <a href="http://commons.wikimedia.org/wiki/File:BLANK_in_Europe_%28relief%29_%28-mini_map%29.svg" title="Map of Europe on Wikimedia Commons" target="_blank">TUBS on Wikimedia Commons</a> who made the map in the background.  Oh, and <a href="https://education.github.com/pack" title="GitHub Student Pack" target="_blank">GitHub</a> for their free repositories they give to students, as well as discounts with their partners.</p>
+                </li>
+            </ul>
+            <p>If you have any other questions, and have a University of York email address, then please email us at <a href="mailto:contact-sepr-fvs-group@york.ac.uk" title="Contact FVS">contact-sepr-fvs-group [at] york.ac.uk</a>, and we'll get back to you.</p>
+        </div></section>
+		<section id="pik"><div class="contain">
+			<h2>Team PIK Modifications</h2>
+			<p>'TaxE' is a pretty dull name for a game, and in its previous state the game had no theme. We took it upon ourselves to reinvent the game with a brand new name and theme<br>
+					Introducing,<br>
+					<blockquote style="text-align:center">Snakes, on a TaxE!</blockquote>
+			A game about competing with a friend to transport animals to cities across Europe, in order to achieve the best score!</p>
+			<p>Most of the modifications are outlined in this trailer:</p>
+			<video width="1280" height="720" controls>
+			<source src="./vid/FVSTrailer.mp4" type="video/mp4">
+			Your browser does not support the video tag
+			</video>
+			<br>
+			
+			
+			<p>But here is a list of some of the main features</p>
+			<ul>
+				<li>
+					<h3>GUI Overhaul</h3>
+					
+					<p  style="text-align:left">We completely remade the User Interface to better display goals, resources and notifications during the game<br>
+					This includes lots of colours for buttons, a colour scale for the speeds of different train types, routes and notifications, images for each of a player's current goals and each players current score
+					<center><img src="./imgs/GUI.png" alt="New GUI" style="width:972.8px; height:500.8px"></center><br>
+					</p>
+				</li>
+				<li>
+					<h3>Via Stations</h3>
+					<p>We wanted to add a further degree of difficulty and variation to the goals that were already being generated<br>
+					<center>
+					<center><img src="./imgs/goalExample.png" alt="Goal Example" ></center>
+					<figcaption>A goal showing cargo, three stations to pass and the goals score</figcaption>
+					</center>				
+					</p>
+					
+				</li>
+				<li>
+					<h3>Hazards</h3>
+					<p>The game currently has two distinct hazards: Border Control and Junction Failure<br>
+						<p>
+						<h4>Border Control<br></h4>
+						A random number of stations are chosen to have border control in place at the start of every game 
+						<img src="./imgs/borderControlStationIcon.png" class="midshot right" alt="The border control icon" style="align:right;width:53px;height:57px">
+						If a train passes through one of these stations on its route it has a chance to not pass through, and therefore be destroyed
+						<br>
+						<h4>Junction Failure<br></h4>
+						If two trains arrive at a junction at the same time the trains will collide and be destroyed, and cause the junction to break. The junction is then unable to be used by players until it gets fixed<br>
+						<br>
+						<figure>
+						<img src="./imgs/junctionFailure.png" alt="A junction failing notification" style="align:left">
+						<figcaption>A Junction Failing</figcaption>
+						</figure>
+						<figure>
+						<img src="./imgs/junctionFailure1.png" alt="A failed junction icon" align="middle" style="right">
+						<figcaption>A Failed Junction on the map</figcaption>
+						</figure>
+						<figure>
+						<img src="./imgs/junctionFixed.png" alt="A fixed junction notification" align="middle" style="right">
+						<figcaption>A Fixed Junction</figcaption>
+						</figure>
+						
+						<br>
+						<br>
+						<br>
+						<br>
+						<br>
+						<br>
+						<br>
+						<br>
+						</p>
+					
+					</p>
+				</li>
+				<li>
+					<h3>Goals</h3>
+					<p>To fit in with the theme of the game, the goals now require the user to transport an animal on their train, indicated in the goal title and by a small clip-art next to the goal<br>
+					The animals are purely cosmetic at this point and do not affect game play</p>
+				</li>
+				<li>
+					<h3> Scoring</h3>
+					<p>A goal's score is based off how far a train has to travel from its origin station to its destination station, and whether it has to make a stop at a middle station on the way. The score is generated by Dijkstra's shortest path algorithm
+					<center>
+					<img src="./imgs/score.png" alt="Players' score" align="middle right"> 
+					<figcaption>
+					Two players competing<br>
+					</figcaption>
+					</center>			
+					</p>
+				</li>
+				<li>
+					<h3>Speed Boosts</h3>
+					<p>It is possible to gain a speed boost for a train by visiting a certain station with a train. The boost lasts until the train completes a goal or is destroyed
+					
+					<figure role="group">
+					
+					<figure>
+					<img src="./imgs/specialStations.png" alt="Special Stations Notification" align="middle">
+					<figcaption  style="width:200px">New Special Stations</figcaption>
+					</figcaption>
+					</figure>
+					
+					<figure1>
+					<img src="./imgs/specialStationIcon.png" alt="A Special Station" align="middle">
+					<figcaption  style="width:150px">How special stations are identified</figcaption>
+					</figure1>
+					
+					</figure>
+					<br>
+					<br>
+					<br>
+					<br>
+					<br>
+					<br>
+					<br>
+					<br>
+					<br>
+					</p>
+				</li>
+				<li>
+					<h3>Sound</h3>
+					<p>A small loop plays in the background while in game, along with voice overs for events done by the one and only <i>Paul Cairns</i><br>
+					Here is a sample or two to get you excited: (won't work in ie/safari)<br>
+					<br>
+					<audio controls>
+						<source src="./sound/elephantBiggerTrain.ogg" type="audio/ogg">
+						Your browser does not support the audio element.
+					</audio>
+					<br>
+					<audio controls>
+						<source src="./sound/newTrain.ogg" type="audio/ogg">
+						Your browser does not support the audio element.
+					</audio>
+					
+					
+					</p>
+				</li>
+			</ul>
+			
+			<h3>Our Repository</h3>
+			<p>Our <a href="https://github.com/ja837/FVS2" title="Team PIK Repository" target="_blank">Github</a> Repository </p>
+			
+			<h3>Docs</h3>
+			<p>Here lies our documentation<br>
+			Changes.doc<br>
+			Javadoc<br></p>
+			
+		</div></section>
+		
+		
+        <footer>
+            <p class="contain">&copy; FVS 2015</p>
+        </footer>
+    </body>
+</html>

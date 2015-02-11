@@ -104,7 +104,7 @@ public class MainMenuScreen extends ScreenAdapter {
         game.fontSmall.setColor(Color.BLACK);
         game.fontSmall.draw(game.batch, "choose number of turns:", 516, 380);
         
-      //Draw text into rectangles
+        //Draw text into rectangles
         game.fontSmall.setColor(Color.WHITE);
         String startGameString = "Start Game";
         game.fontMed.draw(game.batch, startGameString, playBounds.getX() + playBounds.getWidth()/2 - game.fontMed.getBounds(startGameString).width/2,
@@ -122,7 +122,6 @@ public class MainMenuScreen extends ScreenAdapter {
         game.fontSmall.draw(game.batch, turn50String, turnBounds50.getX() + turnBounds50.getWidth()/2 - game.fontSmall.getBounds(turn50String).width/2,
         		turnBounds50.getY() + turnBounds50.getHeight()/2 + game.fontSmall.getBounds(turn50String).height/2); // centre the text
         game.batch.end();
-        
         //draw number of turns selected text
         game.batch.begin();
     	game.fontSmall.setColor(Color.BLACK);

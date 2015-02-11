@@ -1,8 +1,6 @@
 package gameLogic.resource;
 
 import gameLogic.resource.Cargo.trainCargo;
-
-import java.util.ArrayList;
 import java.util.Random;
 
 import com.badlogic.gdx.Gdx;
@@ -12,25 +10,9 @@ import com.badlogic.gdx.audio.Music;
 public class SoundManager {
 	Random random  = new Random();
 
-	Music bananaPeel;
-
-	Music bear ;
-	Music elephant;
-	Music giraffe;
-	Music lion;
-	Music monkey;
-	Music penguin;
-	Music snake;
-	Music yeti;
-	Music zebra;
-
 	Music[] animals = new Music[13];
-
 	Music[] newTrainArray = new Music[5];
-	Music elephantBigger;
-
 	Music[] speedBoost = new Music[2];
-
 	Music[] junctionFailure = new Music[2];
 	
 	Music bGMusic;
@@ -67,7 +49,7 @@ public class SoundManager {
 
 
 	public void playBGMusic(){
-		bGMusic.setVolume(0.65f);
+		bGMusic.setVolume(0.55f);
 		bGMusic.play();
 		bGMusic.setLooping(true);
 	}
@@ -76,8 +58,7 @@ public class SoundManager {
 		highSpeed.setVolume(0.45f);
 		highSpeed.play();
 	}
-
-	
+		
 	public Music getBGMusic(){
 		return bGMusic;
 	} 
@@ -86,10 +67,9 @@ public class SoundManager {
 	}
 	
 	public void playRandomJunctionFailure(){
-			junctionFailure[random.nextInt(2)].play();
+		junctionFailure[random.nextInt(2)].play();
 	}
 	
-
 
 	public void playRandomNewTrain(){
 		if (random.nextInt(4) == 0){
@@ -99,14 +79,12 @@ public class SoundManager {
 					play = false;
 				}
 			}
-
 			for (Music m : animals){
 				if (m != null){
 					if (m.isPlaying()){
 						play = false;
 					}
 				}
-
 			}
 			if(play){
 				newTrainArray[random.nextInt(5)].play();

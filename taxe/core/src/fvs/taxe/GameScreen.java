@@ -36,7 +36,7 @@ public class GameScreen extends ScreenAdapter {
 	public static final int ANIMATION_TIME = 2;
 	private Tooltip tooltip;
 	private Context context;
-
+	
 	private StationController stationController;
 	private InfoController infoController;
 	private ResourceController resourceController;
@@ -63,14 +63,15 @@ public class GameScreen extends ScreenAdapter {
 
 		 tooltip = new Tooltip(skin);
 		 stage.addActor(tooltip);
-
+		 
 		 stationController = new StationController(context, tooltip);
 		 infoController = new InfoController(context);
 		 resourceController = new ResourceController(context);
 		 goalController = new GoalController(context);
 		 routeController = new RouteController(context);
 		 stationWorksController = new StationWorksController(context);
-
+		 		 
+		 
 		 context.setRouteController(routeController);
 		 context.setInfoController(infoController);
 
@@ -135,11 +136,11 @@ public class GameScreen extends ScreenAdapter {
 	 public void render(float delta) {
 		 Gdx.gl.glClearColor(0, 0, 0, 1);
 		 Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-
+		 
 		 game.batch.begin();
 		 game.batch.draw(mapTexture, 0, 0);
 		 game.batch.end();
-
+		 
 		 goalController.drawBackground();
 
 		 stationController.renderConnections(map.getConnections(), Color.GRAY);
@@ -183,6 +184,7 @@ public class GameScreen extends ScreenAdapter {
 			 game.fontSmall.draw(game.batch, "Turn " + (gameLogic.getPlayerManager().getTurnNumber()+1) + "/" + gameLogic.TOTAL_TURNS, 20, TaxeGame.HEIGHT - 100.0f);
 			 game.batch.end();
 		 }
+		 
 
 		 resourceController.drawHeaderText();
 		 resourceController.drawInfoText();
@@ -221,7 +223,7 @@ public class GameScreen extends ScreenAdapter {
 	  * Changes which stations have the speed alterations. Called every 5 turns and changes 3 stations.
 	  */
 	 private void ChangeSpecialStations() {
-			// TODO Auto-generated m-  ethod stub
+			// TODO Auto-generated method stub
 		 List<Station> stations = gameLogic.getMap().getStations();
 		 Random r = new Random();
 		 int station1 = r.nextInt(stations.size());

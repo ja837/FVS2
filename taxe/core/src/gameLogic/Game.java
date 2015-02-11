@@ -1,19 +1,12 @@
 package gameLogic;
 
-import fvs.taxe.GameScreen;
-import fvs.taxe.MainMenuScreen;
 import gameLogic.goal.GoalManager;
 import gameLogic.map.Map;
-import gameLogic.map.Station;
 import gameLogic.resource.ResourceManager;
 import gameLogic.resource.SoundManager;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
-
-import com.badlogic.gdx.scenes.scene2d.ui.Dialog;
-import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 
 
 public class Game {
