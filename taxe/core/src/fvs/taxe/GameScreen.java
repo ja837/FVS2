@@ -95,7 +95,7 @@ public class GameScreen extends ScreenAdapter {
 						 if(rand.nextInt(10)<3){
 							station.setPassable(true);							
 							// infoController.displayFlashMessage("The station at "+station.toString()+" was fixed!", Color.GREEN);
-							 Dialog dia = new Dialog("Junction Fixed", context.getSkin());
+							Dialog dia = new Dialog("Junction Fixed", context.getSkin());
 				            dia.show(context.getStage());
 				            TextButton button = new TextButton("Ok", context.getSkin());
 				            dia.text("The junction at "+station.toString()+"\nwas fixed!");
