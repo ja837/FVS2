@@ -9,7 +9,7 @@ Major Modifications
 1. Fantastic sound effects and background music added
 2. Better scoring - points are awarded relative to distance between stations
 3. Improved train allocation
-4. Improved goal allocation - now players will only receive completeble goals
+4. Improved goal allocation - now players will only receive completable goals
 5. Greated range of goals possible, including via stations
 6. Acronyms added to the map to help identify cities
 7. Train route displayed on map if train is selected
@@ -18,6 +18,7 @@ Major Modifications
 10. Junction failure on train collision
 11. Border control - a chance for players to have their trains removed
 12. Special stations which increase/decrease train speed
+13. Added methods for rapidly finding the actual distance between stations
 
 Project Set-up Instructions
 ===========================
