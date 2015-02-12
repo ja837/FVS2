@@ -24,8 +24,8 @@ public class MapTest extends LibGdxTest{
 
         int previousSize = map.getStations().size();
 
-        map.addStation(name1,acro1, new Position(9999, 9999));
-        map.addStation(name2,acro2, new Position(200,200));
+        map.addStation(name1,acro1, new Position(9999, 9999),true);
+        map.addStation(name2,acro2, new Position(200,200),true);
 
         assertTrue("Failed to add stations", map.getStations().size() - previousSize == 2);
 
