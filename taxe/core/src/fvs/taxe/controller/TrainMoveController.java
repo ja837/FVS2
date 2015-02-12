@@ -8,12 +8,9 @@ import com.badlogic.gdx.scenes.scene2d.actions.SequenceAction;
 
 
 import com.badlogic.gdx.scenes.scene2d.ui.Dialog;
-import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 
-import fvs.taxe.GameScreen;
 import fvs.taxe.actor.TrainActor;
-import fvs.taxe.controller.InfoController;
 import gameLogic.Game;
 import gameLogic.Player;
 import gameLogic.goal.Goal;

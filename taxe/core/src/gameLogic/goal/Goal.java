@@ -93,14 +93,14 @@ public class Goal {
 
 		//goalString = "Send a " + trainString + " carrying a " + cargo.toString().toLowerCase() + " from " + origin.getName() + " to " + destination.getName();
 
-		goalString = "Send a " + trainString + " carrying a " + cargo.toString().toLowerCase() + " from " + origin.getName() + " to " + destination.getName();
-		
+		goalString = "Send a " + trainString + " carrying a " + cargo.toString().toLowerCase() + " from " + origin.getName();
 		
 		if (via != null){
 			goalString += " via " + via.getName();
 		}
+		goalString +=  " to " + destination.getName();
 		
-		goalString += ". - " + reward + " points";
+		goalString += " - " + reward + " points";
 		
 		return goalString;
 	}

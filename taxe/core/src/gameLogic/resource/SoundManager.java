@@ -6,7 +6,6 @@ import java.util.Random;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.audio.Music;
 
-
 public class SoundManager {
 	Random random  = new Random();
 
@@ -19,7 +18,6 @@ public class SoundManager {
 	Music highSpeed;
 
 	public SoundManager(){
-		//this.bananaPeel = Gdx.audio.newMusic(Gdx.files.internal("sounds/bananaPeel.ogg"));
 		this.animals[Cargo.trainCargo.BEAR.ordinal()] = Gdx.audio.newMusic(Gdx.files.internal("sounds/bear.ogg"));
 		this.animals[Cargo.trainCargo.ELEPHANT.ordinal()]= Gdx.audio.newMusic(Gdx.files.internal("sounds/elephantBiggerTrain.ogg"));
 		this.animals[Cargo.trainCargo.GIRAFFE.ordinal()]= Gdx.audio.newMusic(Gdx.files.internal("sounds/giraffe.ogg"));
