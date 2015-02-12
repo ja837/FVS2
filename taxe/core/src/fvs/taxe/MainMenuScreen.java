@@ -102,7 +102,7 @@ public class MainMenuScreen extends ScreenAdapter {
         //draw "choose number of turns:" text
         game.batch.begin();
         game.fontSmall.setColor(Color.BLACK);
-        game.fontSmall.draw(game.batch, "choose number of turns:", 516, 380);
+        game.fontSmall.draw(game.batch, "Choose the number of turns:", 510, 380);
         
         //Draw text into rectangles
         game.fontSmall.setColor(Color.WHITE);
@@ -126,7 +126,7 @@ public class MainMenuScreen extends ScreenAdapter {
         game.batch.begin();
     	game.fontSmall.setColor(Color.BLACK);
     	String turnsString = gameLogic.Game.TOTAL_TURNS + " turns selected";
-    	game.fontSmall.draw(game.batch, turnsString, 540, 310);
+    	game.fontSmall.draw(game.batch, turnsString, 545, 310);
     	game.batch.end();
         
     }
