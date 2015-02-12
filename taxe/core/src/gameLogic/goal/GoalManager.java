@@ -75,14 +75,13 @@ public class GoalManager {
 		
 		//score = score/10;
 		score = (int) Math.round((double) score/10) * 10;
-		System.out.println("Score for going from  " + origin.getName() + " to " + destination.getName() /*+ " via " + via.getName()*/ +" is " + score);
-		
-		int looseScore = Dijkstra.allDistances[Dijkstra.lookupNode(origin).getCount()][Dijkstra.lookupNode(destination).getCount()];
-		if (looseScore == 0){
-			looseScore = Dijkstra.allDistances[Dijkstra.lookupNode(destination).getCount()][Dijkstra.lookupNode(origin).getCount()];
+		String scoreString = "Score for going from  " + origin.getName();
+		if(via!=null){
+			scoreString += " via " + via.getName();
 		}
+		scoreString += " to " + destination.getName()  +" is " + score;
+		System.out.println(scoreString);
 		
-		System.out.println("Base score : " + looseScore);
 		Goal goal = new Goal(origin, destination, via, turn, score);
 		
  
