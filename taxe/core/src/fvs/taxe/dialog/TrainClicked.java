@@ -26,6 +26,9 @@ public class TrainClicked extends ClickListener {
 
         // current player can't be passed in as it changes so find out current player at this instant
         Player currentPlayer = Game.getInstance().getPlayerManager().getCurrentPlayer();
+        if (!train.isOwnedBy(currentPlayer)) {
+        	return;
+        }
         DialogButtonClicked listener = new DialogButtonClicked(context, currentPlayer, train);
         DialogResourceTrain dia = new DialogResourceTrain(train, context.getSkin(), train.getPosition() != null);
         dia.show(context.getStage());
