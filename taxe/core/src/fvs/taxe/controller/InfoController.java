@@ -77,8 +77,8 @@ public class InfoController {
         game.font.setColor(Color.NAVY);
         game.fontSmall.draw(game.batch, "Player 1", 20.0f, TaxeGame.HEIGHT - 25.0f);
         game.font.draw(game.batch, "" + playerList.get(0).getPlayerScore(), 20.0f, TaxeGame.HEIGHT - 50.0f);
-        game.fontSmall.draw(game.batch, "Player 2", 120.0f, TaxeGame.HEIGHT - 25.0f);
-        game.font.draw(game.batch, "" + playerList.get(1).getPlayerScore(), 120.0f, TaxeGame.HEIGHT - 50.0f);
+        game.fontSmall.draw(game.batch, "Player 2", 150.0f, TaxeGame.HEIGHT - 25.0f);
+        game.font.draw(game.batch, "" + playerList.get(1).getPlayerScore(), 150.0f, TaxeGame.HEIGHT - 50.0f);
         game.batch.end();
         context.getStage().addActor(playerScores);
     }

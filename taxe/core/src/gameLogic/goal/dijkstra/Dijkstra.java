@@ -45,7 +45,7 @@ public class Dijkstra {
 	}
 	
 	//actual path through edges
-	//infinite loop when called
+	//infinite loop when called so is not called
 	public static List<Node> getShortestPathTo(Node argTarget){
 		List<Node> path = new ArrayList<Node>();
 		for (Node node = argTarget; node != null; node = node.previous){
@@ -55,15 +55,6 @@ public class Dijkstra {
 		return path;
 	}
 
-	
-	//converting Stations -> nodes for dijkstra
-	public ArrayList<Node> addStationsToNodeList(Map m){
-		for (Station stn : m.getStations()){
-			Node n = new Node(stn);
-			nodeList.add(n);
-		}
-		return nodeList;
-	}
 	 
 	//takes station and returns corresponding node
 	public static Node lookupNode(Station argStation){

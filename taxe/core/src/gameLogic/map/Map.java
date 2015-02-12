@@ -118,7 +118,7 @@ public class Map {
     	for (Node n : Dijkstra.nodeList){
     		n.addConnectionsAsEdges(this);	
     		}
-    	//adding score from x to y in array
+    	//initializing the 2d array
        	Dijkstra.allDistances = new int[Dijkstra.nodeList.size()][Dijkstra.nodeList.size()];
     	//adding to array table for lookup
     	for (Node n1 : Dijkstra.nodeList){

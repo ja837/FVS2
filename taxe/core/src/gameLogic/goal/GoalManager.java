@@ -18,14 +18,19 @@ public class GoalManager {
 	private ResourceManager resourceManager;
 	private SoundManager soundManager;
 	private Random random = new Random();
-	private final int scoreLimit = 1500;
+	private final int scoreLimit = 1600;
 	
 	public GoalManager(Game game) {
 		this.resourceManager = game.getResourceManager();
 		this.soundManager = game.getSoundManager();
 	}
 
-	private Goal generateRandom(int turn, Player player, int limitt) {
+	/**
+	 * @param turn
+	 * @param player
+	 * @return
+	 */
+	private Goal generateRandom(int turn, Player player) {
 		Map map = Game.getInstance().getMap();
 		int score = 0;
 		int score1 = 0;
@@ -68,10 +73,16 @@ public class GoalManager {
 			}
 		}
 		
-		score = score/10;
+		//score = score/10;
 		score = (int) Math.round((double) score/10) * 10;
 		System.out.println("Score for going from  " + origin.getName() + " to " + destination.getName() /*+ " via " + via.getName()*/ +" is " + score);
 		
+		int looseScore = Dijkstra.allDistances[Dijkstra.lookupNode(origin).getCount()][Dijkstra.lookupNode(destination).getCount()];
+		if (looseScore == 0){
+			looseScore = Dijkstra.allDistances[Dijkstra.lookupNode(destination).getCount()][Dijkstra.lookupNode(origin).getCount()];
+		}
+		
+		System.out.println("Base score : " + looseScore);
 		Goal goal = new Goal(origin, destination, via, turn, score);
 		
  
@@ -85,14 +96,31 @@ public class GoalManager {
 	}
 	
 	public void addRandomGoalToPlayer(Player player) {
+		Goal g;
 		int total = 0;
 		//players needs roughly same difficulty goals based on score
-		for (Goal g : player.getGoals()){
-			total += g.getReward();
+		int count = 0;
+		for (int i=0; i<player.getGoals().size(); i++){
+			if (count < 2){
+				total += player.getGoals().get(i).getReward();
+				count++;
+			}
 		}
 		int limit = scoreLimit - total;
-		Goal g = generateRandom(player.getPlayerManager().getTurnNumber(), player, limit);
+		if (player.getGoals().size()<3 ){
+			do {
+				g = generateRandom(player.getPlayerManager().getTurnNumber(), player);
+			}
+			while (limit - g.getReward() < 0);
+		}
+		else {
+			do {
+				g = generateRandom(player.getPlayerManager().getTurnNumber(), player);
+			}
+			while (g.getReward() < 400 && g.getReward() > 1200);
+		}
 		player.addGoal(g);
+		
 		if (player.getGoals().size() < 3){
 			soundManager.playAnimal(g.getCargo());
 		}
@@ -105,7 +133,7 @@ public class GoalManager {
 			if(goal.isComplete(train)) {
 				player.completeGoal(goal);
 				player.removeResource(train);
-				completedString.add("Player " + player.getPlayerNumber() + " completed a goal to " + goal.toString() + "!");
+				completedString.add("Player " + player.getPlayerNumber() + " completed a goal to \n" + goal.toString() + "!");
 			}
 		}
 		System.out.println("Train arrived to final destination: " + train.getFinalDestination().getName());
