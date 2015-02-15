@@ -6,6 +6,11 @@ import java.util.Random;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.audio.Music;
 
+/**
+ * Manages the playng of all sound clips, inlcudes music and voice overs.
+ * @author Jamie
+ *
+ */
 public class SoundManager {
 	Random random  = new Random();
 
@@ -16,7 +21,10 @@ public class SoundManager {
 	
 	Music bGMusic;
 	Music highSpeed;
-
+	
+	/**
+	 * Initialises all of the sound files
+	 */
 	public SoundManager(){
 		this.animals[Cargo.trainCargo.BEAR.ordinal()] = Gdx.audio.newMusic(Gdx.files.internal("sounds/bear.ogg"));
 		this.animals[Cargo.trainCargo.ELEPHANT.ordinal()]= Gdx.audio.newMusic(Gdx.files.internal("sounds/elephantBiggerTrain.ogg"));
@@ -45,30 +53,33 @@ public class SoundManager {
 
 	}
 
-
+	/**
+	 * Play the background music
+	 */
 	public void playBGMusic(){
 		bGMusic.setVolume(0.55f);
 		bGMusic.play();
 		bGMusic.setLooping(true);
 	}
-	public void playHighSpeed(){
-		bGMusic.pause();
-		highSpeed.setVolume(0.45f);
-		highSpeed.play();
-	}
-		
+	
+	/**
+	 * 
+	 * @return the background music track
+	 */
 	public Music getBGMusic(){
 		return bGMusic;
 	} 
-	public Music getHighSpeed(){
-		return highSpeed;
-	}
 	
+	/**
+	 * Play a random voiceover from the list of junction failure voiceovers.
+	 */
 	public void playRandomJunctionFailure(){
 		junctionFailure[random.nextInt(2)].play();
 	}
 	
-
+	/**
+	 * Play a random voiceover from the list of new train voiceovers.
+	 */
 	public void playRandomNewTrain(){
 		if (random.nextInt(4) == 0){
 			Boolean play = true;
@@ -90,6 +101,9 @@ public class SoundManager {
 		}
 	}
 
+	/**
+	 * Play a random voiceover from the list of speed boost voiceovers.
+	 */
 	public void playSpeedBoost(){
 		Boolean play = true;
 		for (Music m : newTrainArray){
@@ -109,8 +123,11 @@ public class SoundManager {
 		}
 	}
 
-
-	public void playAnimal(trainCargo a){
+	/**
+	 * Play the voicevoer clip for the appropriate animal
+	 * @param cargo 
+	 */
+	public void playAnimal(trainCargo cargo){
 		if (true){
 			Boolean play = true;
 			for (Music m : newTrainArray){
@@ -124,12 +141,22 @@ public class SoundManager {
 				}
 			}
 			if (play){
-				if (animals[a.ordinal()] != null){
-					animals[a.ordinal()].play();
+				if (animals[cargo.ordinal()] != null){
+					animals[cargo.ordinal()].play();
 				}
 				
 			}
 		}
+	}
+	
+	public void playHighSpeed(){
+		bGMusic.pause();
+		highSpeed.setVolume(0.45f);
+		highSpeed.play();
+	}
+	
+	public Music getHighSpeed(){
+		return highSpeed;
 	}
 	
 

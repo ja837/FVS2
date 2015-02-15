@@ -153,7 +153,8 @@ public class GameScreen extends ScreenAdapter {
 		 if(gameLogic.getState() == GameState.ROUTING) {
 			 routeController.drawRoute(Color.BLACK);
 		 }
-
+		 
+		 //Animating stage inbetween turns
 		 if(gameLogic.getState() == GameState.ANIMATING) {
 
 			 //Fix for player 1 getting an extra go at the start of the game
@@ -170,14 +171,17 @@ public class GameScreen extends ScreenAdapter {
 
 		 }
 
+		 //Renders all of the routes for trains on the map in red
 		 if(gameLogic.getState() == GameState.NORMAL || gameLogic.getState() == GameState.PLACING){
 			 stationController.renderRoutedConnections(map.getConnections(), Color.RED);
 			 stationController.displayNumberOfTrainsAtStations();
 		 }
-
+		 
+		 //Draw all of the actors (trains etc.) on the screen
 		 stage.act(Gdx.graphics.getDeltaTime());
 		 stage.draw();
 
+		 //Display how many turns have passed
 		 if (gameLogic.getPlayerManager().getTurnNumber() < gameLogic.TOTAL_TURNS) {
 			 game.batch.begin();
 			 game.fontSmall.setColor(Color.NAVY);
@@ -260,13 +264,16 @@ public class GameScreen extends ScreenAdapter {
 		 gameLogic.getSoundManager().playSpeedBoost();
 		 
 		}
-
+	 
+	 /**
+	  * Generates a random number between 0.5 and 1.5. Only includes the 0.1s. i.e. 0.5, 0.6, 0/7 etc. Ensure that it is not 0. 75% chance it is above 1.
+	  * @return the speed modifier
+	  */
 	private float generateRandomSpeedModifier() {
-		//Create a random speed modifier between -50% and 50% that only includes the 10s. i.e. -50, -40, -30 etc. Ensure that it is not 0. 75% chance it is positive.
 		 Random r2 = new Random();
-		 float speedModifier = r2.nextInt(5);
+		 float speedModifier = r2.nextInt(6);
 		 while (speedModifier == 0){
-			 speedModifier = r2.nextInt(5);
+			 speedModifier = r2.nextInt(6);
 		 }
 		 speedModifier *= 10;				 
 		 if ((r2.nextInt(4)) == 0){

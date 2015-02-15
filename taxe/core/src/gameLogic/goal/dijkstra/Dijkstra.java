@@ -44,8 +44,12 @@ public class Dijkstra {
 		}		
 	}
 	
-	//actual path through edges
-	//infinite loop when called so is not called
+	
+	/**
+	 * actual path through edges, infinite loop when called so is not called
+	 * @param argTarget
+	 * @return
+	 */
 	public static List<Node> getShortestPathTo(Node argTarget){
 		List<Node> path = new ArrayList<Node>();
 		for (Node node = argTarget; node != null; node = node.previous){
@@ -56,7 +60,12 @@ public class Dijkstra {
 	}
 
 	 
-	//takes station and returns corresponding node
+
+	/**
+	 * 	takes station and returns corresponding node
+	 * @param argStation - station that you want node for.
+	 * @return node that is associated with station
+	 */
 	public static Node lookupNode(Station argStation){
 		for (Node n : nodeList){
 			if (argStation.getName() == n.getName()){
@@ -66,7 +75,10 @@ public class Dijkstra {
 		throw new IllegalArgumentException("Station doens't exist");
 	}
 	
-	
+	/**
+	 * 
+	 * @return a String that is the list of all nodes.
+	 */
 	public static String nodesToString(){
 		String nodes = "";
 		for (Node n : nodeList){

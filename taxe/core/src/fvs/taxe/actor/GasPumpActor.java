@@ -8,7 +8,11 @@ import gameLogic.map.IPositionable;
 public class GasPumpActor extends Image {
     private static int width = 20;
     private static int height = 20;
-
+    
+    /**
+     * Graphic to show which stations have speed modifiers. Unused in this release.
+     * @param location of station to place gas pump next to
+     */
     public GasPumpActor(IPositionable location) {
         super(new Texture(Gdx.files.internal("pump.png")));
 

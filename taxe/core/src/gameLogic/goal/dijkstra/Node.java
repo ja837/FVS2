@@ -27,7 +27,12 @@ public class Node implements Comparable<Node>{
 		this.minDistance = Float.POSITIVE_INFINITY;
 	}
 	
-	//converting Connection -> edges for dijkstra
+	
+	/**
+	 * converting Connection -> edges for dijkstra
+	 * @param m
+	 * @return
+	 */
 	public ArrayList<Edge> addConnectionsAsEdges(Map m){
 		//does connection exist
 		for (Connection c : m.getConnectionsFromStation(this.getStation())){
@@ -43,7 +48,13 @@ public class Node implements Comparable<Node>{
 	
 	
 	
-	//look up from current node if connection exists
+	
+	/**
+	 * look up from current node if connection exists
+	 * @param m
+	 * @param argStation
+	 * @return
+	 */
 	public Edge lookUpConnection(Map m, Station argStation){
 		for (Edge e : edges){
 			for (Connection c : m.getConnectionsFromStation(argStation)){

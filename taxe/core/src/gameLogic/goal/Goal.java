@@ -36,6 +36,11 @@ public class Goal {
 		this.cargo = Cargo.getCargo(ranNum);
 	}
 	
+	/**
+	 * Add a train constraint to the goal
+	 * @param name - pass "train" to add a train constraint
+	 * @param value - train to add to goal as constraint.
+	 */
 	public void addConstraint(String name, String value) {
 		if(name.equals("train")) {
 			trainName = value;
@@ -44,6 +49,11 @@ public class Goal {
 		}
 	}
 	
+	/**
+	 * Checks if the goal is complete
+	 * @param train that may have completed the goal
+	 * @return true if goal is completed, else false
+	 */
 	public boolean isComplete(Train train) {
 		boolean passedOrigin = false;
 		boolean passedVia = false;
@@ -84,6 +94,9 @@ public class Goal {
 		}
 	}
 	
+	/**
+	 * Returns a text description of the goal
+	 */
 	public String toString() {
 		String goalString;
 		String trainString = "train";

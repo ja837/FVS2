@@ -5,10 +5,12 @@ import com.badlogic.gdx.math.Vector2;
 import gameLogic.map.Connection;
 import gameLogic.map.Station;
 
-/** Class for converting connections into edges to use in dijkstra
 
-*/
-
+/**
+ * Class for converting connections into edges to use in dijkstra
+ * @author Chris
+ *
+ */
 public class Edge {
 	
 	private final Node target;
@@ -25,7 +27,12 @@ public class Edge {
 	
 	
 	
-	
+	/**
+	 * gets the distance between 2 stations
+	 * @param a - first station
+	 * @param b - second station
+	 * @return the distance between them
+	 */
 	private float getDistance(Station a, Station b){
 		return Vector2.dst(a.getLocation().getX(), a.getLocation().getY(), b.getLocation().getX(), b.getLocation().getY());
 	}

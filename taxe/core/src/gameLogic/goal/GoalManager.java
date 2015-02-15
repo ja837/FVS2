@@ -26,8 +26,9 @@ public class GoalManager {
 	}
 
 	/**
-	 * @param turn
-	 * @param player
+	 * generates a random goal
+	 * @param turn number, is used to tell goal what turn it was issued.
+	 * @param player that goal is to be added to. This is used to generate fair goals
 	 * @return
 	 */
 	private Goal generateRandom(int turn, Player player) {
@@ -94,6 +95,10 @@ public class GoalManager {
 		return goal;
 	}
 	
+	/**
+	 * Adds a new random goal to a player, but takes into account their current goals to attempt to give both players goals of similar scores so that the RNG is not too harsh on one player.
+	 * @param player to add goal to.
+	 */
 	public void addRandomGoalToPlayer(Player player) {
 		Goal g;
 		int total = 0;
@@ -142,9 +147,9 @@ public class GoalManager {
 	
 	/** Look up in the array for the distance between to stations
 	 * 
-	 * @param argOrigin
-	 * @param argTarget
-	 * @return int
+	 * @param argOrigin - origin station
+	 * @param argTarget - destination station
+	 * @return int - distance between nodes
 	 */
 	private int genScore (Station argOrigin, Station argTarget){
 		//look up in distances array for value
