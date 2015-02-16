@@ -113,7 +113,7 @@ public class Goal {
 		return goalString;
 	}
 	
-	/** get the string of the filepath for the goal's cargo's image
+	/** get the string of the filepath for the goal's cargo image
 	 * 
 	 * @return
 	 */

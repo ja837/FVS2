@@ -6,10 +6,11 @@ import gameLogic.map.Station;
 
 import java.util.ArrayList;
 
-/** Class for converting stations into nodes for dijkstra
-
-*/
-
+/**
+ * Class for converting stations into nodes to use in Dijkstra
+ * @author Chris
+ *
+ */
 public class Node implements Comparable<Node>{
 	private Station station;
 	private String name;
@@ -19,7 +20,10 @@ public class Node implements Comparable<Node>{
 	private int count;
 	
 	
-	
+	/**
+	 * Constructor
+	 * @param argStation Take a station as input
+	 */
 	public Node(Station argStation){
 		this.name = argStation.getName();
 		this.station = argStation;
@@ -29,9 +33,9 @@ public class Node implements Comparable<Node>{
 	
 	
 	/**
-	 * converting Connection -> edges for dijkstra
-	 * @param m
-	 * @return
+	 * Converting connections into edges
+	 * @param m The game map
+	 * @return An array list of edges
 	 */
 	public ArrayList<Edge> addConnectionsAsEdges(Map m){
 		//does connection exist
@@ -44,16 +48,12 @@ public class Node implements Comparable<Node>{
 		
 		return edges;	
 	}
-	
-	
-	
-	
-	
+
 	/**
 	 * look up from current node if connection exists
-	 * @param m
-	 * @param argStation
-	 * @return
+	 * @param m The game map
+	 * @param argStation The station for lookup
+	 * @return All edges from that station
 	 */
 	public Edge lookUpConnection(Map m, Station argStation){
 		for (Edge e : edges){
@@ -67,37 +67,60 @@ public class Node implements Comparable<Node>{
 			
 		}
 	
-	
+	/**
+	 * Comparing nodes
+	 */
 	public int compareTo(Node other)
     {
         return Double.compare(this.minDistance, other.minDistance);
     }
 	
-	
+	/**
+	 * 
+	 * @return Node name
+	 */
 	public String getName(){
 		return name;
 	}
+	
+	/**
+	 * 
+	 * @return All edges from this node
+	 */
 	public ArrayList<Edge> getEdges(){
 		return edges;
 	}
-	/*
-	public float getMinDistance(){
-		return minDistance;
-	}*/
-	
+
+	/**
+	 * 
+	 * @return Station corresponding to this node
+	 */
 	public Station getStation(){
 		return station;
 	}
 	
+	/**
+	 * Count to uniquely identify nodes
+	 * @param i Integer
+	 * @return A number for this node
+	 */
 	public int setCount(int i){
 		return count = i;
 	}
+	
+	/**
+	 * 
+	 * @return A node's count value
+	 */
 	public int getCount(){
 		return count;
 	}
 	
 	
-	
+	/**
+	 * Converting all edges from this node into a string
+	 * @return A string of all edges
+	 */
 	public String edgeToString(){
 		String edgeString = "";
 		for (Edge e : getEdges()){
@@ -108,6 +131,9 @@ public class Node implements Comparable<Node>{
 	}
 	
 	@Override
+	/**
+	 * Converting a node to string
+	 */
 	public String toString(){
 		return (("Name : " + name)  + " minDistance : " + minDistance); 
 	}

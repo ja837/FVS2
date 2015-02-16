@@ -10,7 +10,9 @@ import gameLogic.resource.Cargo.trainCargo;
 
 import java.util.ArrayList;
 import java.util.List;
-
+/**
+ * @author Chris
+ */
 public class Train extends Resource {
     private String leftImage;
     private String rightImage;
@@ -134,12 +136,19 @@ public class Train extends Resource {
         return speed;
     }
 
-    //Station name and turn number
+    /**
+     * Station name and turn number
+     * @return Station name and what turn the train arrived at it
+     */
     public List<Tuple<String, Integer>> getHistory() {
         return history;
     }
 
-    //Station name and turn number
+    /**
+     * Station name and turn number
+     * @param stationName The name of the station just passed
+     * @param turn The turn the train passed the station
+     */
     public void addHistory(String stationName, int turn) {
         history.add(new Tuple<String, Integer>(stationName, turn));
     }

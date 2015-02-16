@@ -8,16 +8,21 @@ import java.util.Collections;
 import java.util.List;
 import java.util.PriorityQueue;
 
-/** Class for calculating distances to every node to use as a scoring mechanism
+/**
+ * Static master class for implementing Dijkstra's algorithm
  * 
- * 
+ * @author Chris
+ *
  */
 public class Dijkstra {
-	
+
 	public static ArrayList<Node> nodeList;
 	public static int[][] allDistances;
 	
-	//distance as number - use node.ninDistance
+	/**
+	 * Method to find distances to every node
+	 * @param source The starting node
+	 */
 	public static void computePath(Node source){
 		source.minDistance = 0;
 		PriorityQueue<Node> stationQueue = new PriorityQueue<Node>();
@@ -47,8 +52,8 @@ public class Dijkstra {
 	
 	/**
 	 * actual path through edges, infinite loop when called so is not called
-	 * @param argTarget
-	 * @return
+	 * @param argTarget The destination node
+	 * @return A list of nodes that is the shortest route
 	 */
 	public static List<Node> getShortestPathTo(Node argTarget){
 		List<Node> path = new ArrayList<Node>();
@@ -62,9 +67,9 @@ public class Dijkstra {
 	 
 
 	/**
-	 * 	takes station and returns corresponding node
-	 * @param argStation - station that you want node for.
-	 * @return node that is associated with station
+	 * 	Takes station and returns corresponding node
+	 * @param argStation Station that you want node for.
+	 * @return node That is associated with station
 	 */
 	public static Node lookupNode(Station argStation){
 		for (Node n : nodeList){
@@ -76,8 +81,8 @@ public class Dijkstra {
 	}
 	
 	/**
-	 * 
-	 * @return a String that is the list of all nodes.
+	 * Printing all nodes as strings
+	 * @return a String that is the list of all nodes
 	 */
 	public static String nodesToString(){
 		String nodes = "";

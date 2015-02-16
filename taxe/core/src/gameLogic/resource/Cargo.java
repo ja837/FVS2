@@ -1,5 +1,12 @@
 package gameLogic.resource;
 
+
+
+/**Manipulating cargo which a train holds
+ *
+ * @author Chris
+ *
+ */
 public class Cargo {
 	
 	/**

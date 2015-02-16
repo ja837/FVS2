@@ -45,7 +45,7 @@ public class GameScreen extends ScreenAdapter {
 
 
 	/**
-	 * 
+	 * The in game screen
 	 * @param game
 	 */
 	 public GameScreen(TaxeGame game) {

@@ -33,7 +33,7 @@ public class GoalManager {
 	 * generates a random goal
 	 * @param turn number, is used to tell goal what turn it was issued.
 	 * @param player that goal is to be added to. This is used to generate fair goals
-	 * @return
+	 * @return A random goal
 	 */
 	private Goal generateRandom(int turn, Player player) {
 		Map map = Game.getInstance().getMap();
@@ -136,6 +136,7 @@ public class GoalManager {
 		
 	}
 
+	
 	public ArrayList<String> trainArrived(Train train, Player player) {
 		ArrayList<String> completedString = new ArrayList<String>();
 		for(Goal goal:player.getGoals()) {

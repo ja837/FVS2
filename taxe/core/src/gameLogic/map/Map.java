@@ -18,7 +18,6 @@ public class Map {
     private List<Station> stations;
     private List<Connection> connections;
     private Random random = new Random();
-    //public Dijkstra d;
 
     public Map() {    	
         stations = new ArrayList<Station>();
@@ -102,7 +101,8 @@ public class Map {
         return false;
     }
     
-    /**Setting up for Dijkstras
+    /**
+     * Initialising the array of distances between stations
      */
     public void initialiseNodeList(){
     	//making nodes
@@ -174,14 +174,23 @@ public class Map {
         return newConnection;
     }
 
-    //Add Connection by Names
+    /**
+     * Add Connection by Names
+     * @param station1 The first station
+     * @param station2 The second station
+     * @return
+     */
     public Connection addConnection(String station1, String station2) {
         Station st1 = getStationByName(station1);
         Station st2 = getStationByName(station2);
         return addConnection(st1, st2);
     }
 
-    //Get connections from station
+    /**
+     * Get connections from station
+     * @param station The station which needs lookup
+     * @return Connections from this station
+     */
     public List<Connection> getConnectionsFromStation(Station station) {
         List<Connection> results = new ArrayList<Connection>();
         for(Connection connection : connections) {

@@ -12,6 +12,11 @@ import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 
 
+/**The instructions screen
+ * 
+ * @author Chris
+ *
+ */
 public class InstructionsScreen extends ScreenAdapter {
     TaxeGame game;
     OrthographicCamera camera;
@@ -20,7 +25,10 @@ public class InstructionsScreen extends ScreenAdapter {
     Texture mapTexture;
     Image mapImage;
     
-
+    /**The constructor
+     * 
+     * @param game The current Taxe Game
+     */
     public InstructionsScreen(TaxeGame game) {
         this.game = game;
         camera = new OrthographicCamera(TaxeGame.WIDTH, TaxeGame.HEIGHT);
@@ -38,7 +46,6 @@ public class InstructionsScreen extends ScreenAdapter {
     }
 
 	public void update() {
-    	
         if (Gdx.input.justTouched()) {
             camera.unproject(touchPoint.set(Gdx.input.getX(), Gdx.input.getY(), 0));
             /**
@@ -51,6 +58,9 @@ public class InstructionsScreen extends ScreenAdapter {
         }
     }
 
+	/**
+	 * Drawing the actual screen
+	 */
     public void draw() {
         GL20 gl = Gdx.gl;
         gl.glClearColor(1, 1, 1, 1);

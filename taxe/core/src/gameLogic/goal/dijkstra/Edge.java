@@ -37,21 +37,42 @@ public class Edge {
 		return Vector2.dst(a.getLocation().getX(), a.getLocation().getY(), b.getLocation().getX(), b.getLocation().getY());
 	}
 	
+	/**
+	 * 
+	 * @return Return the weight of an edge
+	 */
 	public float getWeight(){
 		return weight;
 	}
 	
+	/**
+	 * 
+	 * @return The connection the edge derived from
+	 */
 	public Connection getConnection(){
 		return conn;
 	}
+	
+	/**
+	 * 
+	 * @return The node at the other side of the edge
+	 */
 	public Node getTarget(){
 		return target;
 	}
+	
+	/**
+	 * 
+	 * @return The node at the start of the edge
+	 */
 	public Node getCurrent(){
 		return current;
 	}
 	
-	
+	/**
+	 * 
+	 * @return A string with station names
+	 */
 	@Override
 	public String toString(){
 		return (conn.getStation1().getName() + " to " + conn.getStation2().getName() + " - " + getWeight());
