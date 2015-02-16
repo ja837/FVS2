@@ -7,7 +7,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.audio.Music;
 
 /**
- * Manages the playng of all sound clips, inlcudes music and voice overs.
+ * Manages the playing of all sound clips, including music and voice overs.
  * @author Jamie, Chris
  *
  */
@@ -15,6 +15,7 @@ public class SoundManager {
 	Random random  = new Random();
 
 	Music[] animals = new Music[13];
+	
 	Music[] newTrainArray = new Music[5];
 	Music[] speedBoost = new Music[2];
 	Music[] junctionFailure = new Music[2];
@@ -50,7 +51,6 @@ public class SoundManager {
 		this.bGMusic = Gdx.audio.newMusic(Gdx.files.internal("sounds/BGMusicLoop.ogg"));
 		
 		this.highSpeed = Gdx.audio.newMusic(Gdx.files.internal("sounds/highSpeed.ogg"));
-
 	}
 
 	/**
