@@ -14,7 +14,7 @@ public class DesktopLauncher {
 		config.width = TaxeGame.WIDTH;
 		config.title = "TaxE";
 		config.resizable = false;
-		config.addIcon("icon/ic_launcher4.png", FileType.Internal);
+		config.addIcon("icon/ic_launcher4.png", FileType.Internal); //PIK added Snakes on a Train icon
 		config.addIcon("icon/ic_launcher3.png", FileType.Internal);
 		config.addIcon("icon/ic_launcher2.png", FileType.Internal);
 		config.addIcon("icon/ic_launcher1.png", FileType.Internal);
