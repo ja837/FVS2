@@ -11,7 +11,6 @@ import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 
-import gameLogic.Game;
 
 public class InstructionsScreen extends ScreenAdapter {
     TaxeGame game;
@@ -26,7 +25,12 @@ public class InstructionsScreen extends ScreenAdapter {
         this.game = game;
         camera = new OrthographicCamera(TaxeGame.WIDTH, TaxeGame.HEIGHT);
         camera.setToOrtho(false);
+        
+        /**
+         * button position
+         */
         backBounds = new Rectangle(TaxeGame.WIDTH/2 - 570, 550, 150, 50);
+        
         touchPoint = new Vector3();
         mapTexture = new Texture(Gdx.files.internal("instructions_screen.png"));
         mapImage = new Image(mapTexture);
@@ -37,7 +41,9 @@ public class InstructionsScreen extends ScreenAdapter {
     	
         if (Gdx.input.justTouched()) {
             camera.unproject(touchPoint.set(Gdx.input.getX(), Gdx.input.getY(), 0));
-            //start the game
+            /**
+             * go back to main menu screen
+             */
             if (backBounds.contains(touchPoint.x, touchPoint.y)) {
                 game.setScreen(new MainMenuScreen(game));
                 return;
@@ -50,7 +56,9 @@ public class InstructionsScreen extends ScreenAdapter {
         gl.glClearColor(1, 1, 1, 1);
         gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
-        //Draw map in the background
+        /**
+         * draw image in background
+         */
         camera.update();
         game.batch.setProjectionMatrix(camera.combined);
 
@@ -62,14 +70,18 @@ public class InstructionsScreen extends ScreenAdapter {
         game.batch.end();
     
     
-        //Draw rectangles, did not use TextButtons because it was easier not to
+        /**
+         * draw rectangles
+         */
         game.shapeRenderer.setProjectionMatrix(camera.combined);
         game.shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
         game.shapeRenderer.setColor(Color.MAROON);
         game.shapeRenderer.rect(backBounds.getX(), backBounds.getY(), backBounds.getWidth(), backBounds.getHeight());
         game.shapeRenderer.end();
 
-        //Draw text into rectangles
+        /**
+         * draw text into rectangles
+         */
         game.batch.begin();
         String backString = "Back";
         game.fontMed.draw(game.batch, backString, backBounds.getX() + backBounds.getWidth()/2 - game.fontMed.getBounds(backString).width/2,

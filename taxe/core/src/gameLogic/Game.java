@@ -21,10 +21,13 @@ public class Game {
 	
 
 
-
 	private final int CONFIG_PLAYERS = 2;
 	public static int TOTAL_TURNS = 30;
 	
+	/**
+	 * changes total turns in game
+	 * @param n
+	 */
 	public static void changeTurns(int n) {
 		TOTAL_TURNS = n;
 	};

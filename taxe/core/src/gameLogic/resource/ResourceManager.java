@@ -48,7 +48,9 @@ public class ResourceManager {
 	public ArrayList<Tuple<String, Integer>> getTrains() {
 		return trains;
 	}
-
+/**
+ * generates random integer, if integer between certain numbers, particular train is returned
+ */
     private Resource getRandomResource() {
             	
     	int index = random.nextInt(100);

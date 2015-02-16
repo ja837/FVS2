@@ -11,7 +11,6 @@ import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 
-import gameLogic.Game;
 
 public class MainMenuScreen extends ScreenAdapter {
     TaxeGame game;
@@ -30,11 +29,16 @@ public class MainMenuScreen extends ScreenAdapter {
         this.game = game;
         camera = new OrthographicCamera(TaxeGame.WIDTH, TaxeGame.HEIGHT);
         camera.setToOrtho(false);
+        
+        /** 
+         * position of buttons
+         */
         playBounds = new Rectangle(TaxeGame.WIDTH/2 - -40, 220, 150, 50);
         instructionsBounds = new Rectangle(TaxeGame.WIDTH/2 - 160, 220, 150, 50);
         turnBounds30 = new Rectangle(TaxeGame.WIDTH/2 - 40, 320, 26, 25);
         turnBounds40 = new Rectangle(TaxeGame.WIDTH/2 - 0, 320, 26, 25);
         turnBounds50 = new Rectangle(TaxeGame.WIDTH/2 - -40, 320, 26, 25);
+        
         touchPoint = new Vector3();
         mapTexture = new Texture(Gdx.files.internal("splash_screen.png"));
         mapImage = new Image(mapTexture);
@@ -45,16 +49,22 @@ public class MainMenuScreen extends ScreenAdapter {
     	
         if (Gdx.input.justTouched()) {
             camera.unproject(touchPoint.set(Gdx.input.getX(), Gdx.input.getY(), 0));
-            //start the game
+            /**
+             * start the game
+             */
             if (playBounds.contains(touchPoint.x, touchPoint.y)) {
                 game.setScreen(new GameScreen(game));
                 return;
             }
-            //close the game
+            /**
+             * go to instructions screen
+             */
             if (instructionsBounds.contains(touchPoint.x, touchPoint.y)) {
             	game.setScreen(new InstructionsScreen(game));
             }
-            //turn selection
+            /**
+             * select number of turns
+             */
             if (turnBounds30.contains(touchPoint.x, touchPoint.y)) {
             	gameLogic.Game.changeTurns(30);
             	System.out.println(gameLogic.Game.TOTAL_TURNS);
@@ -75,7 +85,9 @@ public class MainMenuScreen extends ScreenAdapter {
         gl.glClearColor(1, 1, 1, 1);
         gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
-        //Draw map in the background
+        /**
+         * draw image in background
+         */
         camera.update();
         game.batch.setProjectionMatrix(camera.combined);
 
@@ -87,7 +99,9 @@ public class MainMenuScreen extends ScreenAdapter {
         game.batch.end();
     
     
-        //Draw rectangles, did not use TextButtons because it was easier not to
+        /**
+         * draw rectangles
+         */
         game.shapeRenderer.setProjectionMatrix(camera.combined);
         game.shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
         game.shapeRenderer.setColor(Color.MAROON);
@@ -99,12 +113,16 @@ public class MainMenuScreen extends ScreenAdapter {
         game.shapeRenderer.rect(instructionsBounds.getX(), instructionsBounds.getY(), instructionsBounds.getWidth(), instructionsBounds.getHeight());
         game.shapeRenderer.end();
 
-        //draw "choose number of turns:" text
+        /**
+         * draw "choose number of turns:" text
+         */
         game.batch.begin();
         game.fontSmall.setColor(Color.BLACK);
         game.fontSmall.draw(game.batch, "Choose the number of turns:", 510, 380);
         
-        //Draw text into rectangles
+        /**
+         * Draw text into rectangles
+         */
         game.fontSmall.setColor(Color.WHITE);
         String startGameString = "Start Game";
         game.fontMed.draw(game.batch, startGameString, playBounds.getX() + playBounds.getWidth()/2 - game.fontMed.getBounds(startGameString).width/2,
@@ -122,7 +140,10 @@ public class MainMenuScreen extends ScreenAdapter {
         game.fontSmall.draw(game.batch, turn50String, turnBounds50.getX() + turnBounds50.getWidth()/2 - game.fontSmall.getBounds(turn50String).width/2,
         		turnBounds50.getY() + turnBounds50.getHeight()/2 + game.fontSmall.getBounds(turn50String).height/2); // centre the text
         game.batch.end();
-        //draw number of turns selected text
+        
+        /**
+         * draw number of turns selected text
+         */
         game.batch.begin();
     	game.fontSmall.setColor(Color.BLACK);
     	String turnsString = gameLogic.Game.TOTAL_TURNS + " turns selected";
@@ -136,8 +157,6 @@ public class MainMenuScreen extends ScreenAdapter {
     public void render(float delta) {
     	draw();
     	update();
-    	
-    	
     }
     
 }
