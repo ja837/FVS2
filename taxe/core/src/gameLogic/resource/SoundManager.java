@@ -8,7 +8,7 @@ import com.badlogic.gdx.audio.Music;
 
 /**
  * Manages the playng of all sound clips, inlcudes music and voice overs.
- * @author Jamie
+ * @author Jamie, Chris
  *
  */
 public class SoundManager {
@@ -158,8 +158,4 @@ public class SoundManager {
 	public Music getHighSpeed(){
 		return highSpeed;
 	}
-	
-
-
-
 }

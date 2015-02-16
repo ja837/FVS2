@@ -6,6 +6,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.scenes.scene2d.Group;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
+import com.badlogic.gdx.scenes.scene2d.ui.Dialog;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 
@@ -37,13 +38,12 @@ public class GoalController {
         Player currentPlayer = pm.getCurrentPlayer();
 
         for (Goal goal : currentPlayer.getGoals()) {
-            if(goal.getComplete()) {
+            if(goal.getComplete()) {  	
                 continue;
             }
 
             strings.add(goal.toString());
         }
-
         return strings;
     }
     
@@ -140,9 +140,7 @@ public class GoalController {
 
             y -= 70;
         }
-        
-        
-        
+
         context.getStage().addActor(goalButtons);
     }
 

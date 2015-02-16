@@ -1,5 +1,6 @@
 package gameLogic.goal;
 
+import fvs.taxe.controller.Context;
 import gameLogic.Game;
 import gameLogic.Player;
 import gameLogic.map.CollisionStation;
@@ -12,6 +13,9 @@ import gameLogic.goal.dijkstra.Dijkstra;
 
 import java.util.ArrayList;
 import java.util.Random;
+
+import com.badlogic.gdx.scenes.scene2d.ui.Dialog;
+import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 
 public class GoalManager {
 	public final static int CONFIG_MAX_PLAYER_GOALS = 3;
@@ -74,8 +78,10 @@ public class GoalManager {
 			}
 		}
 		
-		//score = score/10;
+		//rounding to nearest 10
 		score = (int) Math.round((double) score/10) * 10;
+		
+		//string to test goal scores
 		String scoreString = "Score for going from  " + origin.getName();
 		if(via!=null){
 			scoreString += " via " + via.getName();
@@ -85,7 +91,6 @@ public class GoalManager {
 		
 		Goal goal = new Goal(origin, destination, via, turn, score);
 		
- 
 		// Goal with a specific train
 		if(random.nextInt(2) == 1) {
 			//System.out.println(player.getResources().size());
@@ -102,7 +107,7 @@ public class GoalManager {
 	public void addRandomGoalToPlayer(Player player) {
 		Goal g;
 		int total = 0;
-		//players needs roughly same difficulty goals based on score
+		//a players first two goals must add up to less than scoreLimit
 		int count = 0;
 		for (int i=0; i<player.getGoals().size(); i++){
 			if (count < 2){
@@ -135,10 +140,12 @@ public class GoalManager {
 		ArrayList<String> completedString = new ArrayList<String>();
 		for(Goal goal:player.getGoals()) {
 			if(goal.isComplete(train)) {
+				String compString = ("Player " + player.getPlayerNumber() + " completed the goal \nfrom " 
+										+ goal.getOrigin() + " to " + goal.getDestination() + "!");
 				player.completeGoal(goal);
 				player.removeResource(train);
-				completedString.add("Player " + player.getPlayerNumber() + " completed the goal fro \n" 
-									+ goal.getOrigin() + " to " + goal.getDestination() + "!");
+				completedString.add(compString);
+				
 			}
 		}
 		System.out.println("Train arrived to final destination: " + train.getFinalDestination().getName());

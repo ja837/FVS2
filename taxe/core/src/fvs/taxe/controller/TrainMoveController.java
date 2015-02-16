@@ -122,8 +122,16 @@ public class TrainMoveController {
     private RunnableAction afterAction() {
         return new RunnableAction() {
             public void run() {
-                ArrayList<String> completedGoals = context.getGameLogic().getGoalManager().trainArrived(train, train.getPlayer());
-
+                ArrayList<String> completedGoals = context.getGameLogic().getGoalManager().trainArrived(train, train.getPlayer());             
+                
+                for (String s : completedGoals){
+                	context.getInfoController().displayFlashMessage(s, Color.WHITE, 5.0f);
+                }
+                
+                
+                
+                
+                //trains final location
                 System.out.println(train.getFinalDestination().getLocation().getX() + "," + train.getFinalDestination().getLocation().getY());
                 train.setPosition(train.getFinalDestination().getLocation());
                 train.getActor().setVisible(false);

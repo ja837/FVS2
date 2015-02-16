@@ -24,7 +24,6 @@ import gameLogic.TurnListener;
 import gameLogic.map.Map;
 import gameLogic.map.Station;
 
-
 public class GameScreen extends ScreenAdapter {
 	final private TaxeGame game;
 	private Stage stage;

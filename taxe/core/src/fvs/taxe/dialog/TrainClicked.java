@@ -41,6 +41,7 @@ public class TrainClicked extends ClickListener {
 
         // current player can't be passed in as it changes so find out current player at this instant
         Player currentPlayer = Game.getInstance().getPlayerManager().getCurrentPlayer();
+        
 
         if (!train.isOwnedBy(currentPlayer)) {
             context.getInfoController().displayFlashMessage("Opponent's " + train.getName() + "\nSpeed: " + train.getSpeed(), Color.RED, 3);
@@ -51,5 +52,6 @@ public class TrainClicked extends ClickListener {
         } else {
             context.getInfoController().displayFlashMessage("Your " + train.getName() + "\nSpeed: " + train.getSpeed() + "\nDestination: " + train.getFinalDestination().getName(), Color.BLACK, 3);
         }
+        
     }
 }

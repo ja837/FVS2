@@ -67,7 +67,6 @@ public class Goal {
 		if (via != null){
 			for (Tuple<String, Integer> history : train.getHistory()){
 				if (history.getFirst().equals(via.getName()) && history.getSecond() >= turnIssued){
-					
 					passedVia = true;
 				}
 			}
@@ -104,15 +103,11 @@ public class Goal {
 			trainString = trainName;
 		}
 
-		//goalString = "Send a " + trainString + " carrying a " + cargo.toString().toLowerCase() + " from " + origin.getName() + " to " + destination.getName();
-
 		goalString = "Send a " + trainString + " carrying a " + cargo.toString().toLowerCase() + " from " + origin.getName();
-		
 		if (via != null){
 			goalString += " via " + via.getName();
 		}
 		goalString +=  " to " + destination.getName();
-		
 		goalString += " - " + reward + " points";
 		
 		return goalString;

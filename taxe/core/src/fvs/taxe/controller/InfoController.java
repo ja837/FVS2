@@ -54,7 +54,6 @@ public class InfoController {
         flashMessage.setText(message);
         flashMessage.setColor(color);
         flashMessage.addAction(sequence(delay(time), fadeOut(0.25f)));
-
     }
 
     public void drawBackground() {
