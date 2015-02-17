@@ -49,7 +49,6 @@ public class GoalManagerTest extends LibGdxTest {
         Goal goal = new Goal(station1, station2, station3,0,0);
         player1.addGoal(goal);
         player1.addResource(train);
-
         ArrayList<Station> route = new ArrayList<Station>();
         route.add(station1);
         route.add(station3);

@@ -46,7 +46,6 @@ public class MainMenuScreen extends ScreenAdapter {
     }
 
 	public void update() {
-    	
         if (Gdx.input.justTouched()) {
             camera.unproject(touchPoint.set(Gdx.input.getX(), Gdx.input.getY(), 0));
             /**
@@ -152,7 +151,6 @@ public class MainMenuScreen extends ScreenAdapter {
         
     }
 
-    
 	@Override
     public void render(float delta) {
     	draw();
