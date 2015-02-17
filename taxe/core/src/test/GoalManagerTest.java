@@ -78,4 +78,27 @@ public class GoalManagerTest extends LibGdxTest {
         assertTrue("Completed goal string not right", completedStrings.size() > 0);
 
     }
+    @Test
+    public void goalGenerationTest() throws Exception { // New Test
+    	
+    	pm.createPlayers(2);
+    	
+    	Player player1 = pm.getCurrentPlayer();
+    	
+    	Train train = new Train("Green", "", "", 100); // Train needed to assign a goal
+    	player1.addResource(train);
+
+    	gm.addRandomGoalToPlayer(player1);
+    	gm.addRandomGoalToPlayer(player1);
+    	
+    	int scoreVal = 0;
+    	
+    	for (Goal goal: player1.getGoals()) {
+    		scoreVal =+ goal.getReward();
+    	}
+    	
+    	assertTrue("Goal scores to high",scoreVal <= 1600);
+    	
+    	assertFalse("Goals have no score", scoreVal == 0);
+    }
 }
